@@ -148,6 +148,61 @@
       </p>
     </div>
   </footer>
+  <!-- Floating Assignment & Earnings Assistant -->
+<div id="assistantWidget" class="fixed bottom-6 right-6 z-50">
+  <!-- Floating Button -->
+  <button id="assistantBtn" class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold py-3 px-4 rounded-full shadow-lg transition transform hover:scale-110">
+    💡 Need Help?
+  </button>
+
+  <!-- Popup -->
+  <div id="assistantPopup" class="hidden w-80 bg-white rounded-xl shadow-xl mt-2 p-4 animate-slide-in">
+    <h4 class="text-lg font-bold text-gray-900 mb-2">📚 Suggested Assignments & Opportunities</h4>
+    <p class="text-gray-700 text-sm mb-3">
+      Check out these assignments and learning tasks. Some lead to premium content or workshops you can join!
+    </p>
+    <ul class="text-blue-700 font-semibold space-y-2">
+      <li><a href="/statistics.hub/courses_over/Basic_Statistics/index.html">📊 Basic Statistics Assignment</a></li>
+      <li><a href="/statistics.hub/courses_over/Probability/index.html">🎲 Probability Exercises</a></li>
+      <li><a href="/statistics.hub/courses_over/Hypothesis_Testing/index.html">🧪 Hypothesis Testing Tasks</a></li>
+      <li><a href="/statistics.hub/courses_over/Premium_Workshop/index.html" class="text-yellow-600 font-bold">💎 Join Premium Workshop</a></li>
+    </ul>
+    <button id="closeAssistant" class="mt-4 bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md text-sm font-semibold">Close</button>
+  </div>
+</div>
+
+<!-- Animations -->
+<style>
+  @keyframes slideIn {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-slide-in { animation: slideIn 0.5s ease-out forwards; }
+</style>
+
+<script>
+  const assistantBtn = document.getElementById('assistantBtn');
+  const assistantPopup = document.getElementById('assistantPopup');
+  const closeAssistant = document.getElementById('closeAssistant');
+
+  // Toggle popup visibility
+  assistantBtn.addEventListener('click', () => {
+    assistantPopup.classList.toggle('hidden');
+  });
+
+  closeAssistant.addEventListener('click', () => {
+    assistantPopup.classList.add('hidden');
+  });
+
+  // Auto-open popup on first visit
+  if(!localStorage.getItem('assistantSeen')) {
+    setTimeout(() => {
+      assistantPopup.classList.remove('hidden');
+      localStorage.setItem('assistantSeen', 'true');
+    }, 2000); // 2-second delay after page load
+  }
+</script>
+
 
 </body>
 </html>
