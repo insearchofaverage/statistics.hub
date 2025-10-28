@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://insearchofaverage.github.io/statistics.hub/map.xml
+Sitemap: https://insearchofaverage.github.io/statistics.hub/sitemap.xml
