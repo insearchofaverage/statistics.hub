@@ -15,178 +15,263 @@
   <header class="bg-yellow-400 shadow-md sticky top-0 z-50">
     <nav class="container mx-auto flex justify-between items-center p-4">
       <a href="#" class="flex items-center py-5 px-2 text-white text-2xl font-semibold hover:text-yellow-300 transition">
-            📊InSearchOfAverage
-          </a>
-      
-      <ul class="hidden md:flex space-x-4 font-semibold">
-        <li><a href="/statistics.hub/index.html" class="hover:text-blue-700">Home</a></li>
-                <li><a href="about.html" class="hover:text-blue-700">About</a></li>
+        📊InSearchOfAverage
+      </a>
 
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-4 font-semibold text-gray-800">
+        <li><a href="/statistics.hub/index.html" class="hover:text-blue-700">Home</a></li>
+        <li><a href="about.html" class="hover:text-blue-700">About</a></li>
         <li><a href="/statistics.hub/courses_over/courses.html" class="hover:text-blue-700">Courses</a></li>
         <li><a href="/statistics.hub/Software/index.html" class="hover:text-blue-700">Software Tutorials</a></li>
         <li><a href="/statistics.hub/Tools/index.html" class="hover:text-blue-700">Tools</a></li>
-                <li><a href="/statistics.hub/Research/index.html" class="hover:text-blue-700">Research Tools</a></li>
-                        <li><a href="/statistics.hub/Competative/index.html" class="hover:text-blue-700">Competative Blog</a></li>
-    
-                        <li><a href="/statistics.hub/Quiz/index.html" class="hover:text-blue-700">Quiz</a></li>
-                        <li><a href="/statistics.hub/News/index.html" class="hover:text-blue-700">News</a></li>
-                          <li><a href="/statistics.hub/Notifications/index.html" class="hover:text-blue-700">Academic Notifications</a></li>
         <li><a href="/statistics.hub/contact.html" class="hover:text-blue-700">Contact</a></li>
-    </ul>
+      </ul>
 
-    <!-- Hamburger Button -->
-    <button id="menuBtn" class="md:hidden text-gray-800 text-3xl focus:outline-none">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
-
-  <!-- Overlay Background -->
-  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
-
-  <!-- Slide-In Mobile Menu -->
-  <div id="sideMenu" class="hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
-    <div class="flex justify-between items-center px-5 py-4 border-b">
-      <h2 class="text-lg font-bold text-gray-700">Menu</h2>
-      <button id="closeBtn" class="text-gray-600 text-2xl focus:outline-none"><i class="fas fa-times"></i></button>
-    </div>
-    <ul class="flex flex-col text-gray-700 font-semibold mt-4 space-y-2 px-5">
-     <ul class="hidden md:flex space-x-4 font-semibold">
-        <li><a href="/statistics.hub/index.html" class="hover:text-blue-700">Home</a></li>
-                <li><a href="about.html" class="hover:text-blue-700">About</a></li>
-
-        <li><a href="/statistics.hub/courses_over/courses.html" class="hover:text-blue-700">Courses</a></li>
-        <li><a href="/statistics.hub/Software/index.html" class="hover:text-blue-700">Software Tutorials</a></li>
-        <li><a href="/statistics.hub/Tools/index.html" class="hover:text-blue-700">Tools</a></li>
-                <li><a href="/statistics.hub/Research/index.html" class="hover:text-blue-700">Research Tools</a></li>
-                        <li><a href="/statistics.hub/Competative/index.html" class="hover:text-blue-700">Competative Blog</a></li>
-    
-                        <li><a href="/statistics.hub/Quiz/index.html" class="hover:text-blue-700">Quiz</a></li>
-                        <li><a href="/statistics.hub/News/index.html" class="hover:text-blue-700">News</a></li>
-                          <li><a href="/statistics.hub/Notifications/index.html" class="hover:text-blue-700">Academic Notifications</a></li>
-        <li><a href="/statistics.hub/contact.html" class="hover:text-blue-700">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="text-center py-16 sm:py-20 px-4 bg-gradient-to-r from-yellow-300 to-yellow-100">
-  <h2 class="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-4 animate-bounce">
-    Welcome to <span class="text-blue-700">InSearchOfAverage</span>
-  </h2>
-  <p class="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
-    Discover the beauty of <strong>Statistics</strong> and <strong>Data Analysis</strong> through interactive lessons,
-    insightful tutorials, and hands-on examples curated for learners and researchers alike.
-  </p>
-  <div class="mt-6">
-    <a href="/statistics.hub/courses_over/courses.html" class="bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 hover:bg-blue-600">
-      Start Learning
-    </a>
-  </div>
-</section>
-
-<!-- Search Section -->
-<section class="bg-white py-8 shadow-inner">
-  <div class="container mx-auto text-center px-4">
-    <h3 class="text-2xl font-semibold text-gray-800 mb-3">🔎 Search Across the Hub</h3>
-    <form action="https://www.google.com/search" method="get" target="_blank" class="flex flex-col sm:flex-row justify-center">
-      <input type="hidden" name="q" value="site:insearchofaverage.github.io/statistics.hub" />
-      <input type="text" name="q" placeholder="Search anything..." class="border border-gray-300 rounded-t-lg sm:rounded-l-lg sm:rounded-t-none px-4 py-2 w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-      <button type="submit" class="bg-yellow-400 text-gray-900 px-5 py-2 rounded-b-lg sm:rounded-r-lg sm:rounded-b-none font-semibold hover:bg-yellow-300 transition">
-        Search
+      <!-- Hamburger Button -->
+      <button id="menuBtn" class="md:hidden text-gray-800 text-3xl focus:outline-none">
+        <i class="fas fa-bars"></i>
       </button>
-    </form>
-  </div>
-</section>
+    </nav>
 
-<!-- Flash News -->
-<section class="bg-gray-100 py-3">
-  <marquee behavior="scroll" direction="left" scrollamount="6" class="text-gray-800 font-semibold">
-    🔔 New Lecture Series on “Regression Analysis” is now live! | Join our “R for Data Science” Workshop this weekend →
-    <a href="/statistics.hub/tools.html" class="text-blue-700 underline">Register Now</a>
-  </marquee>
-</section>
+    <!-- Overlay -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
 
-<!-- Founder & Blog Section -->
-<section class="container mx-auto my-16 px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-  <!-- Founder -->
-  <div class="bg-white p-6 rounded-2xl shadow-lg text-center lg:text-left">
-    <img src="images/Dr.Narendra.jpg" alt="Founder" class="w-48 mx-auto rounded-full shadow-lg mb-4" />
-    <h3 class="text-3xl font-bold text-gray-900 mb-3">Founder's Message</h3>
-    <p class="text-gray-700 leading-relaxed">
-      Hello everyone! I'm <strong>S. Narendra</strong>, founder of <em>InSearchOfAverage</em>.
-      My vision is to simplify the world of statistics — not as a subject of fear, but as a language that helps us understand life and data better.
-    </p>
-    <p class="mt-3 text-gray-700">
-      Together, let's dive deep into concepts, analyze data, and uncover insights — because every number tells a story.
-    </p>
-
-    <!-- Contact Links -->
-    <div class="flex justify-center lg:justify-start space-x-6 mt-4 text-2xl">
-      <a href="mailto:academiclatexhelp@gmail.com" class="text-gray-700 hover:text-yellow-500"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/s-narendra" target="_blank" class="text-gray-700 hover:text-blue-700"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/insearchofaverage" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fab fa-github"></i></a>
+    <!-- Mobile Menu -->
+    <div id="sideMenu" class="hidden fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+      <div class="flex justify-between items-center px-5 py-4 border-b">
+        <h2 class="text-lg font-bold text-gray-700">Menu</h2>
+        <button id="closeBtn" class="text-gray-600 text-2xl focus:outline-none"><i class="fas fa-times"></i></button>
+      </div>
+      <ul class="flex flex-col text-gray-700 font-semibold mt-4 space-y-2 px-5">
+        <li><a href="/statistics.hub/index.html" class="block py-2 hover:text-blue-600">Home</a></li>
+        <li><a href="about.html" class="block py-2 hover:text-blue-600">About</a></li>
+        <li><a href="/statistics.hub/courses_over/courses.html" class="block py-2 hover:text-blue-600">Courses</a></li>
+        <li><a href="/statistics.hub/Software/index.html" class="block py-2 hover:text-blue-600">Software Tutorials</a></li>
+        <li><a href="/statistics.hub/Tools/index.html" class="block py-2 hover:text-blue-600">Tools</a></li>
+        <li><a href="/statistics.hub/contact.html" class="block py-2 hover:text-blue-600">Contact</a></li>
+      </ul>
     </div>
-  </div>
-
-  <!-- Blog Section -->
-  <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-700">
-    <h3 class="text-3xl font-bold mb-6 text-gray-900 text-center">📰 From the Blog</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-base font-medium text-gray-800">
-      <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition">📊 Why Averages Can Be Misleading</a>
-      <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition">📈 Normal Distribution in Daily Life</a>
-      <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition">🔍 Understanding Correlation vs Causation</a>
-      <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition">📉 Variance and Standard Deviation Explained</a>
-    </div>
-    <div class="text-center mt-8">
-      <a href="https://insearchofaverage.github.io/statistics.hub/courses_over/courses.html" class="bg-blue-700 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-600 transition">
-        View All Blog Posts →
+  </header>
+ <!-- Hero Section -->
+  <section class="text-center py-20 bg-gradient-to-r from-yellow-300 to-yellow-100 transition-all duration-700">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 animate-bounce">
+      Welcome to <span class="text-blue-700">InSearchOfAverage</span>
+    </h2>
+    <p class="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+      Discover the beauty of <strong>Statistics</strong> and <strong>Data Analysis</strong> through interactive lessons,
+      insightful tutorials, and hands-on examples curated for learners and researchers alike.
+    </p>
+    <div class="mt-6">
+      <a href="/statistics.hub/courses_over/courses.html" class="bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 hover:bg-blue-600">
+        Start Learning
       </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Featured Courses -->
-<section class="bg-gray-100 py-10">
-  <div class="container mx-auto text-center px-4">
-    <h3 class="text-3xl font-bold text-gray-900 mb-6">📘 Featured Courses</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-2xl shadow hover:scale-105 transform transition duration-300">
-        <h4 class="text-xl font-semibold mb-2">Basic Statistics</h4>
-        <p class="text-gray-600 mb-3">Understand the foundation of statistical reasoning and data interpretation.</p>
-        <a href="/statistics.hub/courses_over/Basic_Statistics/index.html" class="text-blue-700 font-semibold hover:underline">Explore →</a>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow hover:scale-105 transform transition duration-300">
-        <h4 class="text-xl font-semibold mb-2">Probability & Distributions</h4>
-        <p class="text-gray-600 mb-3">Learn randomness, expected values, and their real-world applications.</p>
-        <a href="#" class="text-blue-700 font-semibold hover:underline">Explore →</a>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow hover:scale-105 transform transition duration-300">
-        <h4 class="text-xl font-semibold mb-2">Hypothesis Testing</h4>
-        <p class="text-gray-600 mb-3">Master confidence intervals, p-values, and testing frameworks.</p>
-        <a href="#" class="text-blue-700 font-semibold hover:underline">Explore →</a>
+  <!-- Search Section -->
+  <section class="bg-white py-8 shadow-inner">
+    <div class="container mx-auto text-center">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3">🔎 Search Across the Hub</h3>
+      <form action="https://www.google.com/search" method="get" target="_blank" class="flex justify-center">
+        <input type="hidden" name="q" value="site:insearchofaverage.github.io/statistics.hub" />
+        <input type="text" name="q" placeholder="Search anything..." class="border border-gray-300 rounded-l-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+        <button type="submit" class="bg-yellow-400 text-gray-900 px-5 rounded-r-lg font-semibold hover:bg-yellow-300 transition">
+          Search
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Flash News -->
+  <section class="bg-gray-100 py-3">
+    <marquee behavior="scroll" direction="left" scrollamount="6" class="text-gray-800 font-semibold">
+      🔔 New Lecture Series on “Regression Analysis” is now live! | Join our “R for Data Science” Workshop this weekend →
+      <a href="/statistics.hub/tools.html" class="text-blue-700 underline">Register Now</a>
+    </marquee>
+  </section>
+
+  <!-- Sections -->
+  <section class="container mx-auto my-16 grid md:grid-cols-2 gap-8 p-4">
+    <div class="bg-white p-6 rounded-2xl shadow-lg fade-up">
+       <img src="images/Dr.Narendra.jpg" alt="Founder" class="mx-auto rounded-full shadow-lg mb-4" />
+      <h3 class="text-3xl font-bold text-gray-900 mb-3">Founders Message</h3>
+      <p class="text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        Hello everyone! I'm <strong>S. Narendra</strong>, founder of <em>InSearchOfAverage</em>.
+        My vision is to simplify the world of statistics — not as a subject of fear, but as a language that helps us understand life and data better.
+        This platform was built for learners, teachers, and curious minds who wish to explore the statistical perspective of the world.
+      </p>
+      <p class="mt-3 text-gray-700">
+        Together, let's dive deep into concepts, analyze data, and uncover insights — because every number tells a story.
+      </p>
+       <!-- Contact Links -->
+    <div class="flex justify-center space-x-6 mt-4">
+      <!-- Email -->
+      <a href="mailto:narendra@example.com" class="text-gray-700 hover:text-yellow-500 transition text-2xl">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/s-narendra" target="_blank" class="text-gray-700 hover:text-blue-700 transition text-2xl">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <!-- GitHub -->
+      <a href="https://github.com/insearchofaverage" target="_blank" class="text-gray-700 hover:text-gray-900 transition text-2xl">
+        <i class="fab fa-github"></i>
+      </a>
+      <!-- Twitter -->
+      <a href="https://twitter.com/yourhandle" target="_blank" class="text-gray-700 hover:text-blue-400 transition text-2xl">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-700 transform hover:-translate-y-1 fade-up">
+  <h3 class="text-3xl font-bold mb-6 text-gray-900 text-center">📰 From the Blog</h3>
+
+  <div class="grid md:grid-cols-2 gap-4 text-lg font-medium text-gray-800">
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+      📊 Why Averages Can Be Misleading
+    </a>
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+      📈 Normal Distribution in Daily Life
+    </a>
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+      🔍 Understanding Correlation vs Causation
+    </a>
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+      📉 Variance and Standard Deviation Explained
+    </a>
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+      🧮 Confidence Intervals Simplified
+    </a>
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+      📘 The Art of Sampling in Research
+    </a>
+    <a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  📊 Introduction to Probability Distributions
+</a>
+<a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  🔍 Understanding Hypothesis Testing
+</a>
+<a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  📈 Regression Analysis Basics
+</a>
+<a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  🧮 Correlation vs Causation Explained
+</a>
+<a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  📉 Z-Scores and Standardization
+</a>
+<a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  📚 Exploratory Data Analysis Techniques
+</a>
+<a href="#" class="block bg-gray-50 px-5 py-3 rounded-lg hover:bg-yellow-50 hover:scale-105 transform transition duration-300">
+  📊 Chi-Square Tests Simplified
+</a>
+
+  </div>
+
+  <div class="text-center mt-8">
+    <a href="https://insearchofaverage.github.io/statistics.hub/courses_over/courses.html" class="bg-blue-700 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-600 transition">
+      View All Blog Posts →
+    </a>
+  </div>
+</div>
+
+  </section>
+  <!-- Introducer Message -->
+ 
+
+  <!-- Featured Courses -->
+  <section class="bg-gray-100 py-10">
+    <div class="container mx-auto text-center">
+      <h3 class="text-3xl font-bold text-gray-900 mb-6">📘 Featured Courses</h3>
+      <div class="grid md:grid-cols-3 gap-6 px-4">
+        <div class="bg-white p-6 rounded-2xl shadow hover:scale-105 transform transition duration-300">
+          <h4 class="text-xl font-semibold mb-2">Basic Statistics</h4>
+          <p class="text-gray-600 mb-3">Understand the foundation of statistical reasoning and data interpretation.</p>
+          <a href="/statistics.hub/courses_over/Basic_Statistics/index.html" class="text-blue-700 font-semibold hover:underline">Explore →</a>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow hover:scale-105 transform transition duration-300">
+          <h4 class="text-xl font-semibold mb-2">Probability & Distributions</h4>
+          <p class="text-gray-600 mb-3">Learn randomness, expected values, and their real-world applications.</p>
+          <a href="#" class="text-blue-700 font-semibold hover:underline">Explore →</a>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow hover:scale-105 transform transition duration-300">
+          <h4 class="text-xl font-semibold mb-2">Hypothesis Testing</h4>
+          <p class="text-gray-600 mb-3">Master confidence intervals, p-values, and testing frameworks.</p>
+          <a href="#" class="text-blue-700 font-semibold hover:underline">Explore →</a>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-200 py-6 mt-10">
+    <div class="container mx-auto text-center">
+      <p>© 2025 InSearchOfAverage </p>
+      <p class="text-sm mt-1">Follow on 
+        <a href="#" class="text-yellow-400 hover:underline">GitHub</a> • 
+        <a href="#" class="text-yellow-400 hover:underline">LinkedIn</a>
+      </p>
+    </div>
+  </footer>
+  <!-- Floating Assignment & Earnings Assistant -->
+<div id="assistantWidget" class="fixed bottom-6 right-6 z-50">
+  <!-- Floating Button -->
+  <button id="assistantBtn" class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold py-3 px-4 rounded-full shadow-lg transition transform hover:scale-110">
+    💡 Need Help?
+  </button>
+
+  <!-- Popup -->
+  <div id="assistantPopup" class="hidden w-80 bg-white rounded-xl shadow-xl mt-2 p-4 animate-slide-in">
+    <h4 class="text-lg font-bold text-gray-900 mb-2">📚 Suggested Assignments & Opportunities</h4>
+    <p class="text-gray-700 text-sm mb-3">
+      Check out these assignments and learning tasks. Some lead to premium content or workshops you can join!
+    </p>
+    <ul class="text-blue-700 font-semibold space-y-2">
+      <li><a href="/statistics.hub/courses_over/Basic_Statistics/index.html">📊 Basic Statistics Assignment</a></li>
+      <li><a href="/statistics.hub/courses_over/Probability/index.html">🎲 Probability Exercises</a></li>
+      <li><a href="/statistics.hub/courses_over/Hypothesis_Testing/index.html">🧪 Hypothesis Testing Tasks</a></li>
+      <li><a href="/statistics.hub/courses_over/Premium_Workshop/index.html" class="text-yellow-600 font-bold">💎 Join Premium Workshop</a></li>
+    </ul>
+    <button id="closeAssistant" class="mt-4 bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md text-sm font-semibold">Close</button>
   </div>
-</section>
+</div>
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-gray-200 py-8 text-center px-4 text-sm sm:text-base">
-  <p>© 2025 InSearchOfAverage</p>
-  <p class="text-sm mt-1">
-    Follow on 
-    <a href="https://github.com/insearchofaverage" class="text-yellow-400 hover:underline">GitHub</a> • 
-    <a href="https://www.linkedin.com/in/s-narendra" class="text-yellow-400 hover:underline">LinkedIn</a>
-  </p>
-</footer>
+<!-- Animations -->
+<style>
+  @keyframes slideIn {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-slide-in { animation: slideIn 0.5s ease-out forwards; }
+</style>
 
-<!-- Back to Top Button -->
-<button id="backToTopBtn" class="hidden fixed bottom-6 right-6 bg-yellow-500 text-white font-bold py-3 px-4 rounded-full shadow-lg hover:bg-yellow-600 focus:outline-none transition-opacity duration-300">
-  ↑
-</button>
-
-<!-- JS for Mobile Menu and Back to Top -->
 <script>
-  // Mobile Menu
+  const assistantBtn = document.getElementById('assistantBtn');
+  const assistantPopup = document.getElementById('assistantPopup');
+  const closeAssistant = document.getElementById('closeAssistant');
+
+  // Toggle popup visibility
+  assistantBtn.addEventListener('click', () => {
+    assistantPopup.classList.toggle('hidden');
+  });
+
+  closeAssistant.addEventListener('click', () => {
+    assistantPopup.classList.add('hidden');
+  });
+
+  // Auto-open popup on first visit
+  if(!localStorage.getItem('assistantSeen')) {
+    setTimeout(() => {
+      assistantPopup.classList.remove('hidden');
+      localStorage.setItem('assistantSeen', 'true');
+    }, 2000); // 2-second delay after page load
+  }
+</script>
+<script>
+  // Mobile Menu Toggle
   const menuBtn = document.getElementById("menuBtn");
   const sideMenu = document.getElementById("sideMenu");
   const overlay = document.getElementById("overlay");
@@ -206,19 +291,6 @@
 
   closeBtn.addEventListener("click", closeMenu);
   overlay.addEventListener("click", closeMenu);
-
-  // Back to Top
-  const backToTopBtn = document.getElementById("backToTopBtn");
-  window.onscroll = function() {
-    if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
-      backToTopBtn.classList.remove("hidden");
-    } else {
-      backToTopBtn.classList.add("hidden");
-    }
-  };
-  backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 </script>
 
 </body>
