@@ -8,26 +8,42 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Navigation -->
-  <nav class="bg-blue-800 text-white shadow-lg">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-between items-center">
-        <a href="index.html" class="flex items-center py-5 px-2 text-white text-2xl font-semibold hover:text-yellow-300 transition">
-          InSearchOfAverage
-        </a>
-        <div class="flex space-x-6">
-            <li><a href="/statistics.hub/index.html" class="hover:text-blue-700">Home</a></li>
-                      <li><a href="about.html" class="hover:text-blue-700">About</a></li>
-        <li><a href="/statistics.hub/courses_over/courses.html" class="hover:text-blue-700">Courses</a></li>
-        <li><a href="/statistics.hub/Software/index.html" class="hover:text-blue-700">Software Tutorials</a></li>
-        <li><a href="/statistics.hub/tools.html" class="hover:text-blue-700">Tools</a></li>
-                <li><a href="/statistics.hub/Research/index.html" class="hover:text-blue-700">Research Tools</a></li>
+<div id="header-placeholder"></div>
 
-        <li><a href="/statistics.hub/contact.html" class="hover:text-blue-700">Contact</a></li>
-        </div>
-      </div>
-    </div>
-  </nav>
+<!-- Load Header -->
+<script>
+  fetch("/statistics.hub/header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header-placeholder").innerHTML = html;
+
+      // Add menu behavior after header loads
+      const script = document.createElement("script");
+      script.innerHTML = `
+        const menuBtn = document.getElementById("menuBtn");
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+        const closeBtn = document.getElementById("closeBtn");
+
+        if (menuBtn && sideMenu && overlay && closeBtn) {
+          menuBtn.addEventListener("click", () => {
+            sideMenu.classList.remove("translate-x-full");
+            overlay.classList.remove("hidden");
+          });
+
+          const closeMenu = () => {
+            sideMenu.classList.add("translate-x-full");
+            overlay.classList.add("hidden");
+          };
+
+          closeBtn.addEventListener("click", closeMenu);
+          overlay.addEventListener("click", closeMenu);
+        }
+      `;
+      document.body.appendChild(script);
+    });
+</script>
+
 
   <!-- About Section -->
   <section class="max-w-6xl mx-auto py-20 px-6">
