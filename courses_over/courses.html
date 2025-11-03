@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses | InSearchOfAverage</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses | Statistics Learning Hub</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome (Free CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+
+  <link rel="icon" href="images/logo.png" />
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Navigation -->
-  <nav class="bg-blue-800 text-white shadow-lg">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-between items-center">
-        
-        <!-- Nav Links -->
-       <a href="#" class="flex items-center py-5 px-2 text-white text-2xl font-semibold hover:text-yellow-300 transition">
-            📊InSearchOfAverage
-          </a>
-      
-      <ul class="hidden md:flex space-x-4 font-semibold">
+  <!-- Header -->
+  <header class="bg-yellow-400 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+
+      <!-- Logo -->
+      <a href="#" class="text-white text-2xl font-semibold hover:text-yellow-200 transition">
+        📊InSearchOfAverage
+      </a>
+
+      <!-- Desktop Menu -->
+    	    <ul class="hidden md:flex space-x-4 font-semibold">
         <li><a href="/statistics.hub/index.html" class="hover:text-blue-700">Home</a></li>
                 <li><a href="about.html" class="hover:text-blue-700">About</a></li>
 
@@ -32,10 +43,69 @@
                         <li><a href="/statistics.hub/News/index.html" class="hover:text-blue-700">News</a></li>
                           <li><a href="/statistics.hub/Notifications/index.html" class="hover:text-blue-700">Academic Notifications</a></li>
         <li><a href="/statistics.hub/contact.html" class="hover:text-blue-700">Contact</a></li>
-        </div>
-      </div>
+      </ul>
+	  
+	  
+
+
+      <!-- Hamburger Button (Mobile Only) -->
+      <button id="menuBtn" class="md:hidden text-gray-800 text-3xl focus:outline-none">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
-  </nav>
+
+    <!-- Dark Overlay -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
+
+    <!-- Side Menu (Mobile) -->
+    <div id="sideMenu"
+      class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+      <div class="flex justify-between items-center px-5 py-4 border-b">
+        <h2 class="text-lg font-bold text-gray-700">Menu</h2>
+        <button id="closeBtn" class="text-gray-600 text-2xl focus:outline-none">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <ul class="flex flex-col text-gray-700 font-semibold mt-4 space-y-2 px-5">
+      <li><a href="/statistics.hub/index.html" class="hover:text-blue-700">Home</a></li>
+                <li><a href="about.html" class="hover:text-blue-700">About</a></li>
+
+        <li><a href="/statistics.hub/courses_over/courses.html" class="hover:text-blue-700">Courses</a></li>
+        <li><a href="/statistics.hub/Software/index.html" class="hover:text-blue-700">Software Tutorials</a></li>
+        <li><a href="/statistics.hub/Tools/index.html" class="hover:text-blue-700">Tools</a></li>
+                <li><a href="/statistics.hub/Research/index.html" class="hover:text-blue-700">Research Tools</a></li>
+                        <li><a href="/statistics.hub/Competative/index.html" class="hover:text-blue-700">Competative Blog</a></li>
+    
+                        <li><a href="/statistics.hub/Quiz/index.html" class="hover:text-blue-700">Quiz</a></li>
+                        <li><a href="/statistics.hub/News/index.html" class="hover:text-blue-700">News</a></li>
+                          <li><a href="/statistics.hub/Notifications/index.html" class="hover:text-blue-700">Academic Notifications</a></li>
+        <li><a href="/statistics.hub/contact.html" class="hover:text-blue-700">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+    const closeBtn = document.getElementById("closeBtn");
+
+    // Open menu
+    menuBtn.addEventListener("click", () => {
+      sideMenu.classList.remove("translate-x-full");
+      overlay.classList.remove("hidden");
+    });
+
+    // Close menu function
+    const closeMenu = () => {
+      sideMenu.classList.add("translate-x-full");
+      overlay.classList.add("hidden");
+    };
+
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+  </script>
+
 
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-20">
@@ -175,6 +245,7 @@
 </body>
 
 </html>
+
 
 
 
