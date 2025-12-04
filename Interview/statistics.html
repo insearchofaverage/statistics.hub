@@ -1,682 +1,678 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Statistics — 100 Interview Questions & Answers</title>
-  <style>
-    :root{--bg:#f4f7fb; --card:#ffffff; --accent:#0b66c3; --muted:#556;}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:#122; line-height:1.45}
-    header{background:linear-gradient(90deg,#08306b 0%, #0b66c3 100%); color:white;padding:20px}
-    header h1{margin:0;font-size:20px}
-    .container{max-width:980px;margin:24px auto;padding:0 16px}
-    .controls{display:flex;gap:8px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
-    .card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 6px 18px rgba(11,102,195,0.06);border:1px solid rgba(11,102,195,0.06)}
-    .q{cursor:pointer;margin:0;display:flex;align-items:center;gap:12px}
-    .q .num{background:rgba(11,102,195,0.08);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700;font-size:13px}
-    .q strong{font-size:15px}
-    .answer{display:none;margin-top:10px;padding:10px;border-radius:8px;background:#fbfdff;border:1px solid rgba(11,102,195,0.04);color:var(--muted)}
-    .meta{font-size:13px;color:var(--muted);margin-top:8px}
-    .search{flex:1;min-width:220px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
-    footer{max-width:980px;margin:18px auto 60px;color:var(--muted);font-size:13px;padding:0 16px}
-    @media(max-width:600px){ .q strong{font-size:14px} .q .num{font-size:12px;padding:5px 7px} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Statistics — Interview Questions</title>
+
+<style>
+  :root{
+    --bg1:#071234; --bg2:#081a3a;
+    --card: rgba(255,255,255,0.04);
+    --accent: #06b6d4;
+    --accent2:#7c3aed;
+    --glass-border: rgba(255,255,255,0.06);
+    --muted: #cbd5e1;
+  }
+  body{
+    margin:0; font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system;
+    background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);
+    color: #e6eef8;
+  }
+  header{
+    padding:32px 18px; text-align:center;
+    background: linear-gradient(90deg, rgba(6,182,212,0.08), rgba(124,58,237,0.08));
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  header h1{
+    margin:0; font-size:26px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header p{ margin:8px 0 0; color:var(--muted); max-width:980px; margin-left:auto; margin-right:auto; }
+
+  .container{ max-width:1100px; margin:28px auto; padding:0 16px; }
+  .controls{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+  .search{ flex:1; min-width:220px; padding:12px 14px; border-radius:12px;
+    border:1px solid var(--glass-border); background:rgba(255,255,255,0.02); color:inherit; outline:none; font-size:15px; }
+  .btn{ padding:10px 14px; border-radius:12px; border:none; cursor:pointer; font-weight:700; color:#fff; background:var(--accent); }
+  .btn.secondary{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:600; }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+  .filter-btn{ padding:8px 12px; border-radius:999px; cursor:pointer; border:1px solid rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.02); color:var(--muted); font-weight:600; }
+  .filter-btn.active{ background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white; box-shadow:0 8px 30px rgba(2,6,23,0.6); transform:translateY(-2px); }
+
+  .section-header{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:28px; margin-bottom:8px; }
+  .section-title{ font-size:18px; color:#fff; font-weight:700; display:flex; gap:12px; align-items:center; }
+  .section-meta{ color:var(--muted); font-size:13px; }
+
+  .grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:14px; margin-bottom:6px; }
+  .card{ background:var(--card); border-radius:12px; padding:14px; transition:transform .18s ease, box-shadow .18s ease;
+    border:1px solid var(--glass-border); backdrop-filter: blur(6px); box-shadow: 0 6px 20px rgba(2,6,23,0.55); }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 12px 36px rgba(2,6,23,0.65); }
+  .q{ display:flex; gap:12px; align-items:flex-start; cursor:pointer; }
+  .num{ min-width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:white; background: linear-gradient(180deg,var(--accent),var(--accent2)); font-size:13px; }
+  .qtext{ font-weight:700; font-size:15px; color:#eaf1ff; text-align:left; line-height:1.25; }
+  .answer{ display:none; margin-top:12px; color:var(--muted); font-size:14px; line-height:1.5; background:rgba(255,255,255,0.01);
+    padding:10px; border-radius:8px; border-left:4px solid rgba(255,255,255,0.03); }
+  .tags{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+  .tag{ font-size:12px; padding:6px 8px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--muted); border:1px solid rgba(255,255,255,0.02); }
+  mark{ background: #fde68a; color:#111827; padding:0 3px; border-radius:3px; }
+  footer{ color:var(--muted); text-align:center; margin:30px 0 60px; font-size:13px; }
+  @media (max-width:760px){ .qtext{ font-size:14px; } header h1{ font-size:20px; } }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <h1>Statistics — 100 Interview Questions & Answers</h1>
-      <p style="margin:6px 0 0;color:rgba(255,255,255,0.9)">Click any question to toggle the answer. Use search to filter.</p>
+<header>
+  <h1>Statistics —  Interview Questions</h1>
+</header>
+
+<main class="container">
+  <div class="controls">
+    <input id="search" class="search" placeholder="Search questions or answers..." />
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="desc">Descriptive</button>
+      <button class="filter-btn" data-cat="prob">Probability</button>
+      <button class="filter-btn" data-cat="rvd">RV & Distributions</button>
+      <button class="filter-btn" data-cat="infer">Inferential</button>
+      <button class="filter-btn" data-cat="hypo">Hypothesis</button>
+      <button class="filter-btn" data-cat="corr">Correlation/Regression</button>
+      <button class="filter-btn" data-cat="sample">Sampling/Estimation</button>
+      <button class="filter-btn" data-cat="bayes">Bayesian</button>
+      <button class="filter-btn" data-cat="ts">Time Series</button>
     </div>
-  </header>
+    <button id="expandAll" class="btn secondary">Expand All</button>
+    <button id="collapseAll" class="btn secondary">Collapse All</button>
+  </div>
 
-  <main class="container">
-    <div class="controls">
-      <input id="search" class="search" placeholder="Search questions or answers (press Enter)" />
-      <button id="clear" class="btn">Clear Search</button>
+  <!-- SECTIONS: 10 categories with 20 Qs each = 200 questions -->
+
+  <!-- 1. Descriptive Statistics (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Descriptive Statistics <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Summaries, central tendency, dispersion</div>
     </div>
+    <div class="grid" data-section="desc">
+      <div class="card" data-cat="desc" data-q="what is descriptive statistics"><div class="q" data-id="s1"><div class="num">1</div><div class="qtext">What is descriptive statistics?</div></div><div class="answer">Methods to summarize and present data (mean, median, mode, spread) without inference.</div></div>
 
-    <section id="questions">
-
-      <!-- 1 -->
-      <article class="card" data-q="What is the difference between population and sample?">
-        <div class="q"><span class="num">1</span><strong>What is the difference between population and sample?</strong></div>
-        <div class="answer">Population is the full set you want to study; a sample is a subset drawn from the population used for analysis.</div>
-      </article>
-
-      <!-- 2 -->
-      <article class="card" data-q="What is a parameter vs statistic?">
-        <div class="q"><span class="num">2</span><strong>What is a parameter vs. a statistic?</strong></div>
-        <div class="answer">A parameter describes a population (e.g., μ, σ); a statistic describes a sample (e.g., x̄, s).</div>
-      </article>
-
-      <!-- 3 -->
-      <article class="card" data-q="What is the law of large numbers?">
-        <div class="q"><span class="num">3</span><strong>What is the Law of Large Numbers?</strong></div>
-        <div class="answer">As sample size increases, the sample mean converges to the population mean.</div>
-      </article>
-
-      <!-- 4 -->
-      <article class="card" data-q="What is the central limit theorem?">
-        <div class="q"><span class="num">4</span><strong>What is the Central Limit Theorem (CLT)?</strong></div>
-        <div class="answer">CLT: the sampling distribution of the sample mean approaches normal as n grows, regardless of population distribution (given finite variance).</div>
-      </article>
-
-      <!-- 5 -->
-      <article class="card" data-q="Descriptive vs inferential statistics?">
-        <div class="q"><span class="num">5</span><strong>Descriptive vs. Inferential Statistics?</strong></div>
-        <div class="answer">Descriptive summarizes data (mean, median, charts); inferential makes conclusions about populations using samples (tests, CIs).</div>
-      </article>
-
-      <!-- 6 -->
-      <article class="card" data-q="Variance vs standard deviation?">
-        <div class="q"><span class="num">6</span><strong>Variance vs. Standard Deviation?</strong></div>
-        <div class="answer">Variance is the average squared deviation; standard deviation is its square root, in the original units.</div>
-      </article>
-
-      <!-- 7 -->
-      <article class="card" data-q="What is a probability distribution?">
-        <div class="q"><span class="num">7</span><strong>What is a probability distribution?</strong></div>
-        <div class="answer">A function describing the probabilities of outcomes of a random variable (PMF for discrete, PDF for continuous).</div>
-      </article>
-
-      <!-- 8 -->
-      <article class="card" data-q="Difference between PMF and PDF?">
-        <div class="q"><span class="num">8</span><strong>Difference between PMF and PDF?</strong></div>
-        <div class="answer">PMF (probability mass function) for discrete variables gives exact probabilities; PDF (probability density function) for continuous gives densities; probabilities are integrals over intervals.</div>
-      </article>
-
-      <!-- 9 -->
-      <article class="card" data-q="What is CDF?">
-        <div class="q"><span class="num">9</span><strong>What is a cumulative distribution function (CDF)?</strong></div>
-        <div class="answer">CDF gives the probability that a random variable is ≤ x; it is the integral (or sum) of the PDF/PMF up to x.</div>
-      </article>
-
-      <!-- 10 -->
-      <article class="card" data-q="What is expected value?">
-        <div class="q"><span class="num">10</span><strong>What is expected value (expectation)?</strong></div>
-        <div class="answer">The weighted average of all possible values of a random variable, using their probabilities (mean of the distribution).</div>
-      </article>
-
-      <!-- 11 -->
-      <article class="card" data-q="What is variance formula?">
-        <div class="q"><span class="num">11</span><strong>How is variance defined?</strong></div>
-        <div class="answer">Variance = E[(X − μ)²]; sample variance uses denominator (n−1) for an unbiased estimator.</div>
-      </article>
-
-      <!-- 12 -->
-      <article class="card" data-q="What is covariance?">
-        <div class="q"><span class="num">12</span><strong>What is covariance?</strong></div>
-        <div class="answer">Covariance measures joint variability of two variables; positive means they move together, negative means opposite.</div>
-      </article>
-
-      <!-- 13 -->
-      <article class="card" data-q="What is correlation?">
-        <div class="q"><span class="num">13</span><strong>What is correlation?</strong></div>
-        <div class="answer">Correlation standardizes covariance to [-1,1], measuring linear association strength (Pearson correlation most common).</div>
-      </article>
-
-      <!-- 14 -->
-      <article class="card" data-q="Pearson vs Spearman correlation?">
-        <div class="q"><span class="num">14</span><strong>Pearson vs Spearman correlation?</strong></div>
-        <div class="answer">Pearson measures linear relationships; Spearman is rank-based and captures monotonic associations, robust to non-linearity/outliers.</div>
-      </article>
-
-      <!-- 15 -->
-      <article class="card" data-q="What is conditional probability?">
-        <div class="q"><span class="num">15</span><strong>What is conditional probability?</strong></div>
-        <div class="answer">P(A|B) is the probability of A given B occurred: P(A∩B)/P(B).</div>
-      </article>
-
-      <!-- 16 -->
-      <article class="card" data-q="What is Bayes theorem?">
-        <div class="q"><span class="num">16</span><strong>What is Bayes' theorem?</strong></div>
-        <div class="answer">P(A|B)=P(B|A)P(A)/P(B): updates prior beliefs P(A) with evidence P(B|A) to get posterior P(A|B).</div>
-      </article>
-
-      <!-- 17 -->
-      <article class="card" data-q="What is independence of events?">
-        <div class="q"><span class="num">17</span><strong>What does independence of events mean?</strong></div>
-        <div class="answer">Events A and B are independent if P(A∩B)=P(A)P(B); knowledge of one doesn't change the other's probability.</div>
-      </article>
-
-      <!-- 18 -->
-      <article class="card" data-q="What is mutual exclusivity?">
-        <div class="q"><span class="num">18</span><strong>What is mutual exclusivity?</strong></div>
-        <div class="answer">Mutually exclusive events cannot occur together: P(A∩B)=0 (e.g., rolling 2 and 3 on same die roll).</div>
-      </article>
-
-      <!-- 19 -->
-      <article class="card" data-q="Discrete distributions examples?">
-        <div class="q"><span class="num">19</span><strong>Common discrete probability distributions?</strong></div>
-        <div class="answer">Binomial, Poisson, Geometric, Negative Binomial, Multinomial.</div>
-      </article>
-
-      <!-- 20 -->
-      <article class="card" data-q="Continuous distributions examples?">
-        <div class="q"><span class="num">20</span><strong>Common continuous probability distributions?</strong></div>
-        <div class="answer">Normal, Uniform, Exponential, Gamma, Beta, Student's t.</div>
-      </article>
-
-      <!-- 21 -->
-      <article class="card" data-q="What is Bernoulli distribution?">
-        <div class="q"><span class="num">21</span><strong>What is the Bernoulli distribution?</strong></div>
-        <div class="answer">A single-trial binary distribution with probability p of success (0/1 outcomes).</div>
-      </article>
-
-      <!-- 22 -->
-      <article class="card" data-q="What is Binomial distribution?">
-        <div class="q"><span class="num">22</span><strong>What is the Binomial distribution?</strong></div>
-        <div class="answer">Distribution of number of successes in n independent Bernoulli trials with success probability p.</div>
-      </article>
-
-      <!-- 23 -->
-      <article class="card" data-q="What is Poisson distribution?">
-        <div class="q"><span class="num">23</span><strong>What is the Poisson distribution used for?</strong></div>
-        <div class="answer">Modeling counts of rare events in a fixed interval with rate λ (e.g., number of emails per hour).</div>
-      </article>
-
-      <!-- 24 -->
-      <article class="card" data-q="What is exponential distribution?">
-        <div class="q"><span class="num">24</span><strong>What is the Exponential distribution?</strong></div>
-        <div class="answer">Models time between independent Poisson events; memoryless property: P(T>t+s|T>t)=P(T>s).</div>
-      </article>
-
-      <!-- 25 -->
-      <article class="card" data-q="What is uniform distribution?">
-        <div class="q"><span class="num">25</span><strong>What is the Uniform distribution?</strong></div>
-        <div class="answer">All values in an interval are equally likely (continuous) or equal probability among discrete outcomes.</div>
-      </article>
-
-      <!-- 26 -->
-      <article class="card" data-q="What is normal distribution?">
-        <div class="q"><span class="num">26</span><strong>What is the Normal (Gaussian) distribution?</strong></div>
-        <div class="answer">A symmetric bell-shaped distribution defined by mean μ and variance σ²; common due to CLT.</div>
-      </article>
-
-      <!-- 27 -->
-      <article class="card" data-q="What is standard normal?">
-        <div class="q"><span class="num">27</span><strong>What is the Standard Normal distribution?</strong></div>
-        <div class="answer">A Normal distribution with mean 0 and variance 1 (Z-distribution); used to standardize variables.</div>
-      </article>
-
-      <!-- 28 -->
-      <article class="card" data-q="What is z-score?">
-        <div class="q"><span class="num">28</span><strong>What is a z-score?</strong></div>
-        <div class="answer">Number of standard deviations an observation is from the mean: z=(x−μ)/σ.</div>
-      </article>
-
-      <!-- 29 -->
-      <article class="card" data-q="What is t-distribution?">
-        <div class="q"><span class="num">29</span><strong>What is Student's t-distribution?</strong></div>
-        <div class="answer">Like Normal but with heavier tails; used when sample size is small and population variance unknown.</div>
-      </article>
-
-      <!-- 30 -->
-      <article class="card" data-q="When use t-test?">
-        <div class="q"><span class="num">30</span><strong>When to use a t-test?</strong></div>
-        <div class="answer">To compare means when population variance is unknown, especially for small samples (one-sample, two-sample, paired variants).</div>
-      </article>
-
-      <!-- 31 -->
-      <article class="card" data-q="What is confidence interval?">
-        <div class="q"><span class="num">31</span><strong>What is a confidence interval?</strong></div>
-        <div class="answer">Range of values, derived from sample data, likely to contain the population parameter with specified confidence (e.g., 95%).</div>
-      </article>
-
-      <!-- 32 -->
-      <article class="card" data-q="Interpretation of 95% CI?">
-        <div class="q"><span class="num">32</span><strong>Interpretation of a 95% confidence interval?</strong></div>
-        <div class="answer">If you repeated sampling many times, ~95% of constructed intervals would contain the true parameter (not that there's 95% probability for a fixed interval).</div>
-      </article>
-
-      <!-- 33 -->
-      <article class="card" data-q="What is hypothesis testing?">
-        <div class="q"><span class="num">33</span><strong>What is hypothesis testing?</strong></div>
-        <div class="answer">Framework to test claims about population parameters using sample data: set null/alternative, compute test statistic, compare to threshold/p-value.</div>
-      </article>
-
-      <!-- 34 -->
-      <article class="card" data-q="What is p-value?">
-        <div class="q"><span class="num">34</span><strong>What is a p-value?</strong></div>
-        <div class="answer">Probability of observing data at least as extreme as observed under the null hypothesis; small p-value suggests rejecting null.</div>
-      </article>
-
-      <!-- 35 -->
-      <article class="card" data-q="Type I and Type II errors?">
-        <div class="q"><span class="num">35</span><strong>Type I vs Type II error?</strong></div>
-        <div class="answer">Type I: false positive (reject true null); Type II: false negative (fail to reject false null). Power = 1 − Type II error.</div>
-      </article>
-
-      <!-- 36 -->
-      <article class="card" data-q="What is statistical power?">
-        <div class="q"><span class="num">36</span><strong>What is statistical power?</strong></div>
-        <div class="answer">Probability of correctly rejecting a false null (detecting effect); increases with effect size, sample size, and α.</div>
-      </article>
-
-      <!-- 37 -->
-      <article class="card" data-q="What is effect size?">
-        <div class="q"><span class="num">37</span><strong>What is effect size?</strong></div>
-        <div class="answer">A measure of the magnitude of a phenomenon (e.g., Cohen's d for mean differences, r for correlations), important beyond statistical significance.</div>
-      </article>
-
-      <!-- 38 -->
-      <article class="card" data-q="What is ANOVA?">
-        <div class="q"><span class="num">38</span><strong>What is ANOVA?</strong></div>
-        <div class="answer">Analysis of Variance compares means across more than two groups by partitioning variance into between- and within-group components.</div>
-      </article>
-
-      <!-- 39 -->
-      <article class="card" data-q="When use ANOVA vs t-test?">
-        <div class="q"><span class="num">39</span><strong>When to use ANOVA instead of multiple t-tests?</strong></div>
-        <div class="answer">Use ANOVA to avoid inflated Type I error when comparing 3+ groups; use post-hoc tests to find pairwise differences.</div>
-      </article>
-
-      <!-- 40 -->
-      <article class="card" data-q="What is chi-square test?">
-        <div class="q"><span class="num">40</span><strong>What is the Chi-square test?</strong></div>
-        <div class="answer">A test for association between categorical variables (Chi-square test of independence) or goodness-of-fit to expected frequencies.</div>
-      </article>
-
-      <!-- 41 -->
-      <article class="card" data-q="What is goodness-of-fit?">
-        <div class="q"><span class="num">41</span><strong>What is a goodness-of-fit test?</strong></div>
-        <div class="answer">Assesses whether observed data match a specified distribution (e.g., chi-square goodness-of-fit).</div>
-      </article>
-
-      <!-- 42 -->
-      <article class="card" data-q="What is non-parametric test?">
-        <div class="q"><span class="num">42</span><strong>What are non-parametric tests?</strong></div>
-        <div class="answer">Tests that don't assume specific distributional forms (e.g., Mann–Whitney U, Wilcoxon signed-rank, Kruskal–Wallis).</div>
-      </article>
-
-      <!-- 43 -->
-      <article class="card" data-q="What is bootstrapping?">
-        <div class="q"><span class="num">43</span><strong>What is bootstrapping?</strong></div>
-        <div class="answer">Resampling with replacement to estimate sampling distributions, standard errors, and confidence intervals without strong parametric assumptions.</div>
-      </article>
-
-      <!-- 44 -->
-      <article class="card" data-q="What is resampling?">
-        <div class="q"><span class="num">44</span><strong>What is resampling?</strong></div>
-        <div class="answer">Techniques that repeatedly draw samples from data (bootstrap, permutation tests, cross-validation) to assess variability or significance.</div>
-      </article>
-
-      <!-- 45 -->
-      <article class="card" data-q="What is permutation test?">
-        <div class="q"><span class="num">45</span><strong>What is a permutation test?</strong></div>
-        <div class="answer">A non-parametric test that computes the sampling distribution of a statistic by permuting labels to evaluate significance.</div>
-      </article>
-
-      <!-- 46 -->
-      <article class="card" data-q="What is regression analysis?">
-        <div class="q"><span class="num">46</span><strong>What is regression analysis?</strong></div>
-        <div class="answer">Modeling relationship between dependent and independent variables; linear regression models linear relationships; many other variants exist.</div>
-      </article>
-
-      <!-- 47 -->
-      <article class="card" data-q="What is least squares?">
-        <div class="q"><span class="num">47</span><strong>What is the method of least squares?</strong></div>
-        <div class="answer">Estimates regression coefficients by minimizing the sum of squared residuals (differences between observed and predicted values).</div>
-      </article>
-
-      <!-- 48 -->
-      <article class="card" data-q="What is R-squared?">
-        <div class="q"><span class="num">48</span><strong>What is R-squared?</strong></div>
-        <div class="answer">Proportion of variance in the dependent variable explained by the model; ranges 0–1; adjusted R² accounts for number of predictors.</div>
-      </article>
-
-      <!-- 49 -->
-      <article class="card" data-q="What is adjusted R-squared?">
-        <div class="q"><span class="num">49</span><strong>What is adjusted R-squared?</strong></div>
-        <div class="answer">R² adjusted for number of predictors and sample size; penalizes adding irrelevant variables.</div>
-      </article>
-
-      <!-- 50 -->
-      <article class="card" data-q="What is multicollinearity?">
-        <div class="q"><span class="num">50</span><strong>What is multicollinearity?</strong></div>
-        <div class="answer">High correlation among predictors causing unstable coefficient estimates; detect with VIF and address by removing/combining features or regularization.</div>
-      </article>
-
-      <!-- 51 -->
-      <article class="card" data-q="What is variance inflation factor?">
-        <div class="q"><span class="num">51</span><strong>What is the Variance Inflation Factor (VIF)?</strong></div>
-        <div class="answer">VIF quantifies multicollinearity for a predictor; VIF>5–10 often indicates problematic multicollinearity.</div>
-      </article>
-
-      <!-- 52 -->
-      <article class="card" data-q="What is heteroscedasticity?">
-        <div class="q"><span class="num">52</span><strong>What is heteroscedasticity?</strong></div>
-        <div class="answer">Non-constant variance of residuals across levels of predictors; violates OLS assumptions and affects standard errors; tests: Breusch–Pagan.</div>
-      </article>
-
-      <!-- 53 -->
-      <article class="card" data-q="What is autocorrelation?">
-        <div class="q"><span class="num">53</span><strong>What is autocorrelation?</strong></div>
-        <div class="answer">Correlation of a time series with its lagged values; indicates dependency across time; can bias OLS errors (Durbin–Watson test).</div>
-      </article>
-
-      <!-- 54 -->
-      <article class="card" data-q="What is time series analysis?">
-        <div class="q"><span class="num">54</span><strong>What is time series analysis?</strong></div>
-        <div class="answer">Analysis of ordered data over time, focusing on trends, seasonality, autocorrelation, forecasting using ARIMA, exponential smoothing, etc.</div>
-      </article>
-
-      <!-- 55 -->
-      <article class="card" data-q="What is stationarity?">
-        <div class="q"><span class="num">55</span><strong>What is stationarity in time series?</strong></div>
-        <div class="answer">A stationary series has constant mean, variance, and autocovariance structure over time; many models assume stationarity (use differencing if needed).</div>
-      </article>
-
-      <!-- 56 -->
-      <article class="card" data-q="What is ARIMA?">
-        <div class="q"><span class="num">56</span><strong>What is ARIMA?</strong></div>
-        <div class="answer">Autoregressive Integrated Moving Average combines AR(p), differencing (I(d)), and MA(q) for modeling and forecasting stationary/non-stationary series.</div>
-      </article>
-
-      <!-- 57 -->
-      <article class="card" data-q="What is exponential smoothing?">
-        <div class="q"><span class="num">57</span><strong>What is exponential smoothing?</strong></div>
-        <div class="answer">Forecasting method that weights recent observations more heavily (Simple, Holt's, Holt–Winters for seasonality).</div>
-      </article>
-
-      <!-- 58 -->
-      <article class="card" data-q="What is cross-validation?">
-        <div class="q"><span class="num">58</span><strong>What is cross-validation?</strong></div>
-        <div class="answer">Technique to evaluate model generalization by splitting data into folds (k-fold, leave-one-out) and averaging validation performance.</div>
-      </article>
-
-      <!-- 59 -->
-      <article class="card" data-q="What is stratified sampling?">
-        <div class="q"><span class="num">59</span><strong>What is stratified sampling?</strong></div>
-        <div class="answer">Sampling ensuring representation across strata (groups) proportionally or equally to reduce sampling variability for subgroup analyses.</div>
-      </article>
-
-      <!-- 60 -->
-      <article class="card" data-q="What is cluster sampling?">
-        <div class="q"><span class="num">60</span><strong>What is cluster sampling?</strong></div>
-        <div class="answer">Sampling by selecting whole clusters (e.g., schools) randomly and then sampling within; used when population is naturally grouped.</div>
-      </article>
-
-      <!-- 61 -->
-      <article class="card" data-q="What is sampling bias?">
-        <div class="q"><span class="num">61</span><strong>What is sampling bias?</strong></div>
-        <div class="answer">Systematic error from non-representative samples (selection bias) leading to invalid inferences about population.</div>
-      </article>
-
-      <!-- 62 -->
-      <article class="card" data-q="What is non-response bias?">
-        <div class="q"><span class="num">62</span><strong>What is non-response bias?</strong></div>
-        <div class="answer">Bias when participants who do not respond differ systematically from responders, affecting survey estimates.</div>
-      </article>
-
-      <!-- 63 -->
-      <article class="card" data-q="What is missing data mechanism?">
-        <div class="q"><span class="num">63</span><strong>What are missing data mechanisms?</strong></div>
-        <div class="answer">MCAR (missing completely at random), MAR (missing at random), MNAR (missing not at random); determines appropriate handling strategies.</div>
-      </article>
-
-      <!-- 64 -->
-      <article class="card" data-q="How handle missing data?">
-        <div class="q"><span class="num">64</span><strong>How to handle missing data?</strong></div>
-        <div class="answer">Options: deletion, imputation (mean, median, regression, MICE), model-based methods; choice depends on mechanism and amount missing.</div>
-      </article>
-
-      <!-- 65 -->
-      <article class="card" data-q="What is MICE?">
-        <div class="q"><span class="num">65</span><strong>What is MICE?</strong></div>
-        <div class="answer">Multiple Imputation by Chained Equations: iterative method filling missing values with multiple plausible imputations to reflect uncertainty.</div>
-      </article>
-
-      <!-- 66 -->
-      <article class="card" data-q="What is ROC curve?">
-        <div class="q"><span class="num">66</span><strong>What is an ROC curve?</strong></div>
-        <div class="answer">Receiver Operating Characteristic plots TPR vs FPR across thresholds; area under curve (AUC) measures classification discrimination.</div>
-      </article>
-
-      <!-- 67 -->
-      <article class="card" data-q="What is precision-recall curve?">
-        <div class="q"><span class="num">67</span><strong>What is the Precision-Recall curve?</strong></div>
-        <div class="answer">Plots precision vs recall across thresholds; more informative than ROC for imbalanced data focusing on positive class.</div>
-      </article>
-
-      <!-- 68 -->
-      <article class="card" data-q="What is confusion matrix?">
-        <div class="q"><span class="num">68</span><strong>What is a confusion matrix?</strong></div>
-        <div class="answer">Table of actual vs predicted class counts: TP, FP, TN, FN; used to compute precision, recall, specificity, etc.</div>
-      </article>
-
-      <!-- 69 -->
-      <article class="card" data-q="What is specificity?">
-        <div class="q"><span class="num">69</span><strong>What is specificity?</strong></div>
-        <div class="answer">True Negative Rate: TN/(TN+FP), measures correctly identified negatives.</div>
-      </article>
-
-      <!-- 70 -->
-      <article class="card" data-q="What is sensitivity?">
-        <div class="q"><span class="num">70</span><strong>What is sensitivity (recall)?</strong></div>
-        <div class="answer">True Positive Rate: TP/(TP+FN), measures correctly identified positives.</div>
-      </article>
-
-      <!-- 71 -->
-      <article class="card" data-q="What is false discovery rate?">
-        <div class="q"><span class="num">71</span><strong>What is False Discovery Rate (FDR)?</strong></div>
-        <div class="answer">Proportion of false positives among positive calls (FP / (TP+FP)); important in multiple testing contexts.</div>
-      </article>
-
-      <!-- 72 -->
-      <article class="card" data-q="What is multiple testing problem?">
-        <div class="q"><span class="num">72</span><strong>What is the multiple testing problem?</strong></div>
-        <div class="answer">Conducting many hypothesis tests increases chance of Type I errors; control with Bonferroni, BH (FDR) procedures.</div>
-      </article>
-
-      <!-- 73 -->
-      <article class="card" data-q="What is Bonferroni correction?">
-        <div class="q"><span class="num">73</span><strong>What is the Bonferroni correction?</strong></div>
-        <div class="answer">Adjust significance α by dividing by number of tests (α/m) to control family-wise error rate conservatively.</div>
-      </article>
-
-      <!-- 74 -->
-      <article class="card" data-q="What is Benjamini-Hochberg?">
-        <div class="q"><span class="num">74</span><strong>What is the Benjamini–Hochberg procedure?</strong></div>
-        <div class="answer">A method controlling False Discovery Rate (FDR) less conservatively than Bonferroni, ranking p-values and selecting threshold.</div>
-      </article>
-
-      <!-- 75 -->
-      <article class="card" data-q="What is effect of outliers?">
-        <div class="q"><span class="num">75</span><strong>How do outliers affect statistical analysis?</strong></div>
-        <div class="answer">They can skew means, inflate variance, bias estimates; consider robust measures (median, trimmed mean) or transform/remove after investigation.</div>
-      </article>
-
-      <!-- 76 -->
-      <article class="card" data-q="What is robustness?">
-        <div class="q"><span class="num">76</span><strong>What does robustness mean in statistics?</strong></div>
-        <div class="answer">Insensitivity of statistical methods to deviations from assumptions or to outliers (e.g., using median vs mean).</div>
-      </article>
-
-      <!-- 77 -->
-      <article class="card" data-q="What is log transformation?">
-        <div class="q"><span class="num">77</span><strong>Why apply log transformation?</strong></div>
-        <div class="answer">To reduce skewness, stabilize variance, and convert multiplicative relationships to additive ones for modeling.</div>
-      </article>
-
-      <!-- 78 -->
-      <article class="card" data-q="What is normalization vs standardization?">
-        <div class="q"><span class="num">78</span><strong>Normalization vs Standardization?</strong></div>
-        <div class="answer">Normalization rescales to [0,1]; standardization transforms to zero mean and unit variance (z-scores).</div>
-      </article>
-
-      <!-- 79 -->
-      <article class="card" data-q="What is Kaplan-Meier?">
-        <div class="q"><span class="num">79</span><strong>What is the Kaplan–Meier estimator?</strong></div>
-        <div class="answer">Non-parametric estimator of survival function accounting for censored data; plots survival probability over time.</div>
-      </article>
-
-      <!-- 80 -->
-      <article class="card" data-q="What is Cox proportional hazards?">
-        <div class="q"><span class="num">80</span><strong>What is the Cox proportional hazards model?</strong></div>
-        <div class="answer">Semi-parametric model for time-to-event data relating covariates to hazard; assumes proportional hazards over time.</div>
-      </article>
-
-      <!-- 81 -->
-      <article class="card" data-q="What is likelihood?">
-        <div class="q"><span class="num">81</span><strong>What is the likelihood function?</strong></div>
-        <div class="answer">Function of parameters given observed data; maximum likelihood estimates (MLE) maximize this function.</div>
-      </article>
-
-      <!-- 82 -->
-      <article class="card" data-q="What is MLE?">
-        <div class="q"><span class="num">82</span><strong>What is Maximum Likelihood Estimation (MLE)?</strong></div>
-        <div class="answer">Method to estimate parameters by maximizing the likelihood of observed data under the model.</div>
-      </article>
-
-      <!-- 83 -->
-      <article class="card" data-q="What is Bayesian inference?">
-        <div class="q"><span class="num">83</span><strong>What is Bayesian inference?</strong></div>
-        <div class="answer">Framework combining prior beliefs with data (likelihood) using Bayes' theorem to obtain posterior distributions over parameters.</div>
-      </article>
-
-      <!-- 84 -->
-      <article class="card" data-q="What is prior vs posterior?">
-        <div class="q"><span class="num">84</span><strong>What are prior and posterior distributions?</strong></div>
-        <div class="answer">Prior: belief about parameter before seeing data. Posterior: updated belief after observing data, proportional to prior × likelihood.</div>
-      </article>
-
-      <!-- 85 -->
-      <article class="card" data-q="What is conjugate prior?">
-        <div class="q"><span class="num">85</span><strong>What is a conjugate prior?</strong></div>
-        <div class="answer">A prior whose posterior is in the same family as the prior, simplifying Bayesian updating (e.g., Beta prior for Binomial likelihood).</div>
-      </article>
-
-      <!-- 86 -->
-      <article class="card" data-q="What is Bayesian credible interval?">
-        <div class="q"><span class="num">86</span><strong>What is a Bayesian credible interval?</strong></div>
-        <div class="answer">Interval containing parameter values with specified posterior probability (e.g., 95% credible interval ↔ 95% posterior probability).</div>
-      </article>
-
-      <!-- 87 -->
-      <article class="card" data-q="What is EM algorithm?">
-        <div class="q"><span class="num">87</span><strong>What is the Expectation-Maximization (EM) algorithm?</strong></div>
-        <div class="answer">Iterative method for MLE with latent variables: E-step computes expected sufficient stats given current params, M-step maximizes likelihood.</div>
-      </article>
-
-      <!-- 88 -->
-      <article class="card" data-q="What is hidden Markov model?">
-        <div class="q"><span class="num">88</span><strong>What is a Hidden Markov Model (HMM)?</strong></div>
-        <div class="answer">Probabilistic model with hidden states following a Markov chain and observed emissions dependent on those states, used in sequence modeling.</div>
-      </article>
-
-      <!-- 89 -->
-      <article class="card" data-q="What is Markov property?">
-        <div class="q"><span class="num">89</span><strong>What is the Markov property?</strong></div>
-        <div class="answer">Future state depends only on the present state, not on the full history (memoryless property of Markov processes).</div>
-      </article>
-
-      <!-- 90 -->
-      <article class="card" data-q="What is Bayesian network?">
-        <div class="q"><span class="num">90</span><strong>What is a Bayesian network?</strong></div>
-        <div class="answer">Directed acyclic graph representing conditional dependencies among variables with associated conditional probability tables.</div>
-      </article>
-
-      <!-- 91 -->
-      <article class="card" data-q="What is Gaussian process?">
-        <div class="q"><span class="num">91</span><strong>What is a Gaussian Process?</strong></div>
-        <div class="answer">A collection of random variables where any finite set has a joint Gaussian distribution; used for non-parametric regression and uncertainty quantification.</div>
-      </article>
-
-      <!-- 92 -->
-      <article class="card" data-q="What is kernel density estimation?">
-        <div class="q"><span class="num">92</span><strong>What is Kernel Density Estimation (KDE)?</strong></div>
-        <div class="answer">Non-parametric method to estimate a continuous probability density by smoothing data points with a kernel function (bandwidth choice matters).</div>
-      </article>
-
-      <!-- 93 -->
-      <article class="card" data-q="What is Bayes factor?">
-        <div class="q"><span class="num">93</span><strong>What is a Bayes factor?</strong></div>
-        <div class="answer">Ratio of marginal likelihoods of two competing models: evidence in favor of one model over another in Bayesian model comparison.</div>
-      </article>
-
-      <!-- 94 -->
-      <article class="card" data-q="What is model selection?">
-        <div class="q"><span class="num">94</span><strong>What is model selection?</strong></div>
-        <div class="answer">Choosing among models based on criteria (AIC, BIC, cross-validation) balancing fit and complexity to avoid overfitting.</div>
-      </article>
-
-      <!-- 95 -->
-      <article class="card" data-q="What are AIC and BIC?">
-        <div class="q"><span class="num">95</span><strong>What are AIC and BIC?</strong></div>
-        <div class="answer">Information criteria: AIC (Akaike) and BIC (Bayesian) penalize likelihood by complexity; lower values indicate preferred models, BIC penalizes complexity more strongly.</div>
-      </article>
-
-      <!-- 96 -->
-      <article class="card" data-q="What is residual analysis?">
-        <div class="q"><span class="num">96</span><strong>What is residual analysis?</strong></div>
-        <div class="answer">Examining residuals (observed − predicted) to check model assumptions: normality, homoscedasticity, independence, and to detect outliers.</div>
-      </article>
-
-      <!-- 97 -->
-      <article class="card" data-q="What is robust statistics?">
-        <div class="q"><span class="num">97</span><strong>What is robust statistics?</strong></div>
-        <div class="answer">Methods less sensitive to outliers or assumption violations (e.g., median, trimmed mean, M-estimators).</div>
-      </article>
-
-      <!-- 98 -->
-      <article class="card" data-q="What is statistical significance vs practical significance?">
-        <div class="q"><span class="num">98</span><strong>Statistical significance vs practical significance?</strong></div>
-        <div class="answer">Statistical significance indicates low probability of result under null; practical significance assesses whether the effect size is meaningful in real-world terms.</div>
-      </article>
-
-      <!-- 99 -->
-      <article class="card" data-q="What is reproducibility in statistics?">
-        <div class="q"><span class="num">99</span><strong>What is reproducibility in statistical analysis?</strong></div>
-        <div class="answer">Ability to re-run analysis and get same results by documenting data, code, environment, seeds, and random splits; critical for scientific validity.</div>
-      </article>
-
-      <!-- 100 -->
-      <article class="card" data-q="How to learn statistics effectively?">
-        <div class="q"><span class="num">100</span><strong>How should one learn statistics effectively?</strong></div>
-        <div class="answer">Combine theory (probability, inference) with practice: analyze real datasets, implement methods, simulate scenarios, and interpret results critically.</div>
-      </article>
-
-    </section>
-
-    <div class="meta">Questions: 100 • Click any question to show the answer. Use search to filter questions by keyword.</div>
-  </main>
+      <div class="card" data-cat="desc" data-q="mean median mode difference"><div class="q" data-id="s2"><div class="num">2</div><div class="qtext">Difference between mean, median and mode?</div></div><div class="answer">Mean is arithmetic average, median is middle value, mode is most frequent value; median resists outliers.</div></div>
+
+      <div class="card" data-cat="desc" data-q="what is variance and sd"><div class="q" data-id="s3"><div class="num">3</div><div class="qtext">What are variance and standard deviation?</div></div><div class="answer">Variance measures average squared deviation; SD is its square root, indicating spread in original units.</div></div>
+
+      <div class="card" data-cat="desc" data-q="range iqr"><div class="q" data-id="s4"><div class="num">4</div><div class="qtext">What are range and IQR?</div></div><div class="answer">Range = max-min; IQR = difference between 75th and 25th percentiles, robust spread measure.</div></div>
+
+      <div class="card" data-cat="desc" data-q="skewness kurtosis"><div class="q" data-id="s5"><div class="num">5</div><div class="qtext">What are skewness and kurtosis?</div></div><div class="answer">Skewness measures asymmetry; kurtosis measures tail heaviness or peakness relative to normal.</div></div>
+
+      <div class="card" data-cat="desc" data-q="percentile quartile"><div class="q" data-id="s6"><div class="num">6</div><div class="qtext">What is a percentile/quartile?</div></div><div class="answer">Percentiles indicate position in ordered data (e.g., 25th percentile = Q1), quartiles split data into 4 equal parts.</div></div>
+
+      <div class="card" data-cat="desc" data-q="boxplot explain"><div class="q" data-id="s7"><div class="num">7</div><div class="qtext">What is a boxplot?</div></div><div class="answer">Visual summary showing median, IQR, whiskers and potential outliers for a distribution.</div></div>
+
+      <div class="card" data-cat="desc" data-q="histogram explain"><div class="q" data-id="s8"><div class="num">8</div><div class="qtext">What is a histogram?</div></div><div class="answer">Bar chart of binned data showing frequency distribution across intervals.</div></div>
+
+      <div class="card" data-cat="desc" data-q="density plot explain"><div class="q" data-id="s9"><div class="num">9</div><div class="qtext">What is a density plot?</div></div><div class="answer">Smoothed estimate of the distribution (kernel density) useful for continuous data visualization.</div></div>
+
+      <div class="card" data-cat="desc" data-q="frequency table"><div class="q" data-id="s10"><div class="num">10</div><div class="qtext">What is a frequency table?</div></div><div class="answer">Tabulation of counts or proportions for categorical or binned numerical data.</div></div>
+
+      <div class="card" data-cat="desc" data-q="coefficient variation"><div class="q" data-id="s11"><div class="num">11</div><div class="qtext">What is coefficient of variation?</div></div><div class="answer">Ratio of SD to mean, useful to compare relative variability across scales.</div></div>
+
+      <div class="card" data-cat="desc" data-q="outlier detect iqr zscore"><div class="q" data-id="s12"><div class="num">12</div><div class="qtext">How detect outliers (IQR, z-score)?</div></div><div class="answer">IQR method flags points beyond 1.5×IQR; z-score flags points beyond chosen sigma thresholds.</div></div>
+
+      <div class="card" data-cat="desc" data-q="winsorization"><div class="q" data-id="s13"><div class="num">13</div><div class="qtext">What is winsorization?</div></div><div class="answer">Replace extreme values with nearest non-extreme quantile to reduce impact of outliers.</div></div>
+
+      <div class="card" data-cat="desc" data-q="data summarization measures"><div class="q" data-id="s14"><div class="num">14</div><div class="qtext">What summary measures are best for skewed data?</div></div><div class="answer">Median and IQR are preferred as they are robust to skew and outliers.</div></div>
+
+      <div class="card" data-cat="desc" data-q="bivariate summary"><div class="q" data-id="s15"><div class="num">15</div><div class="qtext">How summarize bivariate data?</div></div><div class="answer">Use contingency tables, scatter plots, correlation, and cross-tabulations for relationships.</div></div>
+
+      <div class="card" data-cat="desc" data-q="standardization normalization"><div class="q" data-id="s16"><div class="num">16</div><div class="qtext">Standardization vs normalization?</div></div><div class="answer">Standardization rescales to mean 0 SD 1; normalization rescales to a min–max range (e.g., 0–1).</div></div>
+
+      <div class="card" data-cat="desc" data-q="exploratory data analysis"><div class="q" data-id="s17"><div class="num">17</div><div class="qtext">What is Exploratory Data Analysis (EDA)?</div></div><div class="answer">Initial data investigation using visuals and summaries to find patterns and data issues.</div></div>
+
+      <div class="card" data-cat="desc" data-q="missing data patterns"><div class="q" data-id="s18"><div class="num">18</div><div class="qtext">How inspect missing data patterns?</div></div><div class="answer">Use missingness maps, counts by variable, and check for patterns related to other features.</div></div>
+
+      <div class="card" data-cat="desc" data-q="data profiling"><div class="q" data-id="s19"><div class="num">19</div><div class="qtext">What is data profiling?</div></div><div class="answer">Automated summarization of data types, ranges, missingness, and anomalies for dataset health checks.</div></div>
+
+      <div class="card" data-cat="desc" data-q="visualization best practices"><div class="q" data-id="s20"><div class="num">20</div><div class="qtext">Visualization best practices?</div></div><div class="answer">Choose clear charts, label axes, use appropriate scales, avoid misleading representations.</div></div>
+    </div>
+  </div>
+
+  <!-- 2. Probability (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Probability <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Basic probability rules and concepts</div>
+    </div>
+    <div class="grid" data-section="prob">
+      <div class="card" data-cat="prob" data-q="probability definition"><div class="q" data-id="s21"><div class="num">21</div><div class="qtext">What is probability?</div></div><div class="answer">A number between 0 and 1 quantifying the likelihood of an event under a model.</div></div>
+
+      <div class="card" data-cat="prob" data-q="add rule"><div class="q" data-id="s22"><div class="num">22</div><div class="qtext">What is the addition rule?</div></div><div class="answer">P(A∪B)=P(A)+P(B)−P(A∩B); for mutually exclusive events, intersection is zero.</div></div>
+
+      <div class="card" data-cat="prob" data-q="multiplication rule"><div class="q" data-id="s23"><div class="num">23</div><div class="qtext">What is the multiplication rule?</div></div><div class="answer">P(A∩B)=P(A)P(B|A); if independent, P(A∩B)=P(A)P(B).</div></div>
+
+      <div class="card" data-cat="prob" data-q="conditional prob"><div class="q" data-id="s24"><div class="num">24</div><div class="qtext">What is conditional probability?</div></div><div class="answer">Probability of event A given B occurred: P(A|B)=P(A∩B)/P(B).</div></div>
+
+      <div class="card" data-cat="prob" data-q="bayes theorem definition"><div class="q" data-id="s25"><div class="num">25</div><div class="qtext">State Bayes' theorem in words.</div></div><div class="answer">It updates the probability of a hypothesis given new evidence using prior and likelihood.</div></div>
+
+      <div class="card" data-cat="prob" data-q="independence"><div class="q" data-id="s26"><div class="num">26</div><div class="qtext">What does independence mean?</div></div><div class="answer">Events A and B are independent if P(A|B)=P(A), equivalently P(A∩B)=P(A)P(B).</div></div>
+
+      <div class="card" data-cat="prob" data-q="mutually exclusive"><div class="q" data-id="s27"><div class="num">27</div><div class="qtext">Mutually exclusive vs independent?</div></div><div class="answer">Mutually exclusive cannot co-occur; independent can co-occur and their probabilities multiply.</div></div>
+
+      <div class="card" data-cat="prob" data-q="law large numbers"><div class="q" data-id="s28"><div class="num">28</div><div class="qtext">What is the Law of Large Numbers?</div></div><div class="answer">Sample averages converge to expected value as sample size grows.</div></div>
+
+      <div class="card" data-cat="prob" data-q="prob axioms"><div class="q" data-id="s29"><div class="num">29</div><div class="qtext">What are Kolmogorov's axioms?</div></div><div class="answer">Non-negativity, normalization (P(Ω)=1), and additivity for disjoint events.</div></div>
+
+      <div class="card" data-cat="prob" data-q="complement rule"><div class="q" data-id="s30"><div class="num">30</div><div class="qtext">What is the complement rule?</div></div><div class="answer">P(A^c)=1−P(A): probability event does not occur equals 1 minus probability it does.</div></div>
+
+      <div class="card" data-cat="prob" data-q="bayes practical"><div class="q" data-id="s31"><div class="num">31</div><div class="qtext">When use Bayes in practice?</div></div><div class="answer">When updating probabilities with new evidence or combining prior knowledge with data.</div></div>
+
+      <div class="card" data-cat="prob" data-q="probability distribution"><div class="q" data-id="s32"><div class="num">32</div><div class="qtext">Discrete vs continuous distributions?</div></div><div class="answer">Discrete assigns probabilities to outcomes; continuous uses densities, probabilities for intervals.</div></div>
+
+      <div class="card" data-cat="prob" data-q="joint marginal conditional"><div class="q" data-id="s33"><div class="num">33</div><div class="qtext">Joint, marginal and conditional distributions?</div></div><div class="answer">Joint = P(X,Y); marginal = sum/integrate joint over one variable; conditional = joint/marginal.</div></div>
+
+      <div class="card" data-cat="prob" data-q="expectation definition"><div class="q" data-id="s34"><div class="num">34</div><div class="qtext">What is expected value?</div></div><div class="answer">Weighted average of a random variable's possible values using their probabilities.</div></div>
+
+      <div class="card" data-cat="prob" data-q="law unconscious statistician"><div class="q" data-id="s35"><div class="num">35</div><div class="qtext">What is LOTUS (law of unconscious statistician)?</div></div><div class="answer">Compute E[g(X)] by summing/integrating g(x) against the distribution of X without transforming variable.</div></div>
+
+      <div class="card" data-cat="prob" data-q="moment generating function"><div class="q" data-id="s36"><div class="num">36</div><div class="qtext">What is an MGF?</div></div><div class="answer">Moment generating function uniquely encodes moments; derivatives at zero give moments.</div></div>
+
+      <div class="card" data-cat="prob" data-q="cdf vs pdf pmf"><div class="q" data-id="s37"><div class="num">37</div><div class="qtext">CDF vs PDF vs PMF?</div></div><div class="answer">CDF gives cumulative prob; PDF density for continuous; PMF probabilities for discrete outcomes.</div></div>
+
+      <div class="card" data-cat="prob" data-q="law total probability"><div class="q" data-id="s38"><div class="num">38</div><div class="qtext">Law of total probability?</div></div><div class="answer">Decompose P(A) via partition B_i: P(A)=Σ P(A|B_i)P(B_i).</div></div>
+
+      <div class="card" data-cat="prob" data-q="prob paradox"><div class="q" data-id="s39"><div class="num">39</div><div class="qtext">What is the Monty Hall/Bertrand paradox idea?</div></div><div class="answer">They illustrate how conditional probability and problem framing change intuitive answers.</div></div>
+
+      <div class="card" data-cat="prob" data-q="random experiment"><div class="q" data-id="s40"><div class="num">40</div><div class="qtext">What is a random experiment?</div></div><div class="answer">Process with uncertain outcomes (trial) defined by a sample space and probability law.</div></div>
+    </div>
+  </div>
+
+  <!-- 3. Random Variables & Distributions (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Random Variables & Distributions <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Common distributions and properties</div>
+    </div>
+    <div class="grid" data-section="rvd">
+      <div class="card" data-cat="rvd" data-q="what is random variable"><div class="q" data-id="s41"><div class="num">41</div><div class="qtext">What is a random variable?</div></div><div class="answer">Mapping from outcomes to numerical values; can be discrete or continuous.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="bernoulli"><div class="q" data-id="s42"><div class="num">42</div><div class="qtext">What is Bernoulli distribution?</div></div><div class="answer">Single-trial discrete distribution with success probability p (0 or 1 outcomes).</div></div>
+
+      <div class="card" data-cat="rvd" data-q="binomial"><div class="q" data-id="s43"><div class="num">43</div><div class="qtext">What is Binomial distribution?</div></div><div class="answer">Sum of independent Bernoulli trials; models number of successes in n trials.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="poisson"><div class="q" data-id="s44"><div class="num">44</div><div class="qtext">What is Poisson distribution?</div></div><div class="answer">Models counts of rare events in fixed interval with rate λ, approximates binomial for small p.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="uniform"><div class="q" data-id="s45"><div class="num">45</div><div class="qtext">What is the uniform distribution?</div></div><div class="answer">All outcomes in the domain equally likely (discrete or continuous variants).</div></div>
+
+      <div class="card" data-cat="rvd" data-q="normal"><div class="q" data-id="s46"><div class="num">46</div><div class="qtext">Why is the normal distribution important?</div></div><div class="answer">Central limit theorem makes many sums/averages approximately normal; analytically convenient.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="exponential"><div class="q" data-id="s47"><div class="num">47</div><div class="qtext">What is the exponential distribution?</div></div><div class="answer">Memoryless continuous distribution modeling waiting times with rate λ.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="gamma"><div class="q" data-id="s48"><div class="num">48</div><div class="qtext">What is the gamma distribution?</div></div><div class="answer">Flexible family for positive variables; generalizes exponential (sum of exponentials).</div></div>
+
+      <div class="card" data-cat="rvd" data-q="beta"><div class="q" data-id="s49"><div class="num">49</div><div class="qtext">What is the beta distribution?</div></div><div class="answer">Distribution on [0,1] parameterized by shape parameters, useful as conjugate prior for Bernoulli/Binomial.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="student t"><div class="q" data-id="s50"><div class="num">50</div><div class="qtext">What is Student's t-distribution?</div></div><div class="answer">Heavy-tailed distribution used for small-sample inference about means; approaches normal as df increases.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="chi square"><div class="q" data-id="s51"><div class="num">51</div><div class="qtext">What is chi-square distribution?</div></div><div class="answer">Distribution of sum of squared standard normals; used in variance tests and contingency tables.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="f distribution"><div class="q" data-id="s52"><div class="num">52</div><div class="qtext">What is F-distribution?</div></div><div class="answer">Ratio of scaled chi-square variables; used in ANOVA and variance ratio tests.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="geometric"><div class="q" data-id="s53"><div class="num">53</div><div class="qtext">What is geometric distribution?</div></div><div class="answer">Models number of trials to first success in independent Bernoulli trials (memoryless discrete).</div></div>
+
+      <div class="card" data-cat="rvd" data-q="negative binomial"><div class="q" data-id="s54"><div class="num">54</div><div class="qtext">What is negative binomial distribution?</div></div><div class="answer">Models counts until r-th success, generalizes geometric and models overdispersed count data.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="multinomial"><div class="q" data-id="s55"><div class="num">55</div><div class="qtext">What is the multinomial distribution?</div></div><div class="answer">Multivariate generalization of binomial for counts across multiple categories.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="covariance correlation"><div class="q" data-id="s56"><div class="num">56</div><div class="qtext">Covariance vs correlation?</div></div><div class="answer">Covariance measures joint variability; correlation scales covariance to [−1,1] for comparison.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="moment definitions"><div class="q" data-id="s57"><div class="num">57</div><div class="qtext">What are moments?</div></div><div class="answer">Expectations of powers: first moment mean, second central moment variance, etc., describe distribution shape.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="characteristic function"><div class="q" data-id="s58"><div class="num">58</div><div class="qtext">What is a characteristic function?</div></div><div class="answer">Fourier transform of the distribution; uniquely determines distribution and helps with distribution sums.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="mixture distributions"><div class="q" data-id="s59"><div class="num">59</div><div class="qtext">What is a mixture distribution?</div></div><div class="answer">A weighted combination of component distributions modeling heterogeneity or multimodality.</div></div>
+
+      <div class="card" data-cat="rvd" data-q="empirical distribution function"><div class="q" data-id="s60"><div class="num">60</div><div class="qtext">What is empirical distribution function (EDF)?</div></div><div class="answer">Step function estimating CDF from sample data; basis for nonparametric inference.</div></div>
+    </div>
+  </div>
+
+  <!-- 4. Inferential Statistics (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Inferential Statistics <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Estimation, CI, hypothesis framework</div>
+    </div>
+    <div class="grid" data-section="infer">
+      <div class="card" data-cat="infer" data-q="what is statistical inference"><div class="q" data-id="s61"><div class="num">61</div><div class="qtext">What is statistical inference?</div></div><div class="answer">Drawing conclusions about population parameters from sample data using probabilistic models.</div></div>
+
+      <div class="card" data-cat="infer" data-q="point vs interval estimation"><div class="q" data-id="s62"><div class="num">62</div><div class="qtext">Point estimation vs interval estimation?</div></div><div class="answer">Point estimates give a single value; interval estimates give a range with confidence level.</div></div>
+
+      <div class="card" data-cat="infer" data-q="confidence interval explain"><div class="q" data-id="s63"><div class="num">63</div><div class="qtext">Interpretation of a 95% confidence interval?</div></div><div class="answer">If repeated samples taken, ~95% of such intervals would contain the true parameter (frequentist view).</div></div>
+
+      <div class="card" data-cat="infer" data-q="standard error"><div class="q" data-id="s64"><div class="num">64</div><div class="qtext">What is standard error?</div></div><div class="answer">Standard deviation of a sampling distribution of an estimator (e.g., mean's SE = σ/√n).</div></div>
+
+      <div class="card" data-cat="infer" data-q="central limit theorem usage"><div class="q" data-id="s65"><div class="num">65</div><div class="qtext">Why is CLT useful in inference?</div></div><div class="answer">Allows approximate normality of sample means for constructing CIs and tests even if data non-normal.</div></div>
+
+      <div class="card" data-cat="infer" data-q="mle explain"><div class="q" data-id="s66"><div class="num">66</div><div class="qtext">What is Maximum Likelihood Estimation (MLE)?</div></div><div class="answer">Choose parameters maximizing the likelihood of observing the given data under the model.</div></div>
+
+      <div class="card" data-cat="infer" data-q="properties estimator"><div class="q" data-id="s67"><div class="num">67</div><div class="qtext">Desirable properties of estimators?</div></div><div class="answer">Unbiasedness, consistency, efficiency (low variance), and sufficiency are common criteria.</div></div>
+
+      <div class="card" data-cat="infer" data-q="consistency explain"><div class="q" data-id="s68"><div class="num">68</div><div class="qtext">What is consistency of an estimator?</div></div><div class="answer">Estimator converges in probability to the true parameter as sample size increases.</div></div>
+
+      <div class="card" data-cat="infer" data-q="bias variance tradeoff infer"><div class="q" data-id="s69"><div class="num">69</div><div class="qtext">Bias–variance tradeoff in estimation?</div></div><div class="answer">Tradeoff where lower bias often increases variance and vice versa; aim to minimize overall error.</div></div>
+
+      <div class="card" data-cat="infer" data-q="method moments"><div class="q" data-id="s70"><div class="num">70</div><div class="qtext">What is method of moments?</div></div><div class="answer">Estimate parameters by equating sample moments to theoretical moments of distribution.</div></div>
+
+      <div class="card" data-cat="infer" data-q="sufficient statistic"><div class="q" data-id="s71"><div class="num">71</div><div class="qtext">What is a sufficient statistic?</div></div><div class="answer">Statistic summarizing all information about parameter present in the sample (no loss of info).</div></div>
+
+      <div class="card" data-cat="infer" data-q="ancillary statistic"><div class="q" data-id="s72"><div class="num">72</div><div class="qtext">What is ancillary statistic?</div></div><div class="answer">Statistic whose distribution does not depend on the parameter; can help conditional inference.</div></div>
+
+      <div class="card" data-cat="infer" data-q="cramer rao bound"><div class="q" data-id="s73"><div class="num">73</div><div class="qtext">What is Cramér–Rao lower bound?</div></div><div class="answer">Lower bound on variance of unbiased estimators; a measure of estimator efficiency.</div></div>
+
+      <div class="card" data-cat="infer" data-q="likelihood ratio test"><div class="q" data-id="s74"><div class="num">74</div><div class="qtext">What is the likelihood ratio test?</div></div><div class="answer">Compare max likelihoods under null and alternative hypotheses; often asymptotically χ²-distributed.</div></div>
+
+      <div class="card" data-cat="infer" data-q="bootstrap explain"><div class="q" data-id="s75"><div class="num">75</div><div class="qtext">What is the bootstrap?</div></div><div class="answer">Resampling with replacement to estimate sampling distributions and CIs nonparametrically.</div></div>
+
+      <div class="card" data-cat="infer" data-q="jackknife explain"><div class="q" data-id="s76"><div class="num">76</div><div class="qtext">What is the jackknife?</div></div><div class="answer">Leave-one-out resampling method for estimating bias and variance of estimators.</div></div>
+
+      <div class="card" data-cat="infer" data-q="parametric vs nonparametric"><div class="q" data-id="s77"><div class="num">77</div><div class="qtext">Parametric vs nonparametric inference?</div></div><div class="answer">Parametric assumes distributional form; nonparametric makes fewer assumptions and is more flexible.</div></div>
+
+      <div class="card" data-cat="infer" data-q="asymptotic normality"><div class="q" data-id="s78"><div class="num">78</div><div class="qtext">What is asymptotic normality?</div></div><div class="answer">Distributions of many estimators become approximately normal as sample size grows.</div></div>
+
+      <div class="card" data-cat="infer" data-q="profile likelihood"><div class="q" data-id="s79"><div class="num">79</div><div class="qtext">What is profile likelihood?</div></div><div class="answer">Maximize likelihood over nuisance parameters to focus on parameter of interest for CI and tests.</div></div>
+
+      <div class="card" data-cat="infer" data-q="empirical bayes"><div class="q" data-id="s80"><div class="num">80</div><div class="qtext">What is empirical Bayes?</div></div><div class="answer">Estimate prior from data and then apply Bayes, blending frequentist and Bayesian ideas.</div></div>
+    </div>
+  </div>
+
+  <!-- 5. Hypothesis Testing (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Hypothesis Testing <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Tests, p-values, errors, power</div>
+    </div>
+    <div class="grid" data-section="hypo">
+      <div class="card" data-cat="hypo" data-q="hypothesis testing steps"><div class="q" data-id="s81"><div class="num">81</div><div class="qtext">What are the steps in hypothesis testing?</div></div><div class="answer">Set H0/H1, choose α, compute test statistic, find p-value or critical region, conclude.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="pvalue meaning"><div class="q" data-id="s82"><div class="num">82</div><div class="qtext">What is a p-value?</div></div><div class="answer">Probability of data as extreme or more so under the null hypothesis; not the probability null is true.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="type i type ii"><div class="q" data-id="s83"><div class="num">83</div><div class="qtext">Type I vs Type II error?</div></div><div class="answer">Type I: reject true null; Type II: fail to reject false null (false positive vs false negative).</div></div>
+
+      <div class="card" data-cat="hypo" data-q="choose alpha"><div class="q" data-id="s84"><div class="num">84</div><div class="qtext">How choose significance level α?</div></div><div class="answer">Based on tolerance for false positives and study context; common values 0.05 or 0.01.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="one tailed two tailed"><div class="q" data-id="s85"><div class="num">85</div><div class="qtext">One-tailed vs two-tailed tests?</div></div><div class="answer">One-tailed tests directionally test H1; two-tailed test checks for any difference in either direction.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="power definition"><div class="q" data-id="s86"><div class="num">86</div><div class="qtext">What is power of a test?</div></div><div class="answer">Probability to reject the null when alternative true (1−β), depends on effect size and sample size.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="effect size"><div class="q" data-id="s87"><div class="num">87</div><div class="qtext">What is effect size?</div></div><div class="answer">Quantifies magnitude of phenomenon; larger effect sizes make detection easier and increase power.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="multiple comparisons"><div class="q" data-id="s88"><div class="num">88</div><div class="qtext">How adjust for multiple comparisons?</div></div><div class="answer">Use Bonferroni, Holm, FDR/Benjamini–Hochberg to control family-wise or false discovery rates.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="paired vs unpaired"><div class="q" data-id="s89"><div class="num">89</div><div class="qtext">Paired vs unpaired tests?</div></div><div class="answer">Paired for related samples (before/after); unpaired for independent groups.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="t test explain"><div class="q" data-id="s90"><div class="num">90</div><div class="qtext">What is t-test?</div></div><div class="answer">Test comparing means using t-distribution when population SD unknown and sample sizes small.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="anova explain"><div class="q" data-id="s91"><div class="num">91</div><div class="qtext">What is ANOVA?</div></div><div class="answer">Analysis of variance compares means across multiple groups using between- and within-group variability.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="chi square test"><div class="q" data-id="s92"><div class="num">92</div><div class="qtext">What is chi-square test used for?</div></div><div class="answer">Test independence of categorical variables or goodness-of-fit to expected counts.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="nonparametric tests"><div class="q" data-id="s93"><div class="num">93</div><div class="qtext">When use nonparametric tests?</div></div><div class="answer">When assumptions like normality or equal variances are violated; examples: Mann–Whitney, Kruskal–Wallis.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="bootstrap hypothesis"><div class="q" data-id="s94"><div class="num">94</div><div class="qtext">Can bootstrap be used for hypothesis testing?</div></div><div class="answer">Yes—use resampling to estimate null distributions or compute p-values nonparametrically.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="permutation test"><div class="q" data-id="s95"><div class="num">95</div><div class="qtext">What is a permutation test?</div></div><div class="answer">Assess significance by shuffling labels to generate null distribution for test statistic.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="statistical significance practical"><div class="q" data-id="s96"><div class="num">96</div><div class="qtext">Statistical significance vs practical significance?</div></div><div class="answer">Statistical relates to p-values; practical significance concerns real-world effect size and relevance.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="sequential testing"><div class="q" data-id="s97"><div class="num">97</div><div class="qtext">What is sequential testing?</div></div><div class="answer">Testing procedure that allows interim looks and early stopping while controlling error rates.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="one sample proportion test"><div class="q" data-id="s98"><div class="num">98</div><div class="qtext">How test a single proportion?</div></div><div class="answer">Use z-test for proportions or exact binomial tests when sample sizes small.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="power analysis"><div class="q" data-id="s99"><div class="num">99</div><div class="qtext">What is power analysis?</div></div><div class="answer">Compute sample size or power given effect size and α to design studies with adequate detection ability.</div></div>
+
+      <div class="card" data-cat="hypo" data-q="robust tests"><div class="q" data-id="s100"><div class="num">100</div><div class="qtext">What are robust tests?</div></div><div class="answer">Tests less sensitive to assumption violations, e.g., using ranks or trimmed means.</div></div>
+    </div>
+  </div>
+
+  <!-- 6. Correlation & Regression (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Correlation & Regression <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Linear models, assumptions, diagnostics</div>
+    </div>
+    <div class="grid" data-section="corr">
+      <div class="card" data-cat="corr" data-q="correlation measure"><div class="q" data-id="s101"><div class="num">101</div><div class="qtext">What is correlation?</div></div><div class="answer">Measure of linear association between two variables, commonly Pearson correlation.</div></div>
+
+      <div class="card" data-cat="corr" data-q="pearson spearman"><div class="q" data-id="s102"><div class="num">102</div><div class="qtext">Pearson vs Spearman correlation?</div></div><div class="answer">Pearson measures linear relation; Spearman measures monotonic relation using ranks.</div></div>
+
+      <div class="card" data-cat="corr" data-q="regression purpose"><div class="q" data-id="s103"><div class="num">103</div><div class="qtext">What is regression analysis?</div></div><div class="answer">Model relationship between predictors and a response, often for prediction or inference.</div></div>
+
+      <div class="card" data-cat="corr" data-q="ols assumptions"><div class="q" data-id="s104"><div class="num">104</div><div class="qtext">Key OLS assumptions?</div></div><div class="answer">Linearity, independence, homoscedasticity, no perfect multicollinearity, normally distributed errors for inference.</div></div>
+
+      <div class="card" data-cat="corr" data-q="r squared"><div class="q" data-id="s105"><div class="num">105</div><div class="qtext">What is R-squared?</div></div><div class="answer">Proportion of variance in response explained by predictors; can be misleading for model comparison.</div></div>
+
+      <div class="card" data-cat="corr" data-q="adjusted r squared"><div class="q" data-id="s106"><div class="num">106</div><div class="qtext">Why use adjusted R-squared?</div></div><div class="answer">Penalizes adding predictors; gives a better measure for model comparison with different feature counts.</div></div>
+
+      <div class="card" data-cat="corr" data-q="multicollinearity detection"><div class="q" data-id="s107"><div class="num">107</div><div class="qtext">How detect multicollinearity?</div></div><div class="answer">Check VIF, condition number, or unstable coefficient estimates and high pairwise correlations.</div></div>
+
+      <div class="card" data-cat="corr" data-q="heteroscedasticity detection"><div class="q" data-id="s108"><div class="num">108</div><div class="qtext">How detect heteroscedasticity?</div></div><div class="answer">Residual plots, Breusch–Pagan or White tests indicate non-constant error variance.</div></div>
+
+      <div class="card" data-cat="corr" data-q="residual analysis"><div class="q" data-id="s109"><div class="num">109</div><div class="qtext">Why inspect residuals?</div></div><div class="answer">To check model fit, detect nonlinearity, heteroscedasticity, outliers and influential points.</div></div>
+
+      <div class="card" data-cat="corr" data-q="influential points cook"><div class="q" data-id="s110"><div class="num">110</div><div class="qtext">What are influential observations? (Cook's distance)</div></div><div class="answer">Points that disproportionately affect model estimates; Cook’s distance identifies them for review.</div></div>
+
+      <div class="card" data-cat="corr" data-q="regularization lasso ridge"><div class="q" data-id="s111"><div class="num">111</div><div class="qtext">Lasso vs Ridge regression?</div></div><div class="answer">Lasso (L1) produces sparse coefficients; Ridge (L2) shrinks coefficients smoothly; Elastic Net mixes both.</div></div>
+
+      <div class="card" data-cat="corr" data-q="glm explain"><div class="q" data-id="s112"><div class="num">112</div><div class="qtext">What is a generalized linear model (GLM)?</div></div><div class="answer">Framework linking linear predictors to response via a link function and distribution from exponential family.</div></div>
+
+      <div class="card" data-cat="corr" data-q="link functions examples"><div class="q" data-id="s113"><div class="num">113</div><div class="qtext">Common GLM link functions?</div></div><div class="answer">Logit for binomial, log for Poisson, identity for Gaussian, complementary log-log in some cases.</div></div>
+
+      <div class="card" data-cat="corr" data-q="robust regression"><div class="q" data-id="s114"><div class="num">114</div><div class="qtext">What is robust regression?</div></div><div class="answer">Methods less sensitive to outliers (e.g., Huber loss, quantile regression) for reliable estimates.</div></div>
+
+      <div class="card" data-cat="corr" data-q="quantile regression"><div class="q" data-id="s115"><div class="num">115</div><div class="qtext">What is quantile regression?</div></div><div class="answer">Models conditional quantiles (e.g., median) instead of the mean for distributional insights.</div></div>
+
+      <div class="card" data-cat="corr" data-q="nonlinear regression"><div class="q" data-id="s116"><div class="num">116</div><div class="qtext">How handle nonlinear relationships?</div></div><div class="answer">Use polynomial features, splines, GAMs, or transform variables to capture nonlinearity.</div></div>
+
+      <div class="card" data-cat="corr" data-q="interaction term"><div class="q" data-id="s117"><div class="num">117</div><div class="qtext">What are interaction effects?</div></div><div class="answer">When effect of one predictor depends on value of another; include product terms to model them.</div></div>
+
+      <div class="card" data-cat="corr" data-q="categorical predictors encoding"><div class="q" data-id="s118"><div class="num">118</div><div class="qtext">How include categorical predictors?</div></div><div class="answer">One-hot, effect coding, target encoding or embeddings depending on model and cardinality.</div></div>
+
+      <div class="card" data-cat="corr" data-q="model selection criteria aic bic"><div class="q" data-id="s119"><div class="num">119</div><div class="qtext">What are AIC and BIC?</div></div><div class="answer">Information criteria balancing fit and complexity for model selection; BIC penalizes complexity more.</div></div>
+
+      <div class="card" data-cat="corr" data-q="cross validation regression"><div class="q" data-id="s120"><div class="num">120</div><div class="qtext">How use cross-validation in regression?</div></div><div class="answer">Assess predictive performance and tune hyperparameters (e.g., regularization strength) via CV.</div></div>
+    </div>
+  </div>
+
+  <!-- 7. Sampling & Estimation (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Sampling & Estimation <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Sampling methods, estimators, bias/variance</div>
+    </div>
+    <div class="grid" data-section="sample">
+      <div class="card" data-cat="sample" data-q="sampling methods types"><div class="q" data-id="s121"><div class="num">121</div><div class="qtext">Common sampling methods?</div></div><div class="answer">Simple random, stratified, cluster, systematic, and convenience sampling with trade-offs in bias and cost.</div></div>
+
+      <div class="card" data-cat="sample" data-q="sampling bias"><div class="q" data-id="s122"><div class="num">122</div><div class="qtext">What is sampling bias?</div></div><div class="answer">When sample is not representative of population due to selection processes, causing biased inference.</div></div>
+
+      <div class="card" data-cat="sample" data-q="sampling distribution"><div class="q" data-id="s123"><div class="num">123</div><div class="qtext">What is a sampling distribution?</div></div><div class="answer">Distribution of a statistic (e.g., sample mean) over repeated samples from the population.</div></div>
+
+      <div class="card" data-cat="sample" data-q="central limit theorem sampling"><div class="q" data-id="s124"><div class="num">124</div><div class="qtext">Role of CLT in sampling?</div></div><div class="answer">Justifies approximate normality of sample means for large n, enabling approximate CIs and tests.</div></div>
+
+      <div class="card" data-cat="sample" data-q="sample size calc"><div class="q" data-id="s125"><div class="num">125</div><div class="qtext">How calculate sample size?</div></div><div class="answer">Based on desired power, effect size, significance level, and variance or pilot estimates.</div></div>
+
+      <div class="card" data-cat="sample" data-q="estimator bias vs variance"><div class="q" data-id="s126"><div class="num">126</div><div class="qtext">Bias vs variance of an estimator?</div></div><div class="answer">Bias = systematic error; variance = sampling variability; both contribute to MSE.</div></div>
+
+      <div class="card" data-cat="sample" data-q="unbiased estimator"><div class="q" data-id="s127"><div class="num">127</div><div class="qtext">What is an unbiased estimator?</div></div><div class="answer">Its expected value equals the true parameter across repeated samples.</div></div>
+
+      <div class="card" data-cat="sample" data-q="consistent estimator explain"><div class="q" data-id="s128"><div class="num">128</div><div class="qtext">What does consistency mean for estimators?</div></div><div class="answer">Estimator converges in probability to the true parameter as sample size → ∞.</div></div>
+
+      <div class="card" data-cat="sample" data-q="efficiency estimator"><div class="q" data-id="s129"><div class="num">129</div><div class="qtext">What is estimator efficiency?</div></div><div class="answer">An efficient estimator has minimal variance among unbiased estimators (often close to Cramér–Rao bound).</div></div>
+
+      <div class="card" data-cat="sample" data-q="biased estimator examples"><div class="q" data-id="s130"><div class="num">130</div><div class="qtext">Examples of biased estimators?</div></div><div class="answer">Sample variance using 1/n is biased; using 1/(n−1) yields unbiased estimator.</div></div>
+
+      <div class="card" data-cat="sample" data-q="bootstrap sampling"><div class="q" data-id="s131"><div class="num">131</div><div class="qtext">Bootstrap sampling basics?</div></div><div class="answer">Resample with replacement to simulate sampling distribution when analytic forms unavailable.</div></div>
+
+      <div class="card" data-cat="sample" data-q="stratified sampling advantage"><div class="q" data-id="s132"><div class="num">132</div><div class="qtext">Why use stratified sampling?</div></div><div class="answer">Improves representativeness and precision by sampling within homogeneous subgroups.</div></div>
+
+      <div class="card" data-cat="sample" data-q="cluster sampling when use"><div class="q" data-id="s133"><div class="num">133</div><div class="qtext">When use cluster sampling?</div></div><div class="answer">When population naturally groups and resources limit sampling; may increase variance vs SRS.</div></div>
+
+      <div class="card" data-cat="sample" data-q="systematic sampling"><div class="q" data-id="s134"><div class="num">134</div><div class="qtext">What is systematic sampling?</div></div><div class="answer">Select every k-th item from an ordered list; simple but may introduce periodicity bias.</div></div>
+
+      <div class="card" data-cat="sample" data-q="response bias"><div class="q" data-id="s135"><div class="num">135</div><div class="qtext">What is response bias?</div></div><div class="answer">Bias from non-response or inaccurate responses affecting sample representativeness.</div></div>
+
+      <div class="card" data-cat="sample" data-q="finite population correction"><div class="q" data-id="s136"><div class="num">136</div><div class="qtext">What is finite population correction (FPC)?</div></div><div class="answer">Adjustment to variance when sampling a substantial fraction of finite population (reduces SE).</div></div>
+
+      <div class="card" data-cat="sample" data-q="post stratification"><div class="q" data-id="s137"><div class="num">137</div><div class="qtext">What is post-stratification?</div></div><div class="answer">Adjust sample weights after data collection to match known population margins and reduce bias.</div></div>
+
+      <div class="card" data-cat="sample" data-q="importance sampling"><div class="q" data-id="s138"><div class="num">138</div><div class="qtext">What is importance sampling?</div></div><div class="answer">Use a proposal distribution to estimate expectations more efficiently for rare events.</div></div>
+
+      <div class="card" data-cat="sample" data-q="survey sampling errors"><div class="q" data-id="s139"><div class="num">139</div><div class="qtext">Types of sampling error?</div></div><div class="answer">Sampling error (due to chance) and nonsampling errors (measurement, coverage, response).</div></div>
+
+      <div class="card" data-cat="sample" data-q="design effect"><div class="q" data-id="s140"><div class="num">140</div><div class="qtext">What is design effect?</div></div><div class="answer">Ratio of variance under actual design to variance under simple random sampling, accounts for clustering/weights.</div></div>
+    </div>
+  </div>
+
+  <!-- 8. Bayesian Statistics (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Bayesian Statistics <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Priors, posteriors, Bayesian inference</div>
+    </div>
+    <div class="grid" data-section="bayes">
+      <div class="card" data-cat="bayes" data-q="bayesian paradigm"><div class="q" data-id="s141"><div class="num">141</div><div class="qtext">What is Bayesian inference?</div></div><div class="answer">Update prior beliefs with data likelihood to obtain posterior distribution for parameters.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="prior types"><div class="q" data-id="s142"><div class="num">142</div><div class="qtext">Types of priors (informative, noninformative)?</div></div><div class="answer">Informative priors encode domain knowledge; noninformative are vague to let data dominate.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="conjugate prior"><div class="q" data-id="s143"><div class="num">143</div><div class="qtext">What is a conjugate prior?</div></div><div class="answer">Prior leading to posterior in same family as prior, simplifying analytic updates (e.g., Beta-Binomial).</div></div>
+
+      <div class="card" data-cat="bayes" data-q="posterior predictive"><div class="q" data-id="s144"><div class="num">144</div><div class="qtext">What is the posterior predictive distribution?</div></div><div class="answer">Predictive distribution for future data integrating over posterior parameter uncertainty.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="mcmc basics"><div class="q" data-id="s145"><div class="num">145</div><div class="qtext">What is MCMC?</div></div><div class="answer">Markov Chain Monte Carlo methods sample from complex posteriors when analytic forms unavailable.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="gibbs sampling"><div class="q" data-id="s146"><div class="num">146</div><div class="qtext">What is Gibbs sampling?</div></div><div class="answer">MCMC technique sampling each parameter conditional on others iteratively to approximate joint posterior.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="metropolis hastings"><div class="q" data-id="s147"><div class="num">147</div><div class="qtext">What is Metropolis–Hastings?</div></div><div class="answer">MCMC algorithm proposing moves and accepting with probability based on ratio of target densities.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="bayes vs frequentist"><div class="q" data-id="s148"><div class="num">148</div><div class="qtext">Bayesian vs frequentist interpretation?</div></div><div class="answer">Bayesian treats parameters as random with priors; frequentist uses fixed parameters and sampling ideas.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="bayes factor"><div class="q" data-id="s149"><div class="num">149</div><div class="qtext">What is Bayes factor?</div></div><div class="answer">Ratio of marginal likelihoods for model comparison quantifying evidence in data for one model vs another.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="credible interval"><div class="q" data-id="s150"><div class="num">150</div><div class="qtext">Credible interval vs confidence interval?</div></div><div class="answer">Credible interval: Bayesian probability interval for parameter; confidence interval: frequentist coverage property.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="empirical bayes"><div class="q" data-id="s151"><div class="num">151</div><div class="qtext">What is Empirical Bayes?</div></div><div class="answer">Estimate prior parameters from data and then perform Bayesian updating; pragmatic compromise approach.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="hierarchical models"><div class="q" data-id="s152"><div class="num">152</div><div class="qtext">What are hierarchical Bayesian models?</div></div><div class="answer">Models with parameters drawn from higher-level distributions allowing pooled estimation across groups.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="prior sensitivity"><div class="q" data-id="s153"><div class="num">153</div><div class="qtext">What is prior sensitivity?</div></div><div class="answer">Assessment of how inference changes with different prior choices; important when data sparse.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="variational inference"><div class="q" data-id="s154"><div class="num">154</div><div class="qtext">What is variational inference?</div></div><div class="answer">Approximate posterior with tractable family by optimizing divergence (faster than MCMC for large problems).</div></div>
+
+      <div class="card" data-cat="bayes" data-q="bayesian credible predictive checking"><div class="q" data-id="s155"><div class="num">155</div><div class="qtext">What is posterior predictive checking?</div></div><div class="answer">Compare simulated data from posterior predictive to observed data to assess model fit.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="conjugacy example beta binomial"><div class="q" data-id="s156"><div class="num">156</div><div class="qtext">Give a conjugate prior example.</div></div><div class="answer">Beta prior with Binomial likelihood yields Beta posterior for success probability.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="credible vs predictive"><div class="q" data-id="s157"><div class="num">157</div><div class="qtext">Posterior vs posterior predictive?</div></div><div class="answer">Posterior describes parameters; posterior predictive integrates over posterior to predict new data.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="bayesian model averaging"><div class="q" data-id="s158"><div class="num">158</div><div class="qtext">What is Bayesian model averaging?</div></div><div class="answer">Combine predictions from multiple models weighted by posterior model probabilities to account for model uncertainty.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="bayesian decision theory"><div class="q" data-id="s159"><div class="num">159</div><div class="qtext">What is Bayesian decision theory?</div></div><div class="answer">Decision-making framework minimizing expected loss under posterior uncertainty.</div></div>
+
+      <div class="card" data-cat="bayes" data-q="priors in ml"><div class="q" data-id="s160"><div class="num">160</div><div class="qtext">How use priors in ML models?</div></div><div class="answer">Regularization can be seen as priors; incorporate domain knowledge or structure via priors.</div></div>
+    </div>
+  </div>
+
+  <!-- 9. Time Series (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Time Series <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Forecasting basics, stationarity, ARIMA</div>
+    </div>
+    <div class="grid" data-section="ts">
+      <div class="card" data-cat="ts" data-q="time series definition"><div class="q" data-id="s161"><div class="num">161</div><div class="qtext">What is a time series?</div></div><div class="answer">Sequence of observations indexed by time, often exhibiting trend and seasonality.</div></div>
+
+      <div class="card" data-cat="ts" data-q="stationarity explain"><div class="q" data-id="s162"><div class="num">162</div><div class="qtext">What is stationarity?</div></div><div class="answer">Statistical properties (mean, variance) are time-invariant; crucial for many models.</div></div>
+
+      <div class="card" data-cat="ts" data-q="white noise"><div class="q" data-id="s163"><div class="num">163</div><div class="qtext">What is white noise?</div></div><div class="answer">Sequence of uncorrelated random variables with zero mean and constant variance.</div></div>
+
+      <div class="card" data-cat="ts" data-q="autocorrelation function"><div class="q" data-id="s164"><div class="num">164</div><div class="qtext">What is autocorrelation?</div></div><div class="answer">Correlation of a series with its own lagged values, used with ACF/PACF plots.</div></div>
+
+      <div class="card" data-cat="ts" data-q="acf pacf"><div class="q" data-id="s165"><div class="num">165</div><div class="qtext">ACF vs PACF?</div></div><div class="answer">ACF shows correlations at lags; PACF shows partial correlations controlling for intermediate lags.</div></div>
+
+      <div class="card" data-cat="ts" data-q="differencing"><div class="q" data-id="s166"><div class="num">166</div><div class="qtext">What is differencing?</div></div><div class="answer">Subtract previous value(s) to remove trend/seasonality and achieve stationarity.</div></div>
+
+      <div class="card" data-cat="ts" data-q="arima explain"><div class="q" data-id="s167"><div class="num">167</div><div class="qtext">What is ARIMA (p,d,q)?</div></div><div class="answer">ARIMA models autoregression (p), differencing (d), and moving average (q) for forecasting.</div></div>
+
+      <div class="card" data-cat="ts" data-q="seasonal arima"><div class="q" data-id="s168"><div class="num">168</div><div class="qtext">What is SARIMA?</div></div><div class="answer">Seasonal ARIMA adds seasonal AR/MA/differencing terms for periodic patterns.</div></div>
+
+      <div class="card" data-cat="ts" data-q="exponential smoothing"><div class="q" data-id="s169"><div class="num">169</div><div class="qtext">What is exponential smoothing?</div></div><div class="answer">Weighted averaging of past observations with exponentially decaying weights (e.g., Holt-Winters).</div></div>
+
+      <div class="card" data-cat="ts" data-q="forecast evaluation metrics"><div class="q" data-id="s170"><div class="num">170</div><div class="qtext">Common forecasting metrics?</div></div><div class="answer">MAE, RMSE, MAPE, and mean absolute scaled error (MASE) depending on scale/seasonality.</div></div>
+
+      <div class="card" data-cat="ts" data-q="unit root"><div class="q" data-id="s171"><div class="num">171</div><div class="qtext">What is a unit root?</div></div><div class="answer">Characteristic of nonstationary series (random walk); presence tested by Dickey–Fuller tests.</div></div>
+
+      <div class="card" data-cat="ts" data-q="seasonality detection"><div class="q" data-id="s172"><div class="num">172</div><div class="qtext">How detect seasonality?</div></div><div class="answer">Inspect periodic patterns in plots, ACF peaks at seasonal lags, or spectral analysis.</div></div>
+
+      <div class="card" data-cat="ts" data-q="cointegration"><div class="q" data-id="s173"><div class="num">173</div><div class="qtext">What is cointegration?</div></div><div class="answer">Long-run equilibrium relationship between nonstationary series whose linear combination is stationary.</div></div>
+
+      <div class="card" data-cat="ts" data-q="granger causality"><div class="q" data-id="s174"><div class="num">174</div><div class="qtext">What is Granger causality?</div></div><div class="answer">Predictive causality test: one series helps forecast another beyond its own history.</div></div>
+
+      <div class="card" data-cat="ts" data-q="state space models"><div class="q" data-id="s175"><div class="num">175</div><div class="qtext">What are state-space models?</div></div><div class="answer">Models representing observed series via unobserved states evolving over time (e.g., Kalman filter).</div></div>
+
+      <div class="card" data-cat="ts" data-q="kalman filter"><div class="q" data-id="s176"><div class="num">176</div><div class="qtext">What is Kalman filter?</div></div><div class="answer">Recursive algorithm to estimate hidden states in linear Gaussian state-space models.</div></div>
+
+      <div class="card" data-cat="ts" data-q="forecast combination"><div class="q" data-id="s177"><div class="num">177</div><div class="qtext">Why combine forecasts?</div></div><div class="answer">Ensemble of forecasts often improves accuracy and robustness across methods.</div></div>
+
+      <div class="card" data-cat="ts" data-q="time series cross validation"><div class="q" data-id="s178"><div class="num">178</div><div class="qtext">How perform time-series cross-validation?</div></div><div class="answer">Use forward-chaining (rolling origin) splits preserving temporal order to avoid leakage.</div></div>
+
+      <div class="card" data-cat="ts" data-q="deseasonalize trend remove"><div class="q" data-id="s179"><div class="num">179</div><div class="qtext">How remove trend and seasonality?</div></div><div class="answer">Use differencing, decomposition (additive/multiplicative), or regression on time/seasonal dummies.</div></div>
+
+      <div class="card" data-cat="ts" data-q="anomaly detection ts"><div class="q" data-id="s180"><div class="num">180</div><div class="qtext">How detect anomalies in time series?</div></div><div class="answer">Use statistical thresholds, residual-based detection, seasonal decomposition, or specialized models.</div></div>
+    </div>
+  </div>
+
+  <!-- 10. Statistical Modeling for ML (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Statistical Modeling for ML <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Modeling assumptions, evaluation, experiment design</div>
+    </div>
+    <div class="grid" data-section="statml">
+      <div class="card" data-cat="statml" data-q="model assumptions"><div class="q" data-id="s181"><div class="num">181</div><div class="qtext">Why check model assumptions?</div></div><div class="answer">Violations can invalidate inference or degrade predictive performance, so diagnostics are essential.</div></div>
+
+      <div class="card" data-cat="statml" data-q="model misspecification"><div class="q" data-id="s182"><div class="num">182</div><div class="qtext">What is model misspecification?</div></div><div class="answer">When the assumed model form doesn't match data-generating process, leading to biased/poor results.</div></div>
+
+      <div class="card" data-cat="statml" data-q="regularization statistical"><div class="q" data-id="s183"><div class="num">183</div><div class="qtext">Statistical view of regularization?</div></div><div class="answer">Regularization penalizes complexity and can be interpreted as imposing priors in a Bayesian viewpoint.</div></div>
+
+      <div class="card" data-cat="statml" data-q="cross validation usage ml"><div class="q" data-id="s184"><div class="num">184</div><div class="qtext">Why use cross-validation in ML?</div></div><div class="answer">Estimate generalization error and select/tune models while avoiding overfitting to a single split.</div></div>
+
+      <div class="card" data-cat="statml" data-q="model interpretability importance"><div class="q" data-id="s185"><div class="num">185</div><div class="qtext">Why is interpretability important?</div></div><div class="answer">It builds trust, helps debugging, ensures fairness, and satisfies regulatory needs.</div></div>
+
+      <div class="card" data-cat="statml" data-q="causal inference basics"><div class="q" data-id="s186"><div class="num">186</div><div class="qtext">What is causal inference vs correlation?</div></div><div class="answer">Causal inference aims to estimate effect of interventions, requiring design/assumptions beyond association.</div></div>
+
+      <div class="card" data-cat="statml" data-q="confounding"><div class="q" data-id="s187"><div class="num">187</div><div class="qtext">What is a confounder?</div></div><div class="answer">A variable influencing both treatment and outcome that can bias causal estimates if unaccounted for.</div></div>
+
+      <div class="card" data-cat="statml" data-q="randomized experiment advantage"><div class="q" data-id="s188"><div class="num">188</div><div class="qtext">Why randomize experiments?</div></div><div class="answer">Randomization balances observed and unobserved confounders, enabling unbiased causal estimates.</div></div>
+
+      <div class="card" data-cat="statml" data-q="matching propensity score"><div class="q" data-id="s189"><div class="num">189</div><div class="qtext">What is propensity score matching?</div></div><div class="answer">Match units with similar treatment probabilities to reduce confounding in observational studies.</div></div>
+
+      <div class="card" data-cat="statml" data-q="a/b testing stats"><div class="q" data-id="s190"><div class="num">190</div><div class="qtext">Key elements of A/B testing?</div></div><div class="answer">Random assignment, clear metric, sufficient sample size, and correct statistical analysis for inference.</div></div>
+
+      <div class="card" data-cat="statml" data-q="sequential testing ab"><div class="q" data-id="s191"><div class="num">191</div><div class="qtext">How control error in sequential A/B tests?</div></div><div class="answer">Use alpha-spending, sequential tests, or Bayesian approaches to maintain error rates with interim looks.</div></div>
+
+      <div class="card" data-cat="statml" data-q="causal graphs"><div class="q" data-id="s192"><div class="num">192</div><div class="qtext">What are causal graphs (DAGs)?</div></div><div class="answer">Directed acyclic graphs representing causal relationships and guiding identification strategies.</div></div>
+
+      <div class="card" data-cat="statml" data-q="instrumental variables"><div class="q" data-id="s193"><div class="num">193</div><div class="qtext">What is an instrumental variable (IV)?</div></div><div class="answer">IV influences treatment but not outcome directly, enabling causal identification under assumptions.</div></div>
+
+      <div class="card" data-cat="statml" data-q="difference-in-differences"><div class="q" data-id="s194"><div class="num">194</div><div class="qtext">What is difference-in-differences?</div></div><div class="answer">Compare pre-post differences between treated and control groups to estimate causal effects under parallel trends.</div></div>
+
+      <div class="card" data-cat="statml" data-q="synthetic control"><div class="q" data-id="s195"><div class="num">195</div><div class="qtext">What is synthetic control method?</div></div><div class="answer">Construct weighted combination of controls to form a counterfactual for treated unit in comparative case studies.</div></div>
+
+      <div class="card" data-cat="statml" data-q="regularization bias tradeoff"><div class="q" data-id="s196"><div class="num">196</div><div class="qtext">How does regularization trade bias and variance?</div></div><div class="answer">Regularization increases bias slightly but reduces variance, often lowering overall error.</div></div>
+
+      <div class="card" data-cat="statml" data-q="ensemble methods"><div class="q" data-id="s197"><div class="num">197</div><div class="qtext">Why use ensemble methods?</div></div><div class="answer">Combine models to reduce variance and improve predictions by leveraging diverse model strengths.</div></div>
+
+      <div class="card" data-cat="statml" data-q="calibration model outputs"><div class="q" data-id="s198"><div class="num">198</div><div class="qtext">What is probability calibration?</div></div><div class="answer">Adjust predicted probabilities so they match observed frequencies (Platt scaling, isotonic regression).</div></div>
+
+      <div class="card" data-cat="statml" data-q="experiment design basics"><div class="q" data-id="s199"><div class="num">199</div><div class="qtext">Principles of experimental design?</div></div><div class="answer">Randomization, control, replication, blocking, and clear outcome measurement for valid inference.</div></div>
+
+      <div class="card" data-cat="statml" data-q="statistical literacy advice"><div class="q" data-id="s200"><div class="num">200</div><div class="qtext">How improve statistical literacy?</div></div><div class="answer">Practice real data analysis, study concepts, simulate experiments, and communicate results clearly.</div></div>
+    </div>
+  </div>
 
   <footer>
-    <div class="container">
-      Tip: To export, copy the page or save as PDF. Want these pages packaged into a ZIP with index and shared CSS/JS? Ask and I'll prepare it.
-    </div>
+    Tip: Use filters to focus a topic, type keywords to search, and click a question to reveal a concise answer. Ask if you want expanded answers, code examples, or a downloadable PDF.
   </footer>
+</main>
 
-  <script>
-    // Toggle answers
-    document.querySelectorAll('.card .q').forEach(q => {
-      q.addEventListener('click', () => {
-        const ans = q.parentElement.querySelector('.answer');
-        ans.style.display = (ans.style.display === 'block') ? 'none' : 'block';
-      });
+<script>
+  // Helper: highlight text occurrences
+  function highlight(node, term) {
+    if (!term) return;
+    const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    node.innerHTML = node.textContent.replace(regex, (m) => `<mark>${m}</mark>`);
+  }
+
+  // Toggle single card answer
+  document.querySelectorAll('.card .q').forEach(q => {
+    q.addEventListener('click', () => {
+      const card = q.closest('.card');
+      const ans = card.querySelector('.answer');
+      ans.style.display = (ans.style.display === 'block') ? 'none' : 'block';
     });
+  });
 
-    // Simple search (Enter to apply)
-    const search = document.getElementById('search');
-    const clearBtn = document.getElementById('clear');
-    search.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const term = search.value.trim().toLowerCase();
-        document.querySelectorAll('#questions .card').forEach(card => {
-          const text = (card.dataset.q + ' ' + (card.querySelector('.answer')?.textContent || '')).toLowerCase();
-          card.style.display = text.includes(term) ? 'block' : 'none';
-        });
+  // Filters
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('search').value = '';
+      document.querySelectorAll('.card .qtext, .card .answer').forEach(el => el.innerHTML = el.textContent);
+    });
+  });
+
+  // Expand / Collapse All
+  document.getElementById('expandAll').addEventListener('click', ()=>{
+    document.querySelectorAll('.card .answer').forEach(a => a.style.display = 'block');
+  });
+  document.getElementById('collapseAll').addEventListener('click', ()=>{
+    document.querySelectorAll('.card .answer').forEach(a => a.style.display = 'none');
+  });
+
+  // Search (live)
+  const searchInput = document.getElementById('search');
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.trim().toLowerCase();
+    document.querySelectorAll('.card .qtext, .card .answer').forEach(el => el.innerHTML = el.textContent);
+    if (!term) {
+      const active = document.querySelector('.filter-btn.active').dataset.cat;
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = (active === 'all' || card.dataset.cat === active) ? 'block' : 'none';
+      });
+      return;
+    }
+    document.querySelectorAll('.card').forEach(card => {
+      const q = (card.dataset.q || '').toLowerCase();
+      const a = (card.querySelector('.answer')?.textContent || '').toLowerCase();
+      const active = document.querySelector('.filter-btn.active').dataset.cat;
+      const inCategory = (active === 'all' || card.dataset.cat === active);
+      if ((q + ' ' + a).includes(term) && inCategory) {
+        card.style.display = 'block';
+        highlight(card.querySelector('.qtext'), term);
+        highlight(card.querySelector('.answer'), term);
+      } else {
+        card.style.display = 'none';
       }
     });
-    clearBtn.addEventListener('click', () => {
-      search.value = '';
-      document.querySelectorAll('#questions .card').forEach(card => card.style.display = 'block');
-    });
-  </script>
+  });
+
+  // Enter: open first visible answer
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const first = Array.from(document.querySelectorAll('.card'))
+        .find(c => c.style.display !== 'none');
+      if (first) {
+        first.querySelector('.answer').style.display = 'block';
+        first.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+  });
+
+  // Ensure "All" active at start
+  document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
+</script>
 
 </body>
 </html>
