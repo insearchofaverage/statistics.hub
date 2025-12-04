@@ -1,589 +1,1317 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Machine Learning — 100 Interview Questions & Answers</title>
-  <style>
-    :root{
-      --bg:#f4f7fb; --card:#ffffff; --accent:#0b66c3; --muted:#556;
-    }
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:var(--bg); color:#122; line-height:1.45}
-    header{background:linear-gradient(90deg,#08306b 0%, #0b66c3 100%); color:white;padding:24px 20px}
-    header h1{margin:0;font-size:20px}
-    header p{margin:6px 0 0;color:rgba(255,255,255,0.9)}
-    .container{max-width:980px;margin:26px auto;padding:0 16px}
-    .controls{display:flex;gap:8px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
-    .card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 6px 18px rgba(11,102,195,0.06);border:1px solid rgba(11,102,195,0.06)}
-    .q{cursor:pointer;margin:0;display:flex;align-items:center;gap:12px}
-    .q .num{background:rgba(11,102,195,0.08);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700;font-size:13px}
-    .q strong{font-size:15px}
-    .answer{display:none;margin-top:10px;padding:10px;border-radius:8px;background:#fbfdff;border:1px solid rgba(11,102,195,0.04);color:var(--muted)}
-    .meta{font-size:13px;color:var(--muted);margin-top:8px}
-    .search{flex:1;min-width:220px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
-    footer{max-width:980px;margin:18px auto 60px;color:var(--muted);font-size:13px;padding:0 16px}
-    @media(max-width:600px){ .q strong{font-size:14px} .q .num{font-size:12px;padding:5px 7px} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Machine Learning — Interview Questions</title>
+
+<style>
+  :root{
+    --bg1:#0f172a; --bg2:#071233;
+    --card: rgba(255,255,255,0.06);
+    --accent: #7c3aed;
+    --accent2:#06b6d4;
+    --glass-border: rgba(255,255,255,0.08);
+    --muted: #cbd5e1;
+  }
+
+  /* Page */
+  body{
+    margin:0; font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system;
+    background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);
+    color: #e6eef8;
+  }
+  header{
+    padding:32px 18px; text-align:center;
+    background: linear-gradient(90deg, rgba(124,58,237,0.12), rgba(6,182,212,0.08));
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  header h1{
+    margin:0; font-size:26px; letter-spacing:0.2px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header p{ margin:8px 0 0; color:var(--muted); max-width:980px; margin-left:auto; margin-right:auto; }
+
+  /* Container */
+  .container{ max-width:1100px; margin:28px auto; padding:0 16px; }
+
+  /* Controls */
+  .controls{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+  .search{
+    flex:1; min-width:220px; padding:12px 14px; border-radius:12px;
+    border:1px solid var(--glass-border); background:rgba(255,255,255,0.02); color:inherit;
+    outline:none; font-size:15px;
+  }
+  .btn{ padding:10px 14px; border-radius:12px; border:none; cursor:pointer; font-weight:700; color:#fff; background:var(--accent); }
+  .btn.secondary{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:600; }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+
+  .filter-btn{
+    padding:8px 12px; border-radius:999px; cursor:pointer; border:1px solid rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.03); color:var(--muted); font-weight:600;
+  }
+  .filter-btn.active{ background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white; box-shadow:0 8px 30px rgba(12,8,60,0.45); transform:translateY(-2px); }
+
+  /* Layout for sections */
+  .section-header{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:28px; margin-bottom:8px; }
+  .section-title{ font-size:18px; color:#fff; font-weight:700; display:flex; gap:12px; align-items:center; }
+  .section-meta{ color:var(--muted); font-size:13px; }
+
+  /* Grid of cards */
+  .grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:14px; margin-bottom:6px; }
+
+  .card{
+    background:var(--card); border-radius:12px; padding:14px; transition:transform .18s ease, box-shadow .18s ease;
+    border:1px solid var(--glass-border); backdrop-filter: blur(6px);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.55);
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 12px 36px rgba(2,6,23,0.65); }
+
+  .q{ display:flex; gap:12px; align-items:flex-start; cursor:pointer; }
+  .num{
+    min-width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:white; background: linear-gradient(180deg,var(--accent),var(--accent2));
+    font-size:13px;
+  }
+  .qtext{ font-weight:700; font-size:15px; color:#eaf1ff; text-align:left; line-height:1.25; }
+  .answer{ display:none; margin-top:12px; color:var(--muted); font-size:14px; line-height:1.5; background:rgba(255,255,255,0.01); padding:10px; border-radius:8px; border-left:4px solid rgba(255,255,255,0.03); }
+  .tags{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+
+  .tag{ font-size:12px; padding:6px 8px; border-radius:8px; background:rgba(255,255,255,0.02); color:var(--muted); border:1px solid rgba(255,255,255,0.02); }
+
+  /* highlight */
+  mark{ background: #fde68a; color:#111827; padding:0 3px; border-radius:3px; }
+
+  /* Footer */
+  footer{ color:var(--muted); text-align:center; margin:30px 0 60px; font-size:13px; }
+
+  /* Responsive tweaks */
+  @media (max-width:760px){
+    .qtext{ font-size:14px; }
+    header h1{ font-size:20px; }
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <h1>Machine Learning — 100 Interview Questions & Answers</h1>
-      <p>Click any question to toggle the concise answer. Use this page as a single-topic interview reference.</p>
+<header>
+  <h1>Machine Learning —  Interview Questions</h1>
+</header>
+
+<main class="container">
+  <!-- Controls -->
+  <div class="controls">
+    <input id="search" class="search" placeholder="Search questions or answers (press Enter or type)..." />
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="basics">Basics</button>
+      <button class="filter-btn" data-cat="supervised">Supervised</button>
+      <button class="filter-btn" data-cat="unsupervised">Unsupervised</button>
+      <button class="filter-btn" data-cat="feature">FeatureEng</button>
+      <button class="filter-btn" data-cat="evaluation">Evaluation</button>
+      <button class="filter-btn" data-cat="statistics">Statistics</button>
+      <button class="filter-btn" data-cat="optimization">Optimization</button>
+      <button class="filter-btn" data-cat="deep">DeepLearning</button>
+      <button class="filter-btn" data-cat="production">Production</button>
     </div>
-  </header>
 
-  <main class="container">
-    <div class="controls">
-      <input id="search" class="search" placeholder="Search questions or answers (press Enter)" />
-      <button id="clear" class="btn">Clear Search</button>
+    <button id="expandAll" class="btn secondary">Expand All</button>
+    <button id="collapseAll" class="btn secondary">Collapse All</button>
+  </div>
+
+  <!-- Sections & Cards -->
+  <!-- We'll include nine sections totalling 200 questions -->
+  
+  <!-- SECTION: BASICS (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Basics <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Fundamental concepts and definitions</div>
     </div>
-
-    <!-- QUESTIONS START -->
-    <!-- Each card contains a question (click to toggle) and short answer -->
-    
-    <section id="questions">
-
-      <article class="card" data-q="What is Machine Learning?">
-        <div class="q"><span class="num">1</span><strong>What is Machine Learning?</strong></div>
-        <div class="answer">Machine Learning is a branch of AI focused on algorithms that enable systems to learn patterns from data and make predictions or decisions without explicit programming for each case.</div>
-      </article>
-
-      <article class="card" data-q="Difference between AI, ML, and DL?">
-        <div class="q"><span class="num">2</span><strong>Difference between AI, ML, and DL?</strong></div>
-        <div class="answer">AI is the broad field of making machines intelligent. ML is a subset where systems learn from data. Deep Learning is a subset of ML using multi-layer neural networks for feature learning and complex tasks.</div>
-      </article>
-
-      <article class="card" data-q="Types of machine learning?">
-        <div class="q"><span class="num">3</span><strong>What are the main types of machine learning?</strong></div>
-        <div class="answer">Supervised (labeled data), Unsupervised (unlabeled), Semi-supervised (mix), and Reinforcement Learning (agent learns by rewards).</div>
-      </article>
-
-      <article class="card" data-q="What is supervised learning?">
-        <div class="q"><span class="num">4</span><strong>What is supervised learning?</strong></div>
-        <div class="answer">Supervised learning trains models on input-output pairs (labels) to predict outputs for new inputs. Examples: regression and classification.</div>
-      </article>
-
-      <article class="card" data-q="What is unsupervised learning?">
-        <div class="q"><span class="num">5</span><strong>What is unsupervised learning?</strong></div>
-        <div class="answer">Unsupervised learning finds structure in unlabeled data, e.g., clustering (K-means) and dimensionality reduction (PCA).</div>
-      </article>
-
-      <article class="card" data-q="What is reinforcement learning?">
-        <div class="q"><span class="num">6</span><strong>What is reinforcement learning?</strong></div>
-        <div class="answer">An agent interacts with an environment, taking actions to maximize cumulative reward. Used in control, games, robotics (e.g., Q-learning, policy gradients).</div>
-      </article>
-
-      <article class="card" data-q="What is overfitting?">
-        <div class="q"><span class="num">7</span><strong>What is overfitting?</strong></div>
-        <div class="answer">Overfitting occurs when a model learns noise and idiosyncrasies of training data, performing well on train but poorly on unseen data.</div>
-      </article>
-
-      <article class="card" data-q="What is underfitting?">
-        <div class="q"><span class="num">8</span><strong>What is underfitting?</strong></div>
-        <div class="answer">Underfitting happens when a model is too simple to capture underlying patterns, performing poorly on both training and test data.</div>
-      </article>
-
-      <article class="card" data-q="How to prevent overfitting?">
-        <div class="q"><span class="num">9</span><strong>How can you prevent overfitting?</strong></div>
-        <div class="answer">Use regularization (L1/L2), dropout, cross-validation, early stopping, simpler models, more data, and feature selection.</div>
-      </article>
-
-      <article class="card" data-q="Explain bias-variance tradeoff.">
-        <div class="q"><span class="num">10</span><strong>Explain the bias-variance tradeoff.</strong></div>
-        <div class="answer">Bias: error from wrong assumptions (underfitting). Variance: error from sensitivity to training data (overfitting). Aim to minimize total error by balancing both.</div>
-      </article>
-
-      <article class="card" data-q="What is cross-validation?">
-        <div class="q"><span class="num">11</span><strong>What is cross-validation?</strong></div>
-        <div class="answer">A technique to evaluate model generalization by splitting data into k folds and using each fold as validation once (k-fold CV). Helps in hyperparameter tuning.</div>
-      </article>
-
-      <article class="card" data-q="Difference between train, validation, and test sets">
-        <div class="q"><span class="num">12</span><strong>Difference between train, validation, and test sets?</strong></div>
-        <div class="answer">Train: used to fit model parameters. Validation: used to tune hyperparameters and select models. Test: held-out set for final evaluation of performance.</div>
-      </article>
-
-      <article class="card" data-q="What is feature engineering?">
-        <div class="q"><span class="num">13</span><strong>What is feature engineering?</strong></div>
-        <div class="answer">The process of creating, transforming, and selecting features to improve model performance (scaling, encoding, polynomial features, interactions).</div>
-      </article>
-
-      <article class="card" data-q="What is feature selection?">
-        <div class="q"><span class="num">14</span><strong>What is feature selection?</strong></div>
-        <div class="answer">Selecting the most relevant features (via filter, wrapper, or embedded methods) to reduce dimensionality and improve model generalization and efficiency.</div>
-      </article>
-
-      <article class="card" data-q="What is dimensionality reduction?">
-        <div class="q"><span class="num">15</span><strong>What is dimensionality reduction?</strong></div>
-        <div class="answer">Techniques to reduce feature count while preserving signal, e.g., PCA (linear), t-SNE (visualization), UMAP (manifold learning).</div>
-      </article>
-
-      <article class="card" data-q="What is PCA?">
-        <div class="q"><span class="num">16</span><strong>What is Principal Component Analysis (PCA)?</strong></div>
-        <div class="answer">PCA finds orthogonal directions (principal components) capturing maximum variance, used for dimensionality reduction and noise filtering.</div>
-      </article>
-
-      <article class="card" data-q="What is scaling and why needed?">
-        <div class="q"><span class="num">17</span><strong>What is feature scaling and why is it needed?</strong></div>
-        <div class="answer">Scaling (standardization/min-max) brings features to similar ranges; required for distance-based and gradient-based algorithms to converge properly.</div>
-      </article>
-
-      <article class="card" data-q="Types of scaling?">
-        <div class="q"><span class="num">18</span><strong>What types of scaling are common?</strong></div>
-        <div class="answer">Standardization (z-score), Min-Max scaling, Robust scaling (using medians/quantiles), Normalization (unit norm).</div>
-      </article>
-
-      <article class="card" data-q="What is a loss function?">
-        <div class="q"><span class="num">19</span><strong>What is a loss function?</strong></div>
-        <div class="answer">A loss (cost) function measures model prediction error on examples; optimization algorithms minimize the loss (e.g., MSE, cross-entropy).</div>
-      </article>
-
-      <article class="card" data-q="What is gradient descent?">
-        <div class="q"><span class="num">20</span><strong>What is gradient descent?</strong></div>
-        <div class="answer">An iterative optimization method that updates parameters along the negative gradient of the loss to find minima (variants: batch, stochastic, mini-batch).</div>
-      </article>
-
-      <article class="card" data-q="Explain linear regression.">
-        <div class="q"><span class="num">21</span><strong>Explain linear regression.</strong></div>
-        <div class="answer">Linear regression models the relationship between features and continuous target with a linear function; typically trained by minimizing MSE and solved via normal equations or gradient descent.</div>
-      </article>
-
-      <article class="card" data-q="Explain logistic regression.">
-        <div class="q"><span class="num">22</span><strong>Explain logistic regression.</strong></div>
-        <div class="answer">A classification algorithm that models the probability of a binary outcome using the logistic (sigmoid) function; trained by maximizing likelihood (cross-entropy loss).</div>
-      </article>
-
-      <article class="card" data-q="What is regularization?">
-        <div class="q"><span class="num">23</span><strong>What is regularization?</strong></div>
-        <div class="answer">Regularization adds penalty terms to loss (L1/L2) to prevent overfitting by constraining model complexity and shrinking weights.</div>
-      </article>
-
-      <article class="card" data-q="Difference between L1 and L2?">
-        <div class="q"><span class="num">24</span><strong>Difference between L1 and L2 regularization?</strong></div>
-        <div class="answer">L1 (Lasso) uses absolute weights → sparsity and feature selection. L2 (Ridge) uses squared weights → smooth shrinkage and reduced variance.</div>
-      </article>
-
-      <article class="card" data-q="What is elastic net?">
-        <div class="q"><span class="num">25</span><strong>What is Elastic Net regularization?</strong></div>
-        <div class="answer">Elastic Net combines L1 and L2 penalties to balance sparsity and stability, useful when features are correlated.</div>
-      </article>
-
-      <article class="card" data-q="Explain bias term in regression.">
-        <div class="q"><span class="num">26</span><strong>What is the bias (intercept) term in regression?</strong></div>
-        <div class="answer">The bias (intercept) is a constant term allowing the model to fit data that doesn't pass through the origin; it shifts predictions globally.</div>
-      </article>
-
-      <article class="card" data-q="What is decision tree?">
-        <div class="q"><span class="num">27</span><strong>What is a decision tree?</strong></div>
-        <div class="answer">A tree-structured model that splits data based on feature thresholds to predict target; intuitive and handles non-linear patterns but can overfit without pruning.</div>
-      </article>
-
-      <article class="card" data-q="What are Gini and entropy?">
-        <div class="q"><span class="num">28</span><strong>What are Gini impurity and entropy in trees?</strong></div>
-        <div class="answer">Both are split criteria measuring node impurity. Entropy (information gain) and Gini quantify class mix; lower values mean purer nodes.</div>
-      </article>
-
-      <article class="card" data-q="What is pruning?">
-        <div class="q"><span class="num">29</span><strong>What is tree pruning?</strong></div>
-        <div class="answer">Removing branches that add little predictive power to reduce overfitting. Can be pre-pruning (limit depth) or post-pruning (prune after growth).</div>
-      </article>
-
-      <article class="card" data-q="What is ensemble learning?">
-        <div class="q"><span class="num">30</span><strong>What is ensemble learning?</strong></div>
-        <div class="answer">Combining multiple models to improve overall performance and robustness (bagging, boosting, stacking are common techniques).</div>
-      </article>
-
-      <article class="card" data-q="What is bagging?">
-        <div class="q"><span class="num">31</span><strong>What is bagging?</strong></div>
-        <div class="answer">Bootstrap Aggregating: train multiple models on different bootstrap samples and average/vote predictions (e.g., Random Forests).</div>
-      </article>
-
-      <article class="card" data-q="What is random forest?">
-        <div class="q"><span class="num">32</span><strong>What is Random Forest?</strong></div>
-        <div class="answer">An ensemble of decision trees trained on bootstrapped samples with random feature subsets per split; reduces variance and improves generalization.</div>
-      </article>
-
-      <article class="card" data-q="What is boosting?">
-        <div class="q"><span class="num">33</span><strong>What is boosting?</strong></div>
-        <div class="answer">Sequentially train models where each new model focuses on previous errors; examples: AdaBoost, Gradient Boosting, XGBoost, LightGBM.</div>
-      </article>
-
-      <article class="card" data-q="Explain SVM.">
-        <div class="q"><span class="num">34</span><strong>Explain Support Vector Machine (SVM).</strong></div>
-        <div class="answer">SVM finds the hyperplane that maximizes margin between classes. Supports kernels to handle non-linear separations and is robust in high-dim spaces.</div>
-      </article>
-
-      <article class="card" data-q="What is kernel trick?">
-        <div class="q"><span class="num">35</span><strong>What is the kernel trick?</strong></div>
-        <div class="answer">A technique to compute inner products in a transformed feature space implicitly, enabling non-linear decision boundaries without explicit mapping (e.g., RBF kernel).</div>
-      </article>
-
-      <article class="card" data-q="What is KNN?">
-        <div class="q"><span class="num">36</span><strong>What is K-Nearest Neighbors (KNN)?</strong></div>
-        <div class="answer">A non-parametric algorithm that predicts based on labels of k nearest training examples using distance metrics; simple but costly at prediction time.</div>
-      </article>
-
-      <article class="card" data-q="What is clustering?">
-        <div class="q"><span class="num">37</span><strong>What is clustering?</strong></div>
-        <div class="answer">Unsupervised grouping of similar data points into clusters; common methods: K-means, hierarchical clustering, DBSCAN.</div>
-      </article>
-
-      <article class="card" data-q="Explain K-means.">
-        <div class="q"><span class="num">38</span><strong>Explain K-means clustering.</strong></div>
-        <div class="answer">K-means partitions data into k clusters by iteratively assigning points to nearest centroid and updating centroids until convergence; sensitive to initialization and k choice.</div>
-      </article>
-
-      <article class="card" data-q="What is Silhouette score?">
-        <div class="q"><span class="num">39</span><strong>What is the Silhouette score?</strong></div>
-        <div class="answer">A metric to evaluate clustering quality: measures how well each point matches its cluster compared to nearest other cluster (range -1 to 1).</div>
-      </article>
-
-      <article class="card" data-q="What is DBSCAN?">
-        <div class="q"><span class="num">40</span><strong>What is DBSCAN?</strong></div>
-        <div class="answer">Density-Based Spatial Clustering: clusters points based on density connectivity; can find arbitrarily-shaped clusters and identify noise/outliers.</div>
-      </article>
-
-      <article class="card" data-q="What is PCA used for?">
-        <div class="q"><span class="num">41</span><strong>What is PCA used for?</strong></div>
-        <div class="answer">PCA reduces dimensionality by projecting data onto orthogonal components that capture maximum variance, useful for compression and visualization.</div>
-      </article>
-
-      <article class="card" data-q="What is t-SNE?">
-        <div class="q"><span class="num">42</span><strong>What is t-SNE?</strong></div>
-        <div class="answer">t-Distributed Stochastic Neighbor Embedding is a non-linear technique for high-dimensional data visualization preserving local structure (not for general dimensionality reduction).</div>
-      </article>
-
-      <article class="card" data-q="What is supervised vs unsupervised eval?">
-        <div class="q"><span class="num">43</span><strong>How do evaluation approaches differ for supervised and unsupervised learning?</strong></div>
-        <div class="answer">Supervised uses ground-truth labels (accuracy, precision, RMSE). Unsupervised often uses internal/external metrics (silhouette, clustering purity) or downstream task performance.</div>
-      </article>
-
-      <article class="card" data-q="What is confusion matrix?">
-        <div class="q"><span class="num">44</span><strong>What is a confusion matrix?</strong></div>
-        <div class="answer">A table showing actual vs predicted class counts: True Positives, False Positives, True Negatives, False Negatives; basis for many metrics.</div>
-      </article>
-
-      <article class="card" data-q="Explain precision and recall.">
-        <div class="q"><span class="num">45</span><strong>Explain precision and recall.</strong></div>
-        <div class="answer">Precision = TP / (TP + FP) measures correctness among positive predictions. Recall = TP / (TP + FN) measures coverage of actual positives.</div>
-      </article>
-
-      <article class="card" data-q="What is F1-score?">
-        <div class="q"><span class="num">46</span><strong>What is the F1-score?</strong></div>
-        <div class="answer">Harmonic mean of precision and recall; balances the two, useful when classes are imbalanced and both false positives and false negatives matter.</div>
-      </article>
-
-      <article class="card" data-q="What is ROC AUC?">
-        <div class="q"><span class="num">47</span><strong>What is ROC and AUC?</strong></div>
-        <div class="answer">ROC plots True Positive Rate vs False Positive Rate at various thresholds. AUC is area under ROC: a threshold-independent measure of discrimination (0.5 random, 1 perfect).</div>
-      </article>
-
-      <article class="card" data-q="What is PR curve?">
-        <div class="q"><span class="num">48</span><strong>What is the Precision-Recall curve?</strong></div>
-        <div class="answer">Plots precision vs recall for different thresholds; more informative than ROC when classes are highly imbalanced.</div>
-      </article>
-
-      <article class="card" data-q="What is class imbalance and how to handle?">
-        <div class="q"><span class="num">49</span><strong>What is class imbalance and how do you handle it?</strong></div>
-        <div class="answer">When some classes are far rarer than others. Handle by resampling (oversample minority, undersample majority), class weights, synthetic samples (SMOTE), or metric choice (precision/recall).</div>
-      </article>
-
-      <article class="card" data-q="What is evaluation metric for regression?">
-        <div class="q"><span class="num">50</span><strong>What evaluation metrics are used for regression?</strong></div>
-        <div class="answer">Common metrics: Mean Squared Error (MSE), Root MSE (RMSE), Mean Absolute Error (MAE), R-squared (coefficient of determination).</div>
-      </article>
-
-      <article class="card" data-q="What is gradient boosting?">
-        <div class="q"><span class="num">51</span><strong>What is gradient boosting?</strong></div>
-        <div class="answer">An ensemble technique that builds models sequentially, where each model fits the residuals (gradients) of previous models; powerful for tabular data (XGBoost, LightGBM).</div>
-      </article>
-
-      <article class="card" data-q="Why are trees good for tabular data?">
-        <div class="q"><span class="num">52</span><strong>Why are tree-based models effective for tabular data?</strong></div>
-        <div class="answer">They handle mixed feature types, missing values, non-linear interactions, and require little preprocessing; ensembles further improve robustness.</div>
-      </article>
-
-      <article class="card" data-q="What is feature importance?">
-        <div class="q"><span class="num">53</span><strong>What is feature importance?</strong></div>
-        <div class="answer">A measure of how much a feature contributes to model predictions (e.g., impurity decrease in trees, permutation importance, SHAP values for interpretability).</div>
-      </article>
-
-      <article class="card" data-q="What is permutation importance?">
-        <div class="q"><span class="num">54</span><strong>What is permutation importance?</strong></div>
-        <div class="answer">Measure model performance drop when a feature's values are permuted, breaking its relationship with target — gives model-agnostic importance.</div>
-      </article>
-
-      <article class="card" data-q="What is SHAP?">
-        <div class="q"><span class="num">55</span><strong>What are SHAP values?</strong></div>
-        <div class="answer">SHAP (SHapley Additive exPlanations) attributes prediction contributions to features based on cooperative game theory, providing consistent local explanations.</div>
-      </article>
-
-      <article class="card" data-q="What is LIME?">
-        <div class="q"><span class="num">56</span><strong>What is LIME?</strong></div>
-        <div class="answer">Local Interpretable Model-agnostic Explanations approximates complex model predictions locally with an interpretable surrogate to explain individual predictions.</div>
-      </article>
-
-      <article class="card" data-q="What is calibration?">
-        <div class="q"><span class="num">57</span><strong>What is probability calibration?</strong></div>
-        <div class="answer">Calibration ensures predicted probabilities match observed frequencies (e.g., a model predicting 0.7 should be correct ~70% of times). Methods: Platt scaling, isotonic regression.</div>
-      </article>
-
-      <article class="card" data-q="What is early stopping?">
-        <div class="q"><span class="num">58</span><strong>What is early stopping?</strong></div>
-        <div class="answer">Stopping training when validation performance stops improving to avoid overfitting, commonly used in neural networks and boosting.</div>
-      </article>
-
-      <article class="card" data-q="What is learning rate?">
-        <div class="q"><span class="num">59</span><strong>What is the learning rate?</strong></div>
-        <div class="answer">A hyperparameter controlling step size in gradient-based updates. Too large can diverge, too small slows convergence or gets stuck in local minima.</div>
-      </article>
-
-      <article class="card" data-q="What are optimizers?">
-        <div class="q"><span class="num">60</span><strong>What are common optimizers for neural networks?</strong></div>
-        <div class="answer">SGD, Momentum, AdaGrad, RMSprop, Adam (widely used), AdamW (Adam with weight decay).</div>
-      </article>
-
-      <article class="card" data-q="What is batch normalization?">
-        <div class="q"><span class="num">61</span><strong>What is batch normalization?</strong></div>
-        <div class="answer">A technique to normalize layer inputs across a mini-batch, stabilizing and accelerating training; can enable higher learning rates and reduce internal covariate shift.</div>
-      </article>
-
-      <article class="card" data-q="What is dropout?">
-        <div class="q"><span class="num">62</span><strong>What is dropout?</strong></div>
-        <div class="answer">A regularization method that randomly disables a fraction of neurons during training, preventing co-adaptation and reducing overfitting.</div>
-      </article>
-
-      <article class="card" data-q="What is an activation function?">
-        <div class="q"><span class="num">63</span><strong>What is an activation function?</strong></div>
-        <div class="answer">Non-linear functions applied to neuron outputs (ReLU, sigmoid, tanh, softmax) enabling neural networks to learn complex functions.</div>
-      </article>
-
-      <article class="card" data-q="Why use ReLU?">
-        <div class="q"><span class="num">64</span><strong>Why is ReLU commonly used?</strong></div>
-        <div class="answer">ReLU (max(0,x)) is simple, computationally efficient, and reduces vanishing gradient issues, enabling deeper networks to train well.</div>
-      </article>
-
-      <article class="card" data-q="What is vanishing gradient?">
-        <div class="q"><span class="num">65</span><strong>What is the vanishing gradient problem?</strong></div>
-        <div class="answer">Gradients become extremely small in deep networks (especially with sigmoid/tanh), slowing or preventing weight updates in earlier layers.</div>
-      </article>
-
-      <article class="card" data-q="What is exploding gradient?">
-        <div class="q"><span class="num">66</span><strong>What is the exploding gradient problem?</strong></div>
-        <div class="answer">Gradients grow exponentially during backpropagation, causing unstable updates. Solutions: gradient clipping, careful initialization, normalization.</div>
-      </article>
-
-      <article class="card" data-q="What is weight initialization?">
-        <div class="q"><span class="num">67</span><strong>Why is proper weight initialization important?</strong></div>
-        <div class="answer">Good initialization (Glorot/Xavier, He) prevents vanishing/exploding gradients and helps the network converge faster and more reliably.</div>
-      </article>
-
-      <article class="card" data-q="What are CNNs?">
-        <div class="q"><span class="num">68</span><strong>What are Convolutional Neural Networks (CNNs)?</strong></div>
-        <div class="answer">CNNs use convolutional layers to extract spatial hierarchies from data (images, audio). Key ideas: local receptive fields, shared weights, pooling.</div>
-      </article>
-
-      <article class="card" data-q="What is pooling?">
-        <div class="q"><span class="num">69</span><strong>What is pooling in CNNs?</strong></div>
-        <div class="answer">Pooling reduces spatial dimensions (max/average pooling), providing translation invariance and reducing compute and parameters.</div>
-      </article>
-
-      <article class="card" data-q="What are RNNs?">
-        <div class="q"><span class="num">70</span><strong>What are Recurrent Neural Networks (RNNs)?</strong></div>
-        <div class="answer">RNNs process sequential data by maintaining hidden state across time steps. Variants (LSTM, GRU) address vanishing gradient issues for long-term dependencies.</div>
-      </article>
-
-      <article class="card" data-q="What is LSTM?">
-        <div class="q"><span class="num">71</span><strong>What is an LSTM?</strong></div>
-        <div class="answer">Long Short-Term Memory networks are RNN variants with gating mechanisms (input, forget, output) that help capture long-term dependencies in sequences.</div>
-      </article>
-
-      <article class="card" data-q="What is attention?">
-        <div class="q"><span class="num">72</span><strong>What is attention mechanism?</strong></div>
-        <div class="answer">Attention weights the importance of different input elements when producing an output, allowing models to focus on relevant parts of sequences or contexts.</div>
-      </article>
-
-      <article class="card" data-q="What are Transformers?">
-        <div class="q"><span class="num">73</span><strong>What are Transformer models?</strong></div>
-        <div class="answer">Transformers use self-attention and feed-forward layers (no recurrence) to model sequences in parallel; they power large language models like BERT and GPT.</div>
-      </article>
-
-      <article class="card" data-q="What is transfer learning?">
-        <div class="q"><span class="num">74</span><strong>What is transfer learning?</strong></div>
-        <div class="answer">Reuse a pre-trained model (or its features) on a related task, often fine-tuning on target data — common in vision and NLP to save data and compute.</div>
-      </article>
-
-      <article class="card" data-q="What is fine-tuning?">
-        <div class="q"><span class="num">75</span><strong>What is fine-tuning?</strong></div>
-        <div class="answer">Continuing training of a pre-trained model on a new task with target data, often with smaller learning rates to adapt weights without destroying learned features.</div>
-      </article>
-
-      <article class="card" data-q="What is data augmentation?">
-        <div class="q"><span class="num">76</span><strong>What is data augmentation and why use it?</strong></div>
-        <div class="answer">Generate transformed variants of training examples (rotations, crops, noise) to increase data diversity, reduce overfitting, and improve generalization.</div>
-      </article>
-
-      <article class="card" data-q="What is gradient checking?">
-        <div class="q"><span class="num">77</span><strong>What is gradient checking?</strong></div>
-        <div class="answer">Numerically approximate gradients (finite differences) to verify analytical backpropagation implementation correctness, used during debugging.</div>
-      </article>
-
-      <article class="card" data-q="What is cross-entropy?">
-        <div class="q"><span class="num">78</span><strong>What is cross-entropy loss?</strong></div>
-        <div class="answer">A loss function measuring the difference between true and predicted probability distributions; widely used in classification (log loss for binary/multi-class).</div>
-      </article>
-
-      <article class="card" data-q="What is softmax?">
-        <div class="q"><span class="num">79</span><strong>What is softmax?</strong></div>
-        <div class="answer">Softmax converts raw class scores to probabilities that sum to 1, used in multi-class classification final layer combined with cross-entropy loss.</div>
-      </article>
-
-      <article class="card" data-q="What is one-hot encoding?">
-        <div class="q"><span class="num">80</span><strong>What is one-hot encoding?</strong></div>
-        <div class="answer">Represent categorical variables as binary vectors with a 1 in the index of the category and 0 elsewhere; common for feeding categorical data to models.</div>
-      </article>
-
-      <article class="card" data-q="What is embedding?">
-        <div class="q"><span class="num">81</span><strong>What is an embedding?</strong></div>
-        <div class="answer">Dense low-dimensional vector representations for categorical inputs (words, items) that capture semantic similarity and are learned during training.</div>
-      </article>
-
-      <article class="card" data-q="What is word2vec?">
-        <div class="q"><span class="num">82</span><strong>What is Word2Vec?</strong></div>
-        <div class="answer">A technique to learn word embeddings using shallow neural networks (CBOW and Skip-gram) capturing word co-occurrence information.</div>
-      </article>
-
-      <article class="card" data-q="What is TF-IDF?">
-        <div class="q"><span class="num">83</span><strong>What is TF-IDF?</strong></div>
-        <div class="answer">Term Frequency–Inverse Document Frequency weights terms by importance: frequent in a document but rare across corpus gets higher weight; used in text features.</div>
-      </article>
-
-      <article class="card" data-q="What is ROC vs PR curve?">
-        <div class="q"><span class="num">84</span><strong>When to use ROC vs Precision-Recall curve?</strong></div>
-        <div class="answer">ROC is useful generally, but PR curve is preferred when dealing with imbalanced classes, as it focuses on positive class performance.</div>
-      </article>
-
-      <article class="card" data-q="What is SMOTE?">
-        <div class="q"><span class="num">85</span><strong>What is SMOTE?</strong></div>
-        <div class="answer">Synthetic Minority Over-sampling Technique generates synthetic minority class examples by interpolating between nearest neighbors to address imbalance.</div>
-      </article>
-
-      <article class="card" data-q="What is model selection?">
-        <div class="q"><span class="num">86</span><strong>What is model selection?</strong></div>
-        <div class="answer">Choosing among different models/hyperparameters based on validation performance, considering bias-variance, complexity, and deployment constraints.</div>
-      </article>
-
-      <article class="card" data-q="What is hyperparameter tuning?">
-        <div class="q"><span class="num">87</span><strong>What is hyperparameter tuning?</strong></div>
-        <div class="answer">Optimizing non-learned parameters (e.g., learning rate, tree depth) using grid search, random search, Bayesian optimization, or hyperband with cross-validation.</div>
-      </article>
-
-      <article class="card" data-q="What is early stopping? (again)">
-        <div class="q"><span class="num">88</span><strong>How is early stopping applied in practice?</strong></div>
-        <div class="answer">Monitor validation metric; if no improvement for N epochs (patience), stop training and restore best weights to prevent overfitting.</div>
-      </article>
-
-      <article class="card" data-q="What is model interpretability?">
-        <div class="q"><span class="num">89</span><strong>What is model interpretability and why is it important?</strong></div>
-        <div class="answer">Understanding why a model makes decisions (feature impacts, local/global explanations). Important for trust, debugging, fairness, and regulatory compliance.</div>
-      </article>
-
-      <article class="card" data-q="What is reproducibility?">
-        <div class="q"><span class="num">90</span><strong>How do you ensure reproducibility in ML experiments?</strong></div>
-        <div class="answer">Fix random seeds, record environment (packages/versions), use deterministic ops where possible, store data splits and model checkpoints, and document pipelines.</div>
-      </article>
-
-      <article class="card" data-q="What is A/B testing?">
-        <div class="q"><span class="num">91</span><strong>What is A/B testing in ML productization?</strong></div>
-        <div class="answer">A controlled experiment comparing two versions (A and B) to measure impact of model change on user metrics; uses randomization and statistical significance testing.</div>
-      </article>
-
-      <article class="card" data-q="What is model drift?">
-        <div class="q"><span class="num">92</span><strong>What is model (data) drift and how to detect it?</strong></div>
-        <div class="answer">Drift is distribution change between training and production data affecting performance. Detect via monitoring feature distributions, prediction stats, and periodic revalidation.</div>
-      </article>
-
-      <article class="card" data-q="What is online learning?">
-        <div class="q"><span class="num">93</span><strong>What is online learning?</strong></div>
-        <div class="answer">A setting where models update incrementally as new data arrives (streaming), useful when data is large or non-stationary.</div>
-      </article>
-
-      <article class="card" data-q="What is batch learning?">
-        <div class="q"><span class="num">94</span><strong>What is batch learning?</strong></div>
-        <div class="answer">Models are trained on a fixed dataset in batches/epochs; retraining is needed to incorporate new data (opposite of online learning).</div>
-      </article>
-
-      <article class="card" data-q="What is model serving?">
-        <div class="q"><span class="num">95</span><strong>How do you serve ML models in production?</strong></div>
-        <div class="answer">Package model (serialized), expose via API (REST/gRPC), containerize, autoscale endpoints, monitor latency and predictions, and manage versioning.</div>
-      </article>
-
-      <article class="card" data-q="What is quantization?">
-        <div class="q"><span class="num">96</span><strong>What is model quantization?</strong></div>
-        <div class="answer">Reducing numerical precision (e.g., float32 → int8) to reduce model size and latency for deployment on edge devices with minor accuracy loss.</div>
-      </article>
-
-      <article class="card" data-q="What is pruning (NN)?">
-        <div class="q"><span class="num">97</span><strong>What is network pruning?</strong></div>
-        <div class="answer">Removing less important weights/neurons to create a sparse model reducing size and inference costs while attempting to preserve accuracy.</div>
-      </article>
-
-      <article class="card" data-q="What is ensemble stacking?">
-        <div class="q"><span class="num">98</span><strong>What is stacking (stacked generalization)?</strong></div>
-        <div class="answer">An ensemble technique combining base model predictions using a meta-learner trained on their outputs to improve generalization.</div>
-      </article>
-
-      <article class="card" data-q="What is ethical ML?">
-        <div class="q"><span class="num">99</span><strong>What are ethical concerns in ML?</strong></div>
-        <div class="answer">Bias and fairness, privacy, transparency, accountability, misuse risk. Address via careful datasets, fairness metrics, explainability, and governance.</div>
-      </article>
-
-      <article class="card" data-q="How to learn ML effectively?">
-        <div class="q"><span class="num">100</span><strong>How should one learn machine learning effectively?</strong></div>
-        <div class="answer">Combine theory and practice: study fundamentals (probability, linear algebra), implement algorithms, work on projects, read papers, use real datasets, and iterate.</div>
-      </article>
-
-    </section>
-    <!-- QUESTIONS END -->
-
-    <div class="meta">Questions: 100 • Click any question to show the answer. Use search to filter questions by keywords.</div>
-  </main>
+    <div class="grid" data-section="basics">
+      <!-- 1 -->
+      <div class="card" data-cat="basics" data-q="what is machine learning">
+        <div class="q" data-id="q1"><div class="num">1</div><div class="qtext">What is machine learning?</div></div>
+        <div class="answer">Algorithms that learn patterns from data to make predictions or decisions automatically.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="difference ai ml dl">
+        <div class="q" data-id="q2"><div class="num">2</div><div class="qtext">Difference between AI, ML and Deep Learning?</div></div>
+        <div class="answer">AI is the broad field; ML uses data to learn; DL uses deep neural networks within ML.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="types of ml supervised unsupervised">
+        <div class="q" data-id="q3"><div class="num">3</div><div class="qtext">What are main types of machine learning?</div></div>
+        <div class="answer">Supervised, Unsupervised, Semi-supervised, Reinforcement learning.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is supervised learning">
+        <div class="q" data-id="q4"><div class="num">4</div><div class="qtext">What is supervised learning?</div></div>
+        <div class="answer">Training models on labeled examples to map inputs to outputs.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is unsupervised learning">
+        <div class="q" data-id="q5"><div class="num">5</div><div class="qtext">What is unsupervised learning?</div></div>
+        <div class="answer">Discovering structure in unlabeled data, e.g., clustering or dimensionality reduction.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is reinforcement learning">
+        <div class="q" data-id="q6"><div class="num">6</div><div class="qtext">What is reinforcement learning?</div></div>
+        <div class="answer">Learning via interactions and rewards to maximize cumulative return.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="feature engineering definition">
+        <div class="q" data-id="q7"><div class="num">7</div><div class="qtext">What is feature engineering?</div></div>
+        <div class="answer">Creating and transforming inputs (features) to improve model performance.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is model evaluation">
+        <div class="q" data-id="q8"><div class="num">8</div><div class="qtext">What is model evaluation?</div></div>
+        <div class="answer">Measuring performance using metrics on validation/test data to judge generalization.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="difference train test validation">
+        <div class="q" data-id="q9"><div class="num">9</div><div class="qtext">Difference between train, validation, and test sets?</div></div>
+        <div class="answer">Train fits model; validation tunes hyperparameters; test reports final performance.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is cross validation">
+        <div class="q" data-id="q10"><div class="num">10</div><div class="qtext">What is cross-validation?</div></div>
+        <div class="answer">Technique to evaluate stability by splitting data into folds (e.g., k-fold CV).</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is bias and variance">
+        <div class="q" data-id="q11"><div class="num">11</div><div class="qtext">What are bias and variance?</div></div>
+        <div class="answer">Bias = error from wrong assumptions; variance = error from sensitivity to data fluctuations.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is overfitting">
+        <div class="q" data-id="q12"><div class="num">12</div><div class="qtext">What is overfitting?</div></div>
+        <div class="answer">Model learns noise and performs poorly on unseen data.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is underfitting">
+        <div class="q" data-id="q13"><div class="num">13</div><div class="qtext">What is underfitting?</div></div>
+        <div class="answer">Model too simple to capture underlying patterns — poor train and test performance.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is regularization">
+        <div class="q" data-id="q14"><div class="num">14</div><div class="qtext">What is regularization?</div></div>
+        <div class="answer">Adding penalty terms (L1/L2) to reduce overfitting by constraining weights.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is hyperparameter">
+        <div class="q" data-id="q15"><div class="num">15</div><div class="qtext">What is a hyperparameter?</div></div>
+        <div class="answer">A parameter set before training (e.g., learning rate, number of trees) tuned externally.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is supervised metric">
+        <div class="q" data-id="q16"><div class="num">16</div><div class="qtext">Common supervised learning problem types?</div></div>
+        <div class="answer">Regression (continuous target) and classification (discrete labels).</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is unsupervised metric">
+        <div class="q" data-id="q17"><div class="num">17</div><div class="qtext">Common unsupervised tasks?</div></div>
+        <div class="answer">Clustering, anomaly detection, dimensionality reduction, density estimation.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is pipeline">
+        <div class="q" data-id="q18"><div class="num">18</div><div class="qtext">What is an ML pipeline?</div></div>
+        <div class="answer">Sequence: data ingestion → preprocessing → training → evaluation → deployment.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is reproducibility ml">
+        <div class="q" data-id="q19"><div class="num">19</div><div class="qtext">How to ensure reproducibility?</div></div>
+        <div class="answer">Fix seeds, record environment, store splits and checkpoints, document experiments.</div>
+      </div>
+
+      <div class="card" data-cat="basics" data-q="what is explainability">
+        <div class="q" data-id="q20"><div class="num">20</div><div class="qtext">What is model explainability?</div></div>
+        <div class="answer">Understanding and communicating why a model makes particular predictions.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION: SUPERVISED (25) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Supervised Learning <span style="font-size:13px;color:var(--muted);font-weight:600">25 questions</span></div>
+      <div class="section-meta">Algorithms, trees, SVM, regression and classification</div>
+    </div>
+    <div class="grid" data-section="supervised">
+      <!-- 21-45 -->
+      <div class="card" data-cat="supervised" data-q="linear regression explain">
+        <div class="q" data-id="q21"><div class="num">21</div><div class="qtext">What is linear regression?</div></div>
+        <div class="answer">Modeling a continuous target as a linear combination of features.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="logistic regression explain">
+        <div class="q" data-id="q22"><div class="num">22</div><div class="qtext">What is logistic regression?</div></div>
+        <div class="answer">A classifier modeling probability using the logistic (sigmoid) function.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="decision tree explain">
+        <div class="q" data-id="q23"><div class="num">23</div><div class="qtext">What is a decision tree?</div></div>
+        <div class="answer">A flowchart-like model using feature splits to make predictions.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="gini entropy split">
+        <div class="q" data-id="q24"><div class="num">24</div><div class="qtext">Gini vs entropy in trees?</div></div>
+        <div class="answer">Both measure impurity; Gini slightly faster, entropy uses information gain.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="pruning explain">
+        <div class="q" data-id="q25"><div class="num">25</div><div class="qtext">What is tree pruning?</div></div>
+        <div class="answer">Removing branches to reduce overfitting (pre or post pruning).</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="random forest explain">
+        <div class="q" data-id="q26"><div class="num">26</div><div class="qtext">What is Random Forest?</div></div>
+        <div class="answer">Ensemble of trees on bootstrapped samples with feature randomness to reduce variance.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="bagging vs boosting">
+        <div class="q" data-id="q27"><div class="num">27</div><div class="qtext">Bagging vs Boosting?</div></div>
+        <div class="answer">Bagging parallelizes to reduce variance; boosting sequentially reduces bias.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="svm explain kernel">
+        <div class="q" data-id="q28"><div class="num">28</div><div class="qtext">What is SVM and kernel trick?</div></div>
+        <div class="answer">SVM finds max-margin hyperplane; kernels map inputs to higher-dim spaces implicitly.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="knn explain">
+        <div class="q" data-id="q29"><div class="num">29</div><div class="qtext">What is KNN?</div></div>
+        <div class="answer">Lazy classifier predicting by majority label of nearest neighbors using a distance metric.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="naive bayes explain">
+        <div class="q" data-id="q30"><div class="num">30</div><div class="qtext">What is Naive Bayes?</div></div>
+        <div class="answer">Probabilistic classifier assuming conditional independence between features.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="ensemble stacking">
+        <div class="q" data-id="q31"><div class="num">31</div><div class="qtext">What is stacking (stacked generalization)?</div></div>
+        <div class="answer">Combine base models and train a meta-learner on their outputs to improve predictions.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="xgboost lightgbm">
+        <div class="q" data-id="q32"><div class="num">32</div><div class="qtext">Why are XGBoost/LightGBM popular for tabular data?</div></div>
+        <div class="answer">Highly optimized gradient boosting implementations with fast training and good defaults.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="calibration probabilities">
+        <div class="q" data-id="q33"><div class="num">33</div><div class="qtext">What is probability calibration?</div></div>
+        <div class="answer">Adjusting predicted probabilities to match observed frequencies (e.g., Platt scaling).</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="class imbalance handling">
+        <div class="q" data-id="q34"><div class="num">34</div><div class="qtext">How handle class imbalance?</div></div>
+        <div class="answer">Resampling, class weights, threshold tuning, or synthetic oversampling (SMOTE).</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="multiclass strategies">
+        <div class="q" data-id="q35"><div class="num">35</div><div class="qtext">How to solve multiclass with binary classifiers?</div></div>
+        <div class="answer">One-vs-rest or one-vs-one strategies, or use multinomial classifiers directly.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="ordinal regression">
+        <div class="q" data-id="q36"><div class="num">36</div><div class="qtext">What is ordinal regression?</div></div>
+        <div class="answer">Predicting ordered categories while preserving rank information between classes.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="regression metrics">
+        <div class="q" data-id="q37"><div class="num">37</div><div class="qtext">Common regression metrics?</div></div>
+        <div class="answer">MSE, RMSE, MAE, R-squared, and mean absolute percentage error (MAPE).</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="classification metrics">
+        <div class="q" data-id="q38"><div class="num">38</div><div class="qtext">Common classification metrics?</div></div>
+        <div class="answer">Accuracy, precision, recall, F1-score, ROC-AUC, PR-AUC.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="probabilistic vs deterministic">
+        <div class="q" data-id="q39"><div class="num">39</div><div class="qtext">Probabilistic vs deterministic models?</div></div>
+        <div class="answer">Probabilistic output probabilities; deterministic return specific predictions without uncertainty.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="intercept coefficient meaning">
+        <div class="q" data-id="q40"><div class="num">40</div><div class="qtext">What does regression intercept mean?</div></div>
+        <div class="answer">Baseline prediction value when all features are zero (context-dependent).</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="residual explain">
+        <div class="q" data-id="q41"><div class="num">41</div><div class="qtext">What is a residual?</div></div>
+        <div class="answer">Difference between observed and predicted target for each example.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="heteroscedasticity">
+        <div class="q" data-id="q42"><div class="num">42</div><div class="qtext">What is heteroscedasticity?</div></div>
+        <div class="answer">Non-constant variance of residuals across different levels of a variable.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="regularization purpose">
+        <div class="q" data-id="q43"><div class="num">43</div><div class="qtext">Why regularize linear models?</div></div>
+        <div class="answer">To prevent overfitting, reduce variance, and handle multicollinearity.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="multicollinearity">
+        <div class="q" data-id="q44"><div class="num">44</div><div class="qtext">What is multicollinearity?</div></div>
+        <div class="answer">High correlation between features causing unstable coefficient estimates.</div>
+      </div>
+
+      <div class="card" data-cat="supervised" data-q="feature scaling importance supervised">
+        <div class="q" data-id="q45"><div class="num">45</div><div class="qtext">When is feature scaling needed?</div></div>
+        <div class="answer">Required for distance-based and gradient-based algorithms (KNN, SVM, NN), less for trees.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: UNSUPERVISED (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Unsupervised Learning <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Clustering, dimensionality reduction, density methods</div>
+    </div>
+    <div class="grid" data-section="unsupervised">
+      <!-- 46-65 -->
+      <div class="card" data-cat="unsupervised" data-q="what is clustering">
+        <div class="q" data-id="q46"><div class="num">46</div><div class="qtext">What is clustering?</div></div>
+        <div class="answer">Grouping similar data points into clusters without labels.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="kmeans explain">
+        <div class="q" data-id="q47"><div class="num">47</div><div class="qtext">Explain K-means clustering.</div></div>
+        <div class="answer">Iterative algorithm assigning points to nearest centroid and updating centroids.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="hierarchical clustering">
+        <div class="q" data-id="q48"><div class="num">48</div><div class="qtext">What is hierarchical clustering?</div></div>
+        <div class="answer">Builds nested clusters using agglomerative or divisive approaches forming a dendrogram.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="dbscan explain">
+        <div class="q" data-id="q49"><div class="num">49</div><div class="qtext">What is DBSCAN?</div></div>
+        <div class="answer">Density-based clustering algorithm that finds arbitrarily shaped clusters and noise.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="silhouette score">
+        <div class="q" data-id="q50"><div class="num">50</div><div class="qtext">What is silhouette score?</div></div>
+        <div class="answer">Metric measuring cohesion and separation of clusters (range -1 to 1).</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="pca explain">
+        <div class="q" data-id="q51"><div class="num">51</div><div class="qtext">What is PCA?</div></div>
+        <div class="answer">Linear dimensionality reduction projecting data onto orthogonal components of max variance.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="tsne explain">
+        <div class="q" data-id="q52"><div class="num">52</div><div class="qtext">What is t-SNE?</div></div>
+        <div class="answer">Non-linear visualization technique preserving local structure for high-dim data.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="umap explain">
+        <div class="q" data-id="q53"><div class="num">53</div><div class="qtext">What is UMAP?</div></div>
+        <div class="answer">Manifold learning technique for fast, structure-preserving low-dimensional embeddings.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="dim reduction why use">
+        <div class="q" data-id="q54"><div class="num">54</div><div class="qtext">Why use dimensionality reduction?</div></div>
+        <div class="answer">Reduce noise, visualization, speed up models, mitigate curse of dimensionality.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="anomaly detection explain">
+        <div class="q" data-id="q55"><div class="num">55</div><div class="qtext">What is anomaly detection?</div></div>
+        <div class="answer">Identifying rare or unusual observations differing from normal patterns.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="gaussian mixture models">
+        <div class="q" data-id="q56"><div class="num">56</div><div class="qtext">What are Gaussian Mixture Models?</div></div>
+        <div class="answer">Probabilistic models representing data as mixture of Gaussian distributions with EM algorithm.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="biclustering">
+        <div class="q" data-id="q57"><div class="num">57</div><div class="qtext">What is biclustering?</div></div>
+        <div class="answer">Simultaneous clustering of rows and columns to find submatrix patterns.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="spectral clustering">
+        <div class="q" data-id="q58"><div class="num">58</div><div class="qtext">What is spectral clustering?</div></div>
+        <div class="answer">Uses graph Laplacian eigenvectors to partition data using connectivity information.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="choosing k">
+        <div class="q" data-id="q59"><div class="num">59</div><div class="qtext">How choose k in K-means?</div></div>
+        <div class="answer">Use elbow method, silhouette score, or domain knowledge to select k.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="feature extraction unsupervised">
+        <div class="q" data-id="q60"><div class="num">60</div><div class="qtext">What is unsupervised feature extraction?</div></div>
+        <div class="answer">Learning representations from unlabeled data for downstream tasks (e.g., autoencoders).</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="topic modeling">
+        <div class="q" data-id="q61"><div class="num">61</div><div class="qtext">What is topic modeling?</div></div>
+        <div class="answer">Unsupervised technique (LDA) to discover topics in text collections.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="dimreduction pitfalls">
+        <div class="q" data-id="q62"><div class="num">62</div><div class="qtext">Pitfalls of dimensionality reduction?</div></div>
+        <div class="answer">Loss of interpretability, information loss, and misleading visualizations if misused.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="denoising autoencoder">
+        <div class="q" data-id="q63"><div class="num">63</div><div class="qtext">What is a denoising autoencoder?</div></div>
+        <div class="answer">Autoencoder trained to reconstruct clean inputs from noisy versions for robust features.</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="latent variable models">
+        <div class="q" data-id="q64"><div class="num">64</div><div class="qtext">What are latent variable models?</div></div>
+        <div class="answer">Models that express observations via underlying unobserved variables (e.g., PCA, factor analysis).</div>
+      </div>
+
+      <div class="card" data-cat="unsupervised" data-q="density estimation">
+        <div class="q" data-id="q65"><div class="num">65</div><div class="qtext">What is density estimation?</div></div>
+        <div class="answer">Estimating probability distribution of data (parametric or non-parametric like KDE).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: FEATURE ENGINEERING (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Feature Engineering <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Feature creation, selection, encodings</div>
+    </div>
+    <div class="grid" data-section="feature">
+      <!-- 66-85 -->
+      <div class="card" data-cat="feature" data-q="why feature engineering">
+        <div class="q" data-id="q66"><div class="num">66</div><div class="qtext">Why is feature engineering important?</div></div>
+        <div class="answer">Good features often matter more than model choice for performance gains.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="one hot encoding">
+        <div class="q" data-id="q67"><div class="num">67</div><div class="qtext">What is one-hot encoding?</div></div>
+        <div class="answer">Convert categorical values into binary indicator vectors for each category.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="label encoding">
+        <div class="q" data-id="q68"><div class="num">68</div><div class="qtext">When use label encoding?</div></div>
+        <div class="answer">Map categories to integers; be careful with ordinal implications for models.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="target encoding">
+        <div class="q" data-id="q69"><div class="num">69</div><div class="qtext">What is target (mean) encoding?</div></div>
+        <div class="answer">Replace categories with aggregated target statistics (use smoothing to avoid leakage).</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="missing data handling">
+        <div class="q" data-id="q70"><div class="num">70</div><div class="qtext">How handle missing values?</div></div>
+        <div class="answer">Imputation (mean/median/mode), model-based, or special marker values depending on context.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="outlier handling">
+        <div class="q" data-id="q71"><div class="num">71</div><div class="qtext">How detect and handle outliers?</div></div>
+        <div class="answer">Use IQR, z-score, or model-based methods; treat, cap, or remove as appropriate.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="scaling normalization">
+        <div class="q" data-id="q72"><div class="num">72</div><div class="qtext">Scaling: standard vs min-max vs robust?</div></div>
+        <div class="answer">Standardize for z-scores, min-max for bounded ranges, robust uses medians for outliers.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="polynomial features">
+        <div class="q" data-id="q73"><div class="num">73</div><div class="qtext">What are polynomial features?</div></div>
+        <div class="answer">Create interaction and power terms to model non-linearities with linear models.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="feature selection methods">
+        <div class="q" data-id="q74"><div class="num">74</div><div class="qtext">Feature selection methods?</div></div>
+        <div class="answer">Filters, wrappers, and embedded methods (e.g., LASSO, tree importance, recursive feature elimination).</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="dimensionality reduction feature"):
+        <div class="q" data-id="q75"><div class="num">75</div><div class="qtext">When to use dimensionality reduction?</div></div>
+        <div class="answer">When many correlated features, for visualization, noise reduction, or speed improvements.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="time series features">
+        <div class="q" data-id="q76"><div class="num">76</div><div class="qtext">Feature ideas for time series?</div></div>
+        <div class="answer">Lag features, rolling stats, seasonality flags, time-based decompositions.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="text features nlp">
+        <div class="q" data-id="q77"><div class="num">77</div><div class="qtext">Feature extraction for text?</div></div>
+        <div class="answer">TF-IDF, word embeddings, n-grams, topic features, sequence encodings.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="image features">
+        <div class="q" data-id="q78"><div class="num">78</div><div class="qtext">Feature extraction for images?</div></div>
+        <div class="answer">Convolutional features, pre-trained CNN embeddings, color and texture statistics.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="feature interactions">
+        <div class="q" data-id="q79"><div class="num">79</div><div class="qtext">What are feature interactions?</div></div>
+        <div class="answer">Combinations of features whose joint values better explain the target than individually.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="rare category handling">
+        <div class="q" data-id="q80"><div class="num">80</div><div class="qtext">Handling rare categories?</div></div>
+        <div class="answer">Group rare levels, use target smoothing, or frequency encoding.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="feature leakage">
+        <div class="q" data-id="q81"><div class="num">81</div><div class="qtext">What is data leakage?</div></div>
+        <div class="answer">When training data contains future or target-related information not available at inference time.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="time aware split">
+        <div class="q" data-id="q82"><div class="num">82</div><div class="qtext">How split time-series data?</div></div>
+        <div class="answer">Use chronological splits (train earlier periods, test later) to avoid leakage.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="categorical cardinality">
+        <div class="q" data-id="q83"><div class="num">83</div><div class="qtext">Problems with high-cardinality categorical features?</div></div>
+        <div class="answer">Feature explosion with one-hot; prefer embeddings, target/ frequency encoding, hashing.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="missingness informative">
+        <div class="q" data-id="q84"><div class="num">84</div><div class="qtext">When missingness is informative?</div></div>
+        <div class="answer">Missing values carry signal; add an indicator feature to capture that information.</div>
+      </div>
+
+      <div class="card" data-cat="feature" data-q="automated feature engineering">
+        <div class="q" data-id="q85"><div class="num">85</div><div class="qtext">What is automated feature engineering?</div></div>
+        <div class="answer">Tools like Featuretools that generate features via domain primitives and aggregations.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: EVALUATION (25) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Model Evaluation & Metrics <span style="font-size:13px;color:var(--muted);font-weight:600">25 questions</span></div>
+      <div class="section-meta">Metrics, curves, calibration & validation</div>
+    </div>
+    <div class="grid" data-section="evaluation">
+      <!-- 86-110 -->
+      <div class="card" data-cat="evaluation" data-q="confusion matrix">
+        <div class="q" data-id="q86"><div class="num">86</div><div class="qtext">What is a confusion matrix?</div></div>
+        <div class="answer">Table showing counts of true vs predicted classes (TP, FP, TN, FN).</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="precision recall">
+        <div class="q" data-id="q87"><div class="num">87</div><div class="qtext">Precision vs recall?</div></div>
+        <div class="answer">Precision measures correctness of positives; recall measures coverage of actual positives.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="f1score explain">
+        <div class="q" data-id="q88"><div class="num">88</div><div class="qtext">What is F1-score?</div></div>
+        <div class="answer">Harmonic mean of precision and recall, balances both metrics.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="roc auc">
+        <div class="q" data-id="q89"><div class="num">89</div><div class="qtext">What is ROC-AUC?</div></div>
+        <div class="answer">Area under ROC curve; measures separability across thresholds (0.5 random, 1 perfect).</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="pr curve">
+        <div class="q" data-id="q90"><div class="num">90</div><div class="qtext">When use Precision-Recall curve?</div></div>
+        <div class="answer">Useful with imbalanced datasets focusing on positive-class performance.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="auc limitations">
+        <div class="q" data-id="q91"><div class="num">91</div><div class="qtext">Limitations of AUC?</div></div>
+        <div class="answer">Insensitive to calibration and may hide threshold-specific performance differences.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="brier score">
+        <div class="q" data-id="q92"><div class="num">92</div><div class="qtext">What is Brier score?</div></div>
+        <div class="answer">Mean squared error between predicted probabilities and actual outcomes (lower is better).</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="log loss">
+        <div class="q" data-id="q93"><div class="num">93</div><div class="qtext">What is log loss (cross-entropy)?</div></div>
+        <div class="answer">Loss measuring difference between predicted probabilities and true labels; penalizes confident wrong predictions.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="calibration curve">
+        <div class="q" data-id="q94"><div class="num">94</div><div class="qtext">What is a calibration curve?</div></div>
+        <div class="answer">Plot comparing predicted probabilities with observed frequencies to check calibration.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="ks statistic">
+        <div class="q" data-id="q95"><div class="num">95</div><div class="qtext">What is KS statistic?</div></div>
+        <div class="answer">Measure used in binary classification to compare cumulative distributions of scores between classes.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="cross validation types">
+        <div class="q" data-id="q96"><div class="num">96</div><div class="qtext">Types of cross-validation?</div></div>
+        <div class="answer">k-fold, stratified k-fold, time-series split, leave-one-out, repeated CV.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="holdout vs cv">
+        <div class="q" data-id="q97"><div class="num">97</div><div class="qtext">Holdout vs cross-validation?</div></div>
+        <div class="answer">Holdout faster but higher variance; CV provides more robust performance estimates.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="data leakage evaluation">
+        <div class="q" data-id="q98"><div class="num">98</div><div class="qtext">How detect data leakage?</div></div>
+        <div class="answer">Unusually high validation performance, features correlated with target from future info.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="statistical significance">
+        <div class="q" data-id="q99"><div class="num">99</div><div class="qtext">How compare models statistically?</div></div>
+        <div class="answer">Use paired tests (e.g., McNemar, paired t-test on metrics via resampling) with caution.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="confidence intervals performance">
+        <div class="q" data-id="q100"><div class="num">100</div><div class="qtext">Why compute confidence intervals for metrics?</div></div>
+        <div class="answer">To quantify uncertainty around performance estimates due to finite samples.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="cost sensitive metrics">
+        <div class="q" data-id="q101"><div class="num">101</div><div class="qtext">When use cost-sensitive evaluation?</div></div>
+        <div class="answer">When false positives/negatives have different real-world costs; customize loss accordingly.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="business metrics alignment">
+        <div class="q" data-id="q102"><div class="num">102</div><div class="qtext">How align ML metrics with business KPIs?</div></div>
+        <div class="answer">Translate model outputs to business impact, choose metrics reflecting product goals.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="early stopping validation">
+        <div class="q" data-id="q103"><div class="num">103</div><div class="qtext">How use early stopping?</div></div>
+        <div class="answer">Monitor validation metric and stop when performance stops improving (with patience setting).</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="holdout stratified">
+        <div class="q" data-id="q104"><div class="num">104</div><div class="qtext">Why use stratified sampling?</div></div>
+        <div class="answer">To preserve class proportions across splits and get stable metric estimates for imbalanced data.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="weighted metrics explain">
+        <div class="q" data-id="q105"><div class="num">105</div><div class="qtext">What are weighted metrics?</div></div>
+        <div class="answer">Aggregate metrics using class weights to reflect importance or imbalance.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="perplexity nlp metric">
+        <div class="q" data-id="q106"><div class="num">106</div><div class="qtext">What is perplexity (NLP)?</div></div>
+        <div class="answer">Exponentiated cross-entropy indicating how well a language model predicts a sample.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="evaluating regressors">
+        <div class="q" data-id="q107"><div class="num">107</div><div class="qtext">When prefer MAE over MSE?</div></div>
+        <div class="answer">MAE is robust to outliers; MSE penalizes large errors more strongly.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="multilabel metrics">
+        <div class="q" data-id="q108"><div class="num">108</div><div class="qtext">How evaluate multilabel classification?</div></div>
+        <div class="answer">Use micro/macro averaged precision, recall, F1 and subset accuracy depending on needs.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="ranking metrics">
+        <div class="q" data-id="q109"><div class="num">109</div><div class="qtext">Common ranking metrics?</div></div>
+        <div class="answer">MAP, NDCG, precision@k, recall@k used for recommendation and retrieval tasks.</div>
+      </div>
+
+      <div class="card" data-cat="evaluation" data-q="bootstrap ci">
+        <div class="q" data-id="q110"><div class="num">110</div><div class="qtext">How use bootstrap for CI?</div></div>
+        <div class="answer">Resample test set many times, compute metric distribution and derive percentiles for intervals.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: STATISTICS (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Statistics for ML <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Probability, inference, tests</div>
+    </div>
+    <div class="grid" data-section="statistics">
+      <!-- 111-130 -->
+      <div class="card" data-cat="statistics" data-q="probability basics">
+        <div class="q" data-id="q111"><div class="num">111</div><div class="qtext">What is probability?</div></div>
+        <div class="answer">Quantifies uncertainty of events; range 0–1 based on outcomes and assumptions.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="bayes theorem">
+        <div class="q" data-id="q112"><div class="num">112</div><div class="qtext">State Bayes' theorem.</div></div>
+        <div class="answer">P(A|B)=P(B|A)P(A)/P(B): update beliefs with evidence and prior.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="central limit theorem">
+        <div class="q" data-id="q113"><div class="num">113</div><div class="qtext">What is the Central Limit Theorem?</div></div>
+        <div class="answer">Sample means approximate normal distribution as sample size grows, regardless of original distribution.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="hypothesis testing">
+        <div class="q" data-id="q114"><div class="num">114</div><div class="qtext">What is hypothesis testing?</div></div>
+        <div class="answer">Framework to test claims using null/alternative hypotheses and p-values.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="p value">
+        <div class="q" data-id="q115"><div class="num">115</div><div class="qtext">What is a p-value?</div></div>
+        <div class="answer">Probability of observing data as extreme under the null hypothesis (not the probability null is true).</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="confidence interval">
+        <div class="q" data-id="q116"><div class="num">116</div><div class="qtext">What is a confidence interval?</div></div>
+        <div class="answer">Range that likely contains parameter value with a given confidence level (e.g., 95%).</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="type1 type2 error">
+        <div class="q" data-id="q117"><div class="num">117</div><div class="qtext">Type I vs Type II error?</div></div>
+        <div class="answer">Type I: false positive (reject true null). Type II: false negative (fail to reject false null).</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="power of test">
+        <div class="q" data-id="q118"><div class="num">118</div><div class="qtext">What is statistical power?</div></div>
+        <div class="answer">Probability to detect an effect when it exists (1 - Type II error rate).</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="bias estimator">
+        <div class="q" data-id="q119"><div class="num">119</div><div class="qtext">What is estimator bias?</div></div>
+        <div class="answer">Difference between expected estimate and true parameter value.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="variance estimator">
+        <div class="q" data-id="q120"><div class="num">120</div><div class="qtext">Why use unbiased estimators?</div></div>
+        <div class="answer">To ensure expected estimate equals true parameter, but may sacrifice variance.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="correlation vs causation">
+        <div class="q" data-id="q121"><div class="num">121</div><div class="qtext">Correlation vs causation?</div></div>
+        <div class="answer">Correlation measures association; causation implies one variable changes another (needs experiments/careful design).</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="pearson spearman">
+        <div class="q" data-id="q122"><div class="num">122</div><div class="qtext">Pearson vs Spearman correlation?</div></div>
+        <div class="answer">Pearson measures linear correlation; Spearman ranks to measure monotonic relationships.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="chi square test">
+        <div class="q" data-id="q123"><div class="num">123</div><div class="qtext">When use Chi-square test?</div></div>
+        <div class="answer">Test independence for categorical variables in contingency tables.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="t test anova">
+        <div class="q" data-id="q124"><div class="num">124</div><div class="qtext">T-test vs ANOVA?</div></div>
+        <div class="answer">T-test compares two means; ANOVA compares means across multiple groups.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="bayesian inference">
+        <div class="q" data-id="q125"><div class="num">125</div><div class="qtext">What is Bayesian inference?</div></div>
+        <div class="answer">Update posterior beliefs by combining priors with likelihood from data.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="likelihood function">
+        <div class="q" data-id="q126"><div class="num">126</div><div class="qtext">What is likelihood?</div></div>
+        <div class="answer">Function of parameters given observed data used for inference and MLE.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="maximum likelihood">
+        <div class="q" data-id="q127"><div class="num">127</div><div class="qtext">What is maximum likelihood estimation (MLE)?</div></div>
+        <div class="answer">Choose parameters that maximize the likelihood of the observed data.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="bayes vs frequentist">
+        <div class="q" data-id="q128"><div class="num">128</div><div class="qtext">Bayesian vs Frequentist?</div></div>
+        <div class="answer">Bayesian uses priors and yields distributions; frequentist relies on long-run frequencies and point estimates.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="sampling methods">
+        <div class="q" data-id="q129"><div class="num">129</div><div class="qtext">Common sampling methods?</div></div>
+        <div class="answer">Random, stratified, cluster, systematic sampling depending on study design.</div>
+      </div>
+
+      <div class="card" data-cat="statistics" data-q="confidence vs credible interval">
+        <div class="q" data-id="q130"><div class="num">130</div><div class="qtext">Confidence vs credible interval?</div></div>
+        <div class="answer">Confidence intervals: frequentist interpretation; credible intervals: Bayesian probability for parameter given data.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: OPTIMIZATION & TRAINING (20) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Optimization & Training <span style="font-size:13px;color:var(--muted);font-weight:600">20 questions</span></div>
+      <div class="section-meta">Gradient descent, optimizers, batch, learning rates</div>
+    </div>
+    <div class="grid" data-section="optimization">
+      <!-- 131-150 -->
+      <div class="card" data-cat="optimization" data-q="what is gradient descent">
+        <div class="q" data-id="q131"><div class="num">131</div><div class="qtext">What is gradient descent?</div></div>
+        <div class="answer">Iterative method to minimize loss by stepping in negative gradient direction.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="sgd batch mini-batch">
+        <div class="q" data-id="q132"><div class="num">132</div><div class="qtext">SGD vs batch vs mini-batch?</div></div>
+        <div class="answer">Batch uses whole data, SGD single examples, mini-batch balances stability and speed.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="learning rate importance">
+        <div class="q" data-id="q133"><div class="num">133</div><div class="qtext">Why is learning rate important?</div></div>
+        <div class="answer">Controls step size; too large diverges, too small slows convergence.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="momentum explain">
+        <div class="q" data-id="q134"><div class="num">134</div><div class="qtext">What is momentum in optimization?</div></div>
+        <div class="answer">Accumulates past gradients to accelerate and smooth updates, escaping shallow minima.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="adam explain">
+        <div class="q" data-id="q135"><div class="num">135</div><div class="qtext">What is Adam optimizer?</div></div>
+        <div class="answer">Adaptive optimizer combining momentum and RMSprop ideas with per-parameter learning rates.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="lr scheduling">
+        <div class="q" data-id="q136"><div class="num">136</div><div class="qtext">What are learning rate schedules?</div></div>
+        <div class="answer">Rules to decrease LR over time: step decay, exponential, cosine annealing, cyclic schedules.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="gradient clipping">
+        <div class="q" data-id="q137"><div class="num">137</div><div class="qtext">What is gradient clipping?</div></div>
+        <div class="answer">Limit gradient norm to prevent exploding gradients in deep networks.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="weight initialization">
+        <div class="q" data-id="q138"><div class="num">138</div><div class="qtext">Why care about weight initialization?</div></div>
+        <div class="answer">Proper init (Xavier/He) avoids vanishing/exploding gradients and speeds convergence.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="batchnorm explain">
+        <div class="q" data-id="q139"><div class="num">139</div><div class="qtext">What is batch normalization?</div></div>
+        <div class="answer">Normalize layer inputs over mini-batch to stabilize and accelerate training.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="early stopping explain">
+        <div class="q" data-id="q140"><div class="num">140</div><div class="qtext">What is early stopping?</div></div>
+        <div class="answer">Stop training when validation metric stops improving to prevent overfitting.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="regularizers dropout">
+        <div class="q" data-id="q141"><div class="num">141</div><div class="qtext">What is dropout?</div></div>
+        <div class="answer">Randomly drop neurons during training to reduce co-adaptation and overfitting.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="label smoothing">
+        <div class="q" data-id="q142"><div class="num">142</div><div class="qtext">What is label smoothing?</div></div>
+        <div class="answer">Replace one-hot targets with softened distributions to improve generalization and calibration.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="data augmentation role training">
+        <div class="q" data-id="q143"><div class="num">143</div><div class="qtext">Why use data augmentation?</div></div>
+        <div class="answer">Increase training data variability to reduce overfitting and improve robustness.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="mixed precision training">
+        <div class="q" data-id="q144"><div class="num">144</div><div class="qtext">What is mixed precision training?</div></div>
+        <div class="answer">Use lower-precision (float16) where safe to speed up training and reduce memory.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="stochastic weight averaging">
+        <div class="q" data-id="q145"><div class="num">145</div><div class="qtext">What is SWA (stochastic weight averaging)?</div></div>
+        <div class="answer">Average weights from multiple checkpoints to get a flatter minima and better generalization.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="label imbalance sampling">
+        <div class="q" data-id="q146"><div class="num">146</div><div class="qtext">How balance batches for imbalanced labels?</div></div>
+        <div class="answer">Use stratified or class-balanced sampling to ensure each batch contains representative classes.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="optimizer selection">
+        <div class="q" data-id="q147"><div class="num">147</div><div class="qtext">How choose optimizer?</div></div>
+        <div class="answer">Start with Adam for quick convergence; SGD with momentum often generalizes better for some tasks.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="curriculum learning">
+        <div class="q" data-id="q148"><div class="num">148</div><div class="qtext">What is curriculum learning?</div></div>
+        <div class="answer">Train models on easier examples first, gradually increasing difficulty to improve learning.</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="noise injection training">
+        <div class="q" data-id="q149"><div class="num">149</div><div class="qtext">Why inject noise during training?</div></div>
+        <div class="answer">Acts as regularization, improves robustness and generalization (e.g., Gaussian noise on inputs).</div>
+      </div>
+
+      <div class="card" data-cat="optimization" data-q="second order methods">
+        <div class="q" data-id="q150"><div class="num">150</div><div class="qtext">What are second-order optimization methods?</div></div>
+        <div class="answer">Use curvature (Hessian) info (e.g., Newton) for faster convergence but higher compute cost.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: DEEP LEARNING (25) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Deep Learning <span style="font-size:13px;color:var(--muted);font-weight:600">25 questions</span></div>
+      <div class="section-meta">Neural nets, CNNs, RNNs, attention, transformers</div>
+    </div>
+    <div class="grid" data-section="deep">
+      <!-- 151-175 -->
+      <div class="card" data-cat="deep" data-q="what is neural network">
+        <div class="q" data-id="q151"><div class="num">151</div><div class="qtext">What is an artificial neural network?</div></div>
+        <div class="answer">Computational model of interconnected neurons learning representations via layers and activations.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="activation functions">
+        <div class="q" data-id="q152"><div class="num">152</div><div class="qtext">Common activation functions?</div></div>
+        <div class="answer">ReLU, sigmoid, tanh, softmax, Leaky ReLU, GELU.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="vanishing gradient">
+        <div class="q" data-id="q153"><div class="num">153</div><div class="qtext">What is the vanishing gradient problem?</div></div>
+        <div class="answer">Gradients shrink in deep nets (esp. sigmoid/tanh), hindering learning in early layers.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="cnn concepts">
+        <div class="q" data-id="q154"><div class="num">154</div><div class="qtext">What are key CNN components?</div></div>
+        <div class="answer">Convolution, activation, pooling, normalization, fully-connected and skip connections.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="rnn lstm gru">
+        <div class="q" data-id="q155"><div class="num">155</div><div class="qtext">RNN vs LSTM vs GRU?</div></div>
+        <div class="answer">LSTM/GRU use gates to handle long-term dependencies; GRU is simpler with comparable performance.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="attention mechanism">
+        <div class="q" data-id="q156"><div class="num">156</div><div class="qtext">What is attention?</div></div>
+        <div class="answer">Mechanism to weight importance of input elements when producing outputs, enabling direct context access.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="transformer explain">
+        <div class="q" data-id="q157"><div class="num">157</div><div class="qtext">What are Transformers?</div></div>
+        <div class="answer">Architectures using self-attention and feed-forward layers for parallel sequence modeling (BERT/GPT).</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="transfer learning dl">
+        <div class="q" data-id="q158"><div class="num">158</div><div class="qtext">What is transfer learning in DL?</div></div>
+        <div class="answer">Fine-tune pre-trained models or use embeddings to save data and compute.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="batchnorm effect">
+        <div class="q" data-id="q159"><div class="num">159</div><div class="qtext">Why use batch normalization?</div></div>
+        <div class="answer">Stabilizes distributions, speeds training, allows higher learning rates, and regularizes a bit.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="skip connections resnet">
+        <div class="q" data-id="q160"><div class="num">160</div><div class="qtext">What are skip/residual connections?</div></div>
+        <div class="answer">Shortcuts that add inputs to outputs improving gradient flow and enabling deeper nets.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="attention vs conv">
+        <div class="q" data-id="q161"><div class="num">161</div><div class="qtext">Attention vs convolution?</div></div>
+        <div class="answer">Attention models global relationships; convolution captures local patterns via shared filters.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="loss functions dl">
+        <div class="q" data-id="q162"><div class="num">162</div><div class="qtext">Common loss functions in DL?</div></div>
+        <div class="answer">Cross-entropy, MSE, hinge loss, CTC loss, contrastive losses depending on task.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="gradient checkpointing">
+        <div class="q" data-id="q163"><div class="num">163</div><div class="qtext">What is gradient checkpointing?</div></div>
+        <div class="answer">Save memory by recomputing intermediate activations during backward pass at cost of extra compute.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="sequence modeling"):
+        <div class="q" data-id="q164"><div class="num">164</div><div class="qtext">How model sequences?</div></div>
+        <div class="answer">Use RNNs, CNNs for sequences, or Transformers for parallel context-aware sequence modeling.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="word embeddings">
+        <div class="q" data-id="q165"><div class="num">165</div><div class="qtext">What are word embeddings?</div></div>
+        <div class="answer">Dense vector representations capturing semantic similarity among words (Word2Vec, GloVe, contextualized ones).</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="attention interpretability">
+        <div class="q" data-id="q166"><div class="num">166</div><div class="qtext">Are attention weights interpretable?</div></div>
+        <div class="answer">Sometimes informative but not strictly explanations; use caution and complementary explainability methods.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="sequence to sequence">
+        <div class="q" data-id="q167"><div class="num">167</div><div class="qtext">What is seq2seq modeling?</div></div>
+        <div class="answer">Encoder-decoder architectures mapping input sequences to output sequences (translation, summarization).</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="beam search"):
+        <div class="q" data-id="q168"><div class="num">168</div><div class="qtext">What is beam search?</div></div>
+        <div class="answer">Heuristic search keeping top-k hypotheses during sequence generation to balance breadth and depth.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="positional encoding"):
+        <div class="q" data-id="q169"><div class="num">169</div><div class="qtext">Why positional encodings in Transformers?</div></div>
+        <div class="answer">Provide sequence order information since attention is permutation-invariant.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="fine tuning best practices">
+        <div class="q" data-id="q170"><div class="num">170</div><div class="qtext">Fine-tuning best practices?</div></div>
+        <div class="answer">Lower LR, gradual unfreezing, use regularization and validation to avoid catastrophic forgetting.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="self supervised learning">
+        <div class="q" data-id="q171"><div class="num">171</div><div class="qtext">What is self-supervised learning?</div></div>
+        <div class="answer">Train on proxy tasks using unlabeled data to learn useful representations (e.g., contrastive methods).</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="contrastive learning">
+        <div class="q" data-id="q172"><div class="num">172</div><div class="qtext">What is contrastive learning?</div></div>
+        <div class="answer">Learn representations by pulling similar pairs together and pushing dissimilar pairs apart.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="model distillation">
+        <div class="q" data-id="q173"><div class="num">173</div><div class="qtext">What is knowledge distillation?</div></div>
+        <div class="answer">Train a smaller student model to mimic a larger teacher’s outputs for efficient inference.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="catastrophic forgetting">
+        <div class="q" data-id="q174"><div class="num">174</div><div class="qtext">What is catastrophic forgetting?</div></div>
+        <div class="answer">Model loses earlier learned knowledge when trained sequentially on new tasks.</div>
+      </div>
+
+      <div class="card" data-cat="deep" data-q="dl evaluation difficulties">
+        <div class="q" data-id="q175"><div class="num">175</div><div class="qtext">DL-specific evaluation challenges?</div></div>
+        <div class="answer">Large compute variability, randomness, dataset biases, and reproducibility concerns.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: PRODUCTION & MLOPS (25) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Production & MLOps <span style="font-size:13px;color:var(--muted);font-weight:600">25 questions</span></div>
+      <div class="section-meta">Deployment, monitoring, drift, serving, scaling</div>
+    </div>
+    <div class="grid" data-section="production">
+      <!-- 176-200 -->
+      <div class="card" data-cat="production" data-q="model serialization">
+        <div class="q" data-id="q176"><div class="num">176</div><div class="qtext">How to serialize and save models?</div></div>
+        <div class="answer">Use framework serialization (pickle, joblib, ONNX, TorchScript) and store versioned artifacts.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="model serving options">
+        <div class="q" data-id="q177"><div class="num">177</div><div class="qtext">Common model serving options?</div></div>
+        <div class="answer">REST/gRPC APIs, batch jobs, streaming, serverless endpoints, and specialized serving systems.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="containerization"):
+        <div class="q" data-id="q178"><div class="num">178</div><div class="qtext">Why containerize models?</div></div>
+        <div class="answer">Provides reproducible runtime, dependency isolation, and easy deployment across environments.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="model monitoring metrics">
+        <div class="q" data-id="q179"><div class="num">179</div><div class="qtext">What to monitor in production?</div></div>
+        <div class="answer">Performance, latency, error rates, data drift, prediction distributions, and resource usage.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="data drift">
+        <div class="q" data-id="q180"><div class="num">180</div><div class="qtext">What is data drift?</div></div>
+        <div class="answer">Change in input distribution over time degrading model performance.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="concept drift">
+        <div class="q" data-id="q181"><div class="num">181</div><div class="qtext">What is concept drift?</div></div>
+        <div class="answer">Change in relationship between inputs and target, e.g., user behavior shifts affecting labels.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="retraining strategies">
+        <div class="q" data-id="q182"><div class="num">182</div><div class="qtext">Retraining strategies for drift?</div></div>
+        <div class="answer">Periodic retraining, triggered retraining, online updates, or active learning pipelines.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="canary rollout">
+        <div class="q" data-id="q183"><div class="num">183</div><div class="qtext">What is a canary deployment?</div></div>
+        <div class="answer">Gradually roll out new model to a subset of traffic to monitor before full release.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="shadow testing">
+        <div class="q" data-id="q184"><div class="num">184</div><div class="qtext">What is shadow testing?</div></div>
+        <div class="answer">Run a new model in parallel without affecting live responses to compare behavior on real traffic.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="feature store">
+        <div class="q" data-id="q185"><div class="num">185</div><div class="qtext">What is a feature store?</div></div>
+        <div class="answer">Centralized system to store, serve, and manage features consistently for training and serving.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="model versioning">
+        <div class="q" data-id="q186"><div class="num">186</div><div class="qtext">Why version models and data?</div></div>
+        <div class="answer">Traceability, reproducibility, rollback capability, and compliance needs.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="latency optimization">
+        <div class="q" data-id="q187"><div class="num">187</div><div class="qtext">How reduce inference latency?</div></div>
+        <div class="answer">Quantization, pruning, batching, model distillation, caching, and hardware acceleration.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="throughput scaling">
+        <div class="q" data-id="q188"><div class="num">188</div><div class="qtext">How scale model throughput?</div></div>
+        <div class="answer">Horizontal scaling, autoscaling, efficient batching, sharding, and async processing.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="explainability production">
+        <div class="q" data-id="q189"><div class="num">189</div><div class="qtext">Why need explainability in production?</div></div>
+        <div class="answer">For trust, debugging, compliance, and to communicate decisions to stakeholders.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="privacy preserving ml">
+        <div class="q" data-id="q190"><div class="num">190</div><div class="qtext">Privacy-preserving ML approaches?</div></div>
+        <div class="answer">Federated learning, differential privacy, secure multi-party computation.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="cost monitoring">
+        <div class="q" data-id="q191"><div class="num">191</div><div class="qtext">How manage model serving costs?</div></div>
+        <div class="answer">Use efficient models, autoscaling, spot instances, batching, and monitoring to optimize usage.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="a b testing model changes">
+        <div class="q" data-id="q192"><div class="num">192</div><div class="qtext">How run A/B tests with models?</div></div>
+        <div class="answer">Randomize users to variants and measure business metrics for significance and impact.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="rollback strategy">
+        <div class="q" data-id="q193"><div class="num">193</div><div class="qtext">Rollback strategies for bad models?</div></div>
+        <div class="answer">Keep previous stable versions, use feature flags and immediate rollback triggers in pipelines.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="explain monitoring alerts">
+        <div class="q" data-id="q194"><div class="num">194</div><div class="qtext">Useful monitoring alerts?</div></div>
+        <div class="answer">Sudden metric drops, data distribution shifts, error spikes, and latency increases.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="legal regulatory concerns">
+        <div class="q" data-id="q195"><div class="num">195</div><div class="qtext">Regulatory concerns in ML systems?</div></div>
+        <div class="answer">Fairness, bias, explainability, data privacy, and accountability requirements.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="canary metrics">
+        <div class="q" data-id="q196"><div class="num">196</div><div class="qtext">Key canary metrics to watch?</div></div>
+        <div class="answer">Business KPIs, error rates, latency, and prediction distribution differences vs baseline.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="model registry">
+        <div class="q" data-id="q197"><div class="num">197</div><div class="qtext">What is a model registry?</div></div>
+        <div class="answer">Catalogue of model artifacts, metadata, metrics, and lineage for governance and deployment.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="mlops pipelines">
+        <div class="q" data-id="q198"><div class="num">198</div><div class="qtext">Core components of MLOps pipeline?</div></div>
+        <div class="answer">Data ingestion, feature store, training, validation, model registry, CI/CD, and monitoring.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="explainability techniques production">
+        <div class="q" data-id="q199"><div class="num">199</div><div class="qtext">Production explainability techniques?</div></div>
+        <div class="answer">SHAP, LIME, counterfactuals, feature importance dashboards, and rule extraction.</div>
+      </div>
+
+      <div class="card" data-cat="production" data-q="sla for models">
+        <div class="q" data-id="q200"><div class="num">200</div><div class="qtext">What SLA considerations for model APIs?</div></div>
+        <div class="answer">Latency percentiles, uptime, throughput, error budgets, and scaling guarantees in SLAs.</div>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <div class="container">
-      Tip: To export, copy the page content or convert to PDF. Want separate HTML files per topic or a ZIP? Ask and I’ll prepare it.
-    </div>
+    Tip: use the filter buttons to focus on a topic, type keywords to search, and click a question to reveal the short answer. Want longer answers or downloadable PDF? Ask and I'll generate it.
   </footer>
+</main>
 
-  <script>
-    // Toggle answers on question click
-    document.querySelectorAll('.card .q').forEach(q => {
-      q.addEventListener('click', () => {
-        const ans = q.parentElement.querySelector('.answer');
-        ans.style.display = (ans.style.display === 'block') ? 'none' : 'block';
-      });
+<script>
+  // Helper: highlight text occurrences
+  function highlight(node, term) {
+    if (!term) return;
+    const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    node.innerHTML = node.textContent.replace(regex, (m) => `<mark>${m}</mark>`);
+  }
+
+  // Toggle single card answer
+  document.querySelectorAll('.card .q').forEach(q => {
+    q.addEventListener('click', () => {
+      const card = q.closest('.card');
+      const ans = card.querySelector('.answer');
+      ans.style.display = (ans.style.display === 'block') ? 'none' : 'block';
     });
+  });
 
-    // Simple search
-    const search = document.getElementById('search');
-    const clearBtn = document.getElementById('clear');
-    search.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const term = search.value.trim().toLowerCase();
-        document.querySelectorAll('#questions .card').forEach(card => {
-          const text = (card.dataset.q + ' ' + (card.querySelector('.answer')?.textContent || '')).toLowerCase();
-          card.style.display = text.includes(term) ? 'block' : 'none';
-        });
+  // Filters
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      // Clear search highlight when switching
+      document.getElementById('search').value = '';
+      document.querySelectorAll('.card .qtext, .card .answer').forEach(el => el.innerHTML = el.textContent);
+    });
+  });
+
+  // Expand / Collapse All
+  document.getElementById('expandAll').addEventListener('click', ()=>{
+    document.querySelectorAll('.card .answer').forEach(a => a.style.display = 'block');
+  });
+  document.getElementById('collapseAll').addEventListener('click', ()=>{
+    document.querySelectorAll('.card .answer').forEach(a => a.style.display = 'none');
+  });
+
+  // Search (live)
+  const searchInput = document.getElementById('search');
+  let lastTimeout = null;
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.trim().toLowerCase();
+    // Remove previous highlights
+    document.querySelectorAll('.card .qtext, .card .answer').forEach(el => el.innerHTML = el.textContent);
+    if (!term) {
+      // If no term, show items according to active filter
+      const active = document.querySelector('.filter-btn.active').dataset.cat;
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = (active === 'all' || card.dataset.cat === active) ? 'block' : 'none';
+      });
+      return;
+    }
+    document.querySelectorAll('.card').forEach(card => {
+      const q = card.dataset.q.toLowerCase();
+      const a = card.querySelector('.answer').textContent.toLowerCase();
+      const active = document.querySelector('.filter-btn.active').dataset.cat;
+      const inCategory = (active === 'all' || card.dataset.cat === active);
+      if ((q + ' ' + a).includes(term) && inCategory) {
+        card.style.display = 'block';
+        // highlight in question and answer
+        highlight(card.querySelector('.qtext'), term);
+        highlight(card.querySelector('.answer'), term);
+      } else {
+        card.style.display = 'none';
       }
     });
-    clearBtn.addEventListener('click', () => {
-      search.value = '';
-      document.querySelectorAll('#questions .card').forEach(card => card.style.display = 'block');
-    });
-  </script>
+  });
+
+  // Press Enter to focus first result
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const first = Array.from(document.querySelectorAll('.card'))
+        .find(c => c.style.display !== 'none');
+      if (first) {
+        first.querySelector('.answer').style.display = 'block';
+        first.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+  });
+
+  // Initialize: ensure "All" active
+  document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
+</script>
 
 </body>
 </html>
