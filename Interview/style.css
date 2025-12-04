@@ -1,0 +1,8 @@
+body{font-family:Arial, sans-serif;margin:0;background:#f5f7fb;color:#222;}
+header{background:#0d47a1;color:white;padding:16px;text-align:center;}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;padding:20px;}
+.card{display:block;padding:20px;background:white;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.1);text-align:center;font-weight:bold;color:#0d47a1;text-decoration:none;transition:0.2s;}
+.card:hover{background:#0d47a1;color:white;}
+.qcard{background:white;margin:12px;padding:14px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.qcard h3{margin:0;font-size:16px;color:#0d47a1;cursor:pointer;}
+.answer{display:none;margin-top:8px;color:#444;}
